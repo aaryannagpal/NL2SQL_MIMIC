@@ -1,0 +1,79 @@
+{
+    "name": "datetimeevents",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "stay_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the patient’s stay within the hospital."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the event was charted."
+      },
+      "storetime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the event was stored."
+      },
+      "itemid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the item associated with the event."
+      },
+      "value": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Datetime value associated with the event."
+      },
+      "valueuom": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the datetime value."
+      },
+      "warning": {
+        "type": "tinyint(1)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator flag for warnings (1 = true, 0 = false)."
+      }
+    },
+    "indexes": {}
+  }
+  

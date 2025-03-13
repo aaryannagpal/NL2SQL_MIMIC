@@ -1,0 +1,46 @@
+{
+  "name": "d_labitems",
+  "columns": {
+    "itemid": {
+      "type": "smallint unsigned",
+      "null": false,
+      "primary_key": false,
+      "foreign_key": false,
+      "relation": "",
+      "description": "Unique identifier for the lab item."
+    },
+    "label": {
+      "type": "varchar(255)",
+      "null": true,
+      "primary_key": false,
+      "foreign_key": false,
+      "relation": "",
+      "description": "Descriptive label for the lab item."
+    },
+    "fluid": {
+      "type": "varchar(255)",
+      "null": false,
+      "primary_key": false,
+      "foreign_key": false,
+      "relation": "",
+      "description": "Type of fluid associated with the lab item."
+    },
+    "category": {
+      "type": "varchar(255)",
+      "null": false,
+      "primary_key": false,
+      "foreign_key": false,
+      "relation": "",
+      "description": "Category of the lab item."
+    },
+    "loinc_code": {
+      "type": "varchar(255)",
+      "null": true,
+      "primary_key": false,
+      "foreign_key": false,
+      "relation": "",
+      "description": "LOINC code associated with the lab item."
+    }
+  },
+  "indexes": {}
+}

@@ -1,0 +1,31 @@
+{
+    "name": "d_icd_procedures",
+    "columns": {
+      "icd_code": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "ICD code identifier for procedures."
+      },
+      "icd_version": {
+        "type": "tinyint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Version of the ICD code for procedures."
+      },
+      "long_title": {
+        "type": "text",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Long descriptive title for the ICD procedure."
+      }
+    },
+    "indexes": {}
+  }
+  

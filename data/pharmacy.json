@@ -1,0 +1,223 @@
+{
+    "name": "pharmacy",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "pharmacy_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the pharmacy record."
+      },
+      "poe_id": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Point of entry identifier for the pharmacy record."
+      },
+      "starttime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Start time for the pharmacy event or order."
+      },
+      "stoptime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Stop time for the pharmacy event or order."
+      },
+      "medication": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Medication name or description."
+      },
+      "proc_type": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Procedure type for the pharmacy order."
+      },
+      "status": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Status of the pharmacy order."
+      },
+      "entertime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the pharmacy order was entered."
+      },
+      "verifiedtime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the pharmacy order was verified."
+      },
+      "route": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Route of administration for the medication."
+      },
+      "frequency": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Frequency of administration."
+      },
+      "disp_sched": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Dispensing schedule for the medication."
+      },
+      "infusion_type": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of infusion if applicable."
+      },
+      "sliding_scale": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator for sliding scale dosing, if applicable."
+      },
+      "lockout_interval": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Lockout interval for the pharmacy order, if applicable."
+      },
+      "basal_rate": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Basal infusion rate, if applicable."
+      },
+      "one_hr_max": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Maximum allowed dose in one hour."
+      },
+      "doses_per_24_hrs": {
+        "type": "tinyint unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Number of doses allowed in a 24-hour period."
+      },
+      "duration": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Duration for which the medication is administered."
+      },
+      "duration_interval": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Interval unit for the duration (e.g., hours, days)."
+      },
+      "expiration_value": {
+        "type": "smallint unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Numeric value indicating expiration period."
+      },
+      "expiration_unit": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the expiration period."
+      },
+      "expirationdate": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Expiration date of the pharmacy order or medication."
+      },
+      "dispensation": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Information on dispensation details."
+      },
+      "fill_quantity": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Quantity filled for the pharmacy order."
+      }
+    },
+    "indexes": {}
+  }
+  

@@ -1,0 +1,47 @@
+{
+    "name": "services",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier."
+      },
+      "transfertime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the service transfer occurred."
+      },
+      "prev_service": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Previous service before the transfer."
+      },
+      "curr_service": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Current service after the transfer."
+      }
+    },
+    "indexes": {}
+  }
+  

@@ -1,0 +1,63 @@
+{
+    "name": "drgcodes",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "drg_type": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of DRG (Diagnosis-Related Group) code."
+      },
+      "drg_code": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "DRG code associated with the admission."
+      },
+      "description": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Description of the DRG code."
+      },
+      "drg_severity": {
+        "type": "tinyint unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Severity level of the DRG code."
+      },
+      "drg_mortality": {
+        "type": "tinyint unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Mortality risk associated with the DRG code."
+      }
+    },
+    "indexes": {}
+  }
+  

@@ -1,0 +1,44 @@
+{
+    "name": "d_hcpcs",
+    "columns": {
+        "code": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "HCPCS code; serves as a unique identifier enforced by a unique index."
+        },
+        "category": {
+            "type": "tinyint unsigned",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Numeric category of the HCPCS code."
+        },
+        "long_description": {
+            "type": "text",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Detailed description of the HCPCS code."
+        },
+        "short_description": {
+            "type": "text",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Short description of the HCPCS code."
+        }
+    },
+    "indexes": {
+        "d_hcpcs_idx01": {
+            "columns": ["code"],
+            "unique": true
+        }
+    }
+}
+  

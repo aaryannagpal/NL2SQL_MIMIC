@@ -1,0 +1,127 @@
+{
+    "name": "labevents",
+    "columns": {
+      "labevent_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the lab event."
+      },
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "specimen_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the specimen associated with the lab event."
+      },
+      "itemid": {
+        "type": "smallint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the lab item."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the lab event was recorded."
+      },
+      "storetime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the lab event was stored."
+      },
+      "value": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Text value of the lab result."
+      },
+      "valuenum": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Numeric value of the lab result, if applicable."
+      },
+      "valueuom": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the lab result."
+      },
+      "ref_range_lower": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Lower bound of the reference range."
+      },
+      "ref_range_upper": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Upper bound of the reference range."
+      },
+      "flag": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator flag for the lab result (e.g., abnormal, high, low)."
+      },
+      "priority": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Priority level assigned to the lab event."
+      },
+      "comments": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Additional comments or notes regarding the lab event."
+      }
+    },
+    "indexes": {}
+  }
+  

@@ -1,0 +1,79 @@
+{
+    "name": "d_items",
+    "columns": {
+      "itemid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the item."
+      },
+      "label": {
+        "type": "text",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Descriptive label for the item."
+      },
+      "abbreviation": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Abbreviated label for the item."
+      },
+      "linksto": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicates which table or entity the item links to."
+      },
+      "category": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Category of the item."
+      },
+      "unitname": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement name, if applicable."
+      },
+      "param_type": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Parameter type of the item."
+      },
+      "lownormalvalue": {
+        "type": "smallint",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Lower bound of the normal value range."
+      },
+      "highnormalvalue": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Upper bound of the normal value range."
+      }
+    },
+    "indexes": {}
+  }
+  

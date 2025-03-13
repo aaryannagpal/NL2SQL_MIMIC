@@ -1,0 +1,55 @@
+{
+    "name": "patients",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the patient."
+      },
+      "gender": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Gender of the patient."
+      },
+      "anchor_age": {
+        "type": "tinyint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Age of the patient at the anchor time."
+      },
+      "anchor_year": {
+        "type": "smallint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Year of the anchor event."
+      },
+      "anchor_year_group": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Group categorization based on the anchor year."
+      },
+      "dod": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Date of death of the patient, if applicable."
+      }
+    },
+    "indexes": {}
+  }
+  

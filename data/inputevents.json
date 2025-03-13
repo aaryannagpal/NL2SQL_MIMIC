@@ -1,0 +1,215 @@
+{
+    "name": "inputevents",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "stay_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the patient's ICU stay."
+      },
+      "starttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Start time of the input event."
+      },
+      "endtime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "End time of the input event."
+      },
+      "storetime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the event was stored."
+      },
+      "itemid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the item associated with the input event."
+      },
+      "amount": {
+        "type": "float",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Amount administered or input."
+      },
+      "amountuom": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the amount."
+      },
+      "rate": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Rate at which the input was administered, if applicable."
+      },
+      "rateuom": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the rate."
+      },
+      "orderid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Order identifier associated with the input event."
+      },
+      "linkorderid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Linked order identifier, connecting related orders."
+      },
+      "ordercategoryname": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Category name of the order."
+      },
+      "secondaryordercategoryname": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Secondary category name of the order, if applicable."
+      },
+      "ordercomponenttypedescription": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Description of the order component type."
+      },
+      "ordercategorydescription": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Description of the order category."
+      },
+      "patientweight": {
+        "type": "float",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Weight of the patient at the time of the event."
+      },
+      "totalamount": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Total amount administered, if applicable."
+      },
+      "totalamountuom": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the total amount."
+      },
+      "isopenbag": {
+        "type": "tinyint(1)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator whether the bag is open (1 = yes, 0 = no)."
+      },
+      "continueinnextdept": {
+        "type": "tinyint(1)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator whether the input event continues in the next department (1 = yes, 0 = no)."
+      },
+      "cancelreason": {
+        "type": "tinyint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Reason code for cancellation, if applicable."
+      },
+      "statusdescription": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Description of the status of the order or event."
+      },
+      "originalamount": {
+        "type": "float",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Original amount ordered."
+      },
+      "originalrate": {
+        "type": "float",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Original rate as ordered."
+      }
+    },
+    "indexes": {}
+  }
+  

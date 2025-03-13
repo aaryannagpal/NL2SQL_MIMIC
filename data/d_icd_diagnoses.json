@@ -1,0 +1,38 @@
+{
+    "name": "d_icd_diagnoses",
+    "columns": {
+        "icd_code": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "ICD code identifier."
+        },
+        "icd_version": {
+            "type": "tinyint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Version of the ICD code."
+        },
+        "long_title": {
+            "type": "text",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Long descriptive title for the ICD code."
+        }
+    },
+    "indexes": {
+        "d_icd_diagnoses_icd_code_icd_version": {
+            "columns": [
+                "icd_code",
+                "icd_version"
+            ],
+            "unique": true
+        }
+    }
+}

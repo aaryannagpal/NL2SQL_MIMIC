@@ -1,0 +1,271 @@
+{
+    "name": "emar_detail",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "emar_id": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the EMAR record."
+      },
+      "emar_seq": {
+        "type": "smallint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Sequence number for the EMAR detail record."
+      },
+      "parent_field_ordinal": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Ordinal value to indicate parent field ordering, if applicable."
+      },
+      "administration_type": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of administration for the medication."
+      },
+      "pharmacy_id": {
+        "type": "int unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the pharmacy, if applicable."
+      },
+      "barcode_type": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of barcode associated with the record."
+      },
+      "reason_for_no_barcode": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Explanation provided when a barcode is not present."
+      },
+      "complete_dose_not_given": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator if the complete dose was not given."
+      },
+      "dose_due": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "The dose that was scheduled to be given."
+      },
+      "dose_due_unit": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the dose due."
+      },
+      "dose_given": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Actual dose that was administered."
+      },
+      "dose_given_unit": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the dose given."
+      },
+      "will_remainder_of_dose_be_given": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator whether the remainder of the dose will be given."
+      },
+      "product_amount_given": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Amount of product administered."
+      },
+      "product_unit": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit for the amount of product given."
+      },
+      "product_code": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Code representing the product."
+      },
+      "product_description": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Description of the product administered."
+      },
+      "product_description_other": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Alternate product description if available."
+      },
+      "prior_infusion_rate": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Infusion rate before adjustment, if any."
+      },
+      "infusion_rate": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Current infusion rate."
+      },
+      "infusion_rate_adjustment": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Details on any adjustment to the infusion rate."
+      },
+      "infusion_rate_adjustment_amount": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Amount by which the infusion rate was adjusted."
+      },
+      "infusion_rate_unit": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the infusion rate."
+      },
+      "route": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Route of administration."
+      },
+      "infusion_complete": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator if the infusion was completed."
+      },
+      "completion_interval": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Interval for completion of the infusion."
+      },
+      "new_iv_bag_hung": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator if a new IV bag was hung."
+      },
+      "continued_infusion_in_other_location": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator if the infusion continued in another location."
+      },
+      "restart_interval": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Interval for restarting the infusion, if applicable."
+      },
+      "side": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicates the side (e.g., left, right) for the infusion."
+      },
+      "site": {
+        "type": "text",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Site of administration."
+      },
+      "non_formulary_visual_verification": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Indicator for non-formulary visual verification."
+      }
+    },
+    "indexes": {}
+  }
+  
