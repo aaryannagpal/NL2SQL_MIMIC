@@ -1,0 +1,9 @@
+# Core dependencies
+python-dotenv>=0.19.0  # For environment variable management
+openai>=1.0.0          # For GPT-4 API access
+pytest>=7.0.0          # For testing
+sqlalchemy>=2.0.0      # For database interactions
+pymysql>=1.0.0         # MySQL Python connector
+pandas>=2.0.0          # For data handling
+numpy>=1.20.0          # For numerical operations
+tqdm>=4.65.0          # For progress bars 
