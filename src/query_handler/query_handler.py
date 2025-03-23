@@ -1,14 +1,39 @@
 import pymysql
 import time
 import json
+import os
 
 class QueryHandler:
-    def __init__(self, db_config):
-        """Initialize with database configuration"""
+    
+    def __init__(self):
+        self.db_config = {
+            'host': 'localhost',
+            'user': 'aaryan',
+            'password': os.environ.get('MIMIC_SQL_PW', ''),
+            'db': 'capstone_mimic',
+            'charset': 'utf8mb4',
+            'cursorclass': pymysql.cursors.DictCursor
+        }
+        self.connection = None
+
+    def update_config(self, db_config):
+        """Update database configuration
+        
+        :param db_config: Dictionary with database connection parameters
+        """
         self.db_config = db_config
-        self.connection = pymysql.connect(
-            **db_config,
-        )
+        if self.connection:
+            self.connection.close()
+            self.connect()
+
+    def connect(self):
+        """Connect to database"""
+        try:
+            self.connection = pymysql.connect(**self.db_config)
+            print("Connected to database successfully!")
+        except pymysql.Error as e:
+            print(f"Failed to connect to database: {e}")
+            self.connection = None
 
     def execute(self, sql_query):
         """
@@ -18,6 +43,8 @@ class QueryHandler:
         - Row count
         - Execution plan
         - Success status
+
+        :param sql_query: SQL query to execute
         """
         response = {
             "query": sql_query,
@@ -33,17 +60,14 @@ class QueryHandler:
             start_time = time.time()
             
             with self.connection.cursor() as cursor:
-                # Execute main query
                 cursor.execute(sql_query)
                 
-                # Get results if available
                 if cursor.description:
                     response["results"] = cursor.fetchall()
                     response["row_count"] = len(response["results"])
                 else:
                     response["row_count"] = cursor.rowcount
                 
-                # Get execution plan
                 cursor.execute(f"EXPLAIN FORMAT=JSON {sql_query}")
                 plan = cursor.fetchone()
                 response["execution_plan"] = json.loads(plan['EXPLAIN'])
