@@ -17,9 +17,8 @@ This project investigates and implements various approaches to convert natural l
 - [x] MIMIC Loaded to MySQL
 - [x] Database schema setup
 - [ ] Schema management system
-- [ ] Basic NL2SQL pipeline
-- [ ] Evaluation framework
-- [ ] Advanced techniques implementation
+- [ ] Evaluation Metrics Class
+- [ ] **Basic NL2SQL pipeline**
 
 ## Getting Started
 
