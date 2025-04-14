@@ -1,6 +1,32 @@
 import os
+from pathlib import Path
+from typing import Final
 
-MYSQL_DB_PATH = "/home/aaryan/Downloads/mimic/mimic4.db"
+PROJECT_ROOT = Path(__file__).parent
 
-# OpenAI API Key (GPT-4)
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+DATA_DIR: Final[Path] = PROJECT_ROOT / "data" / "mimic_data"
+
+MYSQL_DB_PATH: Final[Path] = DATA_DIR / "mimic4.db"
+MIMIC_SCHEMA_PATH: Final[Path] = DATA_DIR / "mimic.json"
+DICTIONARY_MAP_PATH: Final[Path] = DATA_DIR / "dictionary.json"
+
+OPENAI_API_KEY: Final[str] = os.getenv("OPENAI_API_KEY", "")
+
+def _validate_paths() -> None:
+    """Check if critical files/dirs exist at startup."""
+    required_paths = [
+        DATA_DIR,
+        MYSQL_DB_PATH,
+        MIMIC_SCHEMA_PATH,
+        DICTIONARY_MAP_PATH,
+    ]
+    for path in required_paths:
+        if not path.exists():
+            raise FileNotFoundError(f"Config error: {path} does not exist")
+
+def _validate_api_key() -> None:
+    if not OPENAI_API_KEY:
+        raise ValueError("OPENAI_API_KEY is not set in environment variables")
+
+_validate_paths()
+_validate_api_key()
