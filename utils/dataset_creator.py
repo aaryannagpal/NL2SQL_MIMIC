@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 from typing import List, Dict, Tuple, Set, Optional, Any, Union
 from tqdm import tqdm
+from datetime import datetime
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
@@ -567,11 +568,53 @@ class QueryTemplateGenerator:
             sql_value = ""
             display_value = ""
             sql_filter = f"{column} {op}"
-            
+
+
         else:
-            if "char" in column_type or "text" in column_type or "datetime" in column_type:
+            if "char" in column_type or "text" in column_type:
                 sql_value = f"'{sample_value}'"
                 display_value = str(sample_value)
+            
+            elif "datetime" in column_type:
+                try:                    
+                    original_timestamp = datetime.strptime(sample_value, '%Y-%m-%d %H:%M:%S')
+                    
+                    date_format_choice = random.choice([
+                        "full_datetime",  # "January 15, 2020 at 08:30 AM"
+                        "date_only",      # "January 15, 2020"
+                        "month_year",     # "January 2020"
+                        "date_simple"     # "2020-01-15"
+                    ])
+                    
+                    if date_format_choice == "full_datetime":
+                        # Keep original with full date and time
+                        sql_value = f"'{sample_value}'"
+                        date_str = original_timestamp.strftime('%B %d, %Y')
+                        time_str = original_timestamp.strftime('%I:%M %p')
+                        display_value = f"{date_str} at {time_str}"
+                        
+                    elif date_format_choice == "date_only":
+                        # Set time to midnight for date-only comparison
+                        date_only = original_timestamp.replace(hour=0, minute=0, second=0)
+                        sql_value = f"'{date_only.strftime('%Y-%m-%d %H:%M:%S')}'"
+                        display_value = date_only.strftime('%B %d, %Y')
+                        
+                    elif date_format_choice == "month_year":
+                        # Set to first day of month at midnight
+                        month_year = original_timestamp.replace(day=1, hour=0, minute=0, second=0)
+                        sql_value = f"'{month_year.strftime('%Y-%m-%d %H:%M:%S')}'"
+                        display_value = month_year.strftime('%B %Y')
+                        
+                    else:
+                        # Date in YYYY-MM-DD format with midnight time
+                        date_simple = original_timestamp.replace(hour=0, minute=0, second=0)
+                        sql_value = f"'{date_simple.strftime('%Y-%m-%d %H:%M:%S')}'"
+                        display_value = date_simple.strftime('%Y-%m-%d')
+                
+                except (ValueError, TypeError):
+                    sql_value = f"'{sample_value}'"
+                    display_value = str(sample_value)
+            
             else:
                 sql_value = str(sample_value)
                 display_value = str(sample_value)
