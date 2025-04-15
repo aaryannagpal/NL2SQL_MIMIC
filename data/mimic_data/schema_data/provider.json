@@ -1,0 +1,13 @@
+{
+    "name": "provider",
+    "columns": {
+        "provider_id": {
+            "type": "text",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Deidentified ID which uniquely represents a single caregiver or provider."
+        }
+    }
+}

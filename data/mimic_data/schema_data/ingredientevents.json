@@ -1,14 +1,6 @@
 {
-    "name": "labevents",
+    "name": "ingredientevents",
     "columns": {
-        "labevent_id": {
-            "type": "int unsigned",
-            "null": false,
-            "primary_key": false,
-            "foreign_key": false,
-            "relation": "",
-            "description": "Unique identifier for the lab event."
-        },
         "subject_id": {
             "type": "int unsigned",
             "null": false,
@@ -19,115 +11,131 @@
         },
         "hadm_id": {
             "type": "int unsigned",
-            "null": true,
+            "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
             "description": "Admission identifier; typically links to an admissions record."
         },
-        "specimen_id": {
+        "stay_id": {
             "type": "int unsigned",
             "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Identifier for the specimen associated with the lab event."
+            "description": "Unique identifier for the patient's ICU stay."
         },
-        "itemid": {
-            "type": "smallint unsigned",
-            "null": false,
-            "primary_key": false,
-            "foreign_key": false,
-            "relation": "",
-            "description": "Identifier for the lab item."
-        },
-        "order_provider_id": {
-            "type": "text",
+        "caregiver_id": {
+            "type": "int unsigned",
             "null": true,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Deidentified provider ID who ordered the event"
+            "description": "Deidentified ID of caregiver who documented this row."
         },
-        "charttime": {
+        "starttime": {
             "type": "datetime",
             "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Time when the lab event was recorded."
+            "description": "Start time of the input event."
+        },
+        "endtime": {
+            "type": "datetime",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "End time of the input event."
         },
         "storetime": {
             "type": "datetime",
-            "null": true,
+            "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Time when the lab event was stored."
+            "description": "Time when the event was stored."
         },
-        "value": {
-            "type": "text",
-            "null": true,
+        "itemid": {
+            "type": "mediumint unsigned",
+            "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Text value of the lab result."
+            "description": "Identifier for the item associated with the input event."
         },
-        "valuenum": {
+        "amount": {
+            "type": "float",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Amount administered or input."
+        },
+        "amountuom": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unit of measurement for the amount."
+        },
+        "rate": {
             "type": "float",
             "null": true,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Numeric value of the lab result, if applicable."
+            "description": "Rate at which the input was administered, if applicable."
         },
-        "valueuom": {
+        "rateuom": {
             "type": "varchar(255)",
             "null": true,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Unit of measurement for the lab result."
+            "description": "Unit of measurement for the rate."
         },
-        "ref_range_lower": {
+        "orderid": {
+            "type": "mediumint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Order identifier associated with the input event."
+        },
+        "linkorderid": {
+            "type": "mediumint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Linked order identifier, connecting related orders."
+        },
+        "statusdescription": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Description of the status of the order or event."
+        },
+        "originalamount": {
             "type": "float",
-            "null": true,
+            "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Lower bound of the reference range."
+            "description": "Original amount ordered."
         },
-        "ref_range_upper": {
+        "originalrate": {
             "type": "float",
-            "null": true,
+            "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Upper bound of the reference range."
-        },
-        "flag": {
-            "type": "varchar(255)",
-            "null": true,
-            "primary_key": false,
-            "foreign_key": false,
-            "relation": "",
-            "description": "Indicator flag for the lab result (e.g., abnormal, high, low)."
-        },
-        "priority": {
-            "type": "varchar(255)",
-            "null": true,
-            "primary_key": false,
-            "foreign_key": false,
-            "relation": "",
-            "description": "Priority level assigned to the lab event."
-        },
-        "comments": {
-            "type": "text",
-            "null": true,
-            "primary_key": false,
-            "foreign_key": false,
-            "relation": "",
-            "description": "Additional comments or notes regarding the lab event."
+            "description": "Original rate as ordered."
         }
     },
     "indexes": {}

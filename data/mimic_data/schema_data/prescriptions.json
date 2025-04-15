@@ -1,143 +1,174 @@
 {
     "name": "prescriptions",
     "columns": {
-      "subject_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Identifier for the patient; may link to a patients table."
-      },
-      "hadm_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Admission identifier; typically links to an admissions record."
-      },
-      "pharmacy_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Unique identifier for the pharmacy record."
-      },
-      "starttime": {
-        "type": "datetime",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Start time for the prescription."
-      },
-      "stoptime": {
-        "type": "datetime",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Stop time for the prescription."
-      },
-      "drug_type": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Type of drug prescribed."
-      },
-      "drug": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Name or description of the drug."
-      },
-      "gsn": {
-        "type": "text",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Generic Sequence Number for the drug."
-      },
-      "ndc": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "National Drug Code identifier."
-      },
-      "prod_strength": {
-        "type": "text",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Product strength information."
-      },
-      "form_rx": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Form of the drug as prescribed."
-      },
-      "dose_val_rx": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Dose value as prescribed."
-      },
-      "dose_unit_rx": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Unit for the prescribed dose."
-      },
-      "form_val_disp": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Form value at dispensation."
-      },
-      "form_unit_disp": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Unit for the dispensed form value."
-      },
-      "doses_per_24_hrs": {
-        "type": "tinyint unsigned",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Number of doses allowed in a 24-hour period."
-      },
-      "route": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Route of administration for the prescription."
-      }
+        "subject_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the patient; may link to a patients table."
+        },
+        "hadm_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Admission identifier; typically links to an admissions record."
+        },
+        "pharmacy_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unique identifier for the pharmacy record."
+        },
+        "poe_id": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the point of entry associated with the record."
+        },
+        "poe_seq": {
+            "type": "smallint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Sequence number for the POE detail record."
+        },
+        "order_provider_id": {
+            "type": "text",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Deidentified provider ID who ordered the event"
+        },
+        "starttime": {
+            "type": "datetime",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Start time for the prescription."
+        },
+        "stoptime": {
+            "type": "datetime",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Stop time for the prescription."
+        },
+        "drug_type": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Type of drug prescribed."
+        },
+        "drug": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Name or description of the drug."
+        },
+        "formulary_drug_cd": {
+            "type": "varchar(120)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Formulary drug code."
+        },
+        "gsn": {
+            "type": "text",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Generic Sequence Number for the drug."
+        },
+        "ndc": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "National Drug Code identifier."
+        },
+        "prod_strength": {
+            "type": "text",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Product strength information."
+        },
+        "form_rx": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Form of the drug as prescribed."
+        },
+        "dose_val_rx": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Dose value as prescribed."
+        },
+        "dose_unit_rx": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unit for the prescribed dose."
+        },
+        "form_val_disp": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Form value at dispensation."
+        },
+        "form_unit_disp": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unit for the dispensed form value."
+        },
+        "doses_per_24_hrs": {
+            "type": "tinyint unsigned",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Number of doses allowed in a 24-hour period."
+        },
+        "route": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Route of administration for the prescription."
+        }
     },
     "indexes": {}
-  }
-  
+}

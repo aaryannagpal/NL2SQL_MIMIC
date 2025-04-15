@@ -49,6 +49,14 @@
             "relation": "",
             "description": "Type of admission (e.g., emergency, urgent, elective)."
         },
+        "admit_provider_id": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Deidentified ID of provider who admitted the patient."
+        },
         "admission_location": {
             "type": "varchar(255)",
             "null": true,
@@ -89,13 +97,13 @@
             "relation": "",
             "description": "Marital status of the patient."
         },
-        "ethnicity": {
+        "race": {
             "type": "varchar(255)",
             "null": false,
             "primary_key": false,
             "foreign_key": false,
             "relation": "",
-            "description": "Ethnicity of the patient."
+            "description": "Race of the patient."
         },
         "edregtime": {
             "type": "datetime",
@@ -124,20 +132,31 @@
     },
     "indexes": {
         "admissions_idx04": {
-            "columns": ["hadm_id"],
+            "columns": [
+                "hadm_id"
+            ],
             "unique": true
         },
         "admissions_idx01": {
-            "columns": ["subject_id", "hadm_id"],
+            "columns": [
+                "subject_id",
+                "hadm_id"
+            ],
             "unique": false
         },
         "admissions_idx02": {
-            "columns": ["admittime", "dischtime", "deathtime"],
+            "columns": [
+                "admittime",
+                "dischtime",
+                "deathtime"
+            ],
             "unique": false
         },
         "admissions_idx03": {
-            "columns": ["admission_type"],
+            "columns": [
+                "admission_type"
+            ],
             "unique": false
         }
     }
-}  
+}

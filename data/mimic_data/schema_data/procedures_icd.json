@@ -1,55 +1,54 @@
 {
     "name": "procedures_icd",
     "columns": {
-      "subject_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Identifier for the patient."
-      },
-      "hadm_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Admission identifier."
-      },
-      "seq_num": {
-        "type": "tinyint unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Sequence number for ordering the ICD procedure."
-      },
-      "chartdate": {
-        "type": "datetime",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Date when the procedure was charted."
-      },
-      "icd_code": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "ICD code for the procedure."
-      },
-      "icd_version": {
-        "type": "tinyint unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Version of the ICD coding system."
-      }
+        "subject_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the patient."
+        },
+        "hadm_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Admission identifier."
+        },
+        "seq_num": {
+            "type": "tinyint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Sequence number for ordering the ICD procedure."
+        },
+        "chartdate": {
+            "type": "datetime",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Date when the procedure was charted."
+        },
+        "icd_code": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "ICD code for the procedure."
+        },
+        "icd_version": {
+            "type": "tinyint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Version of the ICD coding system."
+        }
     },
     "indexes": {}
-  }
-  
+}

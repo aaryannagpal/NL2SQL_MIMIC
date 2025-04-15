@@ -1,0 +1,13 @@
+{
+    "name": "caregiver",
+    "columns": {
+        "caregiver_id": {
+            "type": "int unsigned",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Deidentified ID of caregiver who documented this row."
+        }
+    }
+}

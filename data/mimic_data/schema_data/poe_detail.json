@@ -1,47 +1,46 @@
 {
     "name": "poe_detail",
     "columns": {
-      "poe_id": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Unique identifier for the POE record."
-      },
-      "poe_seq": {
-        "type": "smallint unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Sequence number for the POE detail record."
-      },
-      "subject_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Identifier for the patient; may link to a patients table."
-      },
-      "field_name": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Name of the field for additional details."
-      },
-      "field_value": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Value of the corresponding field."
-      }
+        "poe_id": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unique identifier for the POE record."
+        },
+        "poe_seq": {
+            "type": "smallint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Sequence number for the POE detail record."
+        },
+        "subject_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the patient; may link to a patients table."
+        },
+        "field_name": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Name of the field for additional details."
+        },
+        "field_value": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Value of the corresponding field."
+        }
     },
     "indexes": {}
-  }
-  
+}

@@ -1,95 +1,102 @@
 {
     "name": "poe",
     "columns": {
-      "poe_id": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Unique identifier for the POE (Point of Entry) record."
-      },
-      "poe_seq": {
-        "type": "smallint unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Sequence number for the POE record."
-      },
-      "subject_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Identifier for the patient; may link to a patients table."
-      },
-      "hadm_id": {
-        "type": "int unsigned",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Admission identifier; typically links to an admissions record."
-      },
-      "ordertime": {
-        "type": "datetime",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Time when the order was placed."
-      },
-      "order_type": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Type of order."
-      },
-      "order_subtype": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Subtype of the order, if applicable."
-      },
-      "transaction_type": {
-        "type": "varchar(255)",
-        "null": false,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Type of transaction associated with the order."
-      },
-      "discontinue_of_poe_id": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "POE ID of the order being discontinued, if applicable."
-      },
-      "discontinued_by_poe_id": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "POE ID of the order that discontinues this one, if applicable."
-      },
-      "order_status": {
-        "type": "varchar(255)",
-        "null": true,
-        "primary_key": false,
-        "foreign_key": false,
-        "relation": "",
-        "description": "Current status of the order."
-      }
+        "poe_id": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unique identifier for the POE (Point of Entry) record."
+        },
+        "poe_seq": {
+            "type": "smallint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Sequence number for the POE record."
+        },
+        "subject_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the patient; may link to a patients table."
+        },
+        "hadm_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Admission identifier; typically links to an admissions record."
+        },
+        "ordertime": {
+            "type": "datetime",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Time when the order was placed."
+        },
+        "order_type": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Type of order."
+        },
+        "order_subtype": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Subtype of the order, if applicable."
+        },
+        "transaction_type": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Type of transaction associated with the order."
+        },
+        "discontinue_of_poe_id": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "POE ID of the order being discontinued, if applicable."
+        },
+        "discontinued_by_poe_id": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "POE ID of the order that discontinues this one, if applicable."
+        },
+        "order_provider_id": {
+            "type": "text",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Deidentified provider ID who ordered the event"
+        },
+        "order_status": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Current status of the order."
+        }
     },
     "indexes": {}
-  }
-  
+}
