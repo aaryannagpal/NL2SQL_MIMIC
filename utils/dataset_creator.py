@@ -20,6 +20,8 @@ from config import (
     DICTIONARY_MAP_PATH,
     MYSQL_DB_PATH,
     MIMIC_SAMPLE_PATH,
+
+    DEFAULT_PATTERN_FOR_LIKE_OPERATION,
 )
 
 with open(MIMIC_SCHEMA_PATH) as f:
@@ -174,7 +176,6 @@ class MimicSchema:
             conn = sqlite3.connect(self.db_path)
             cursor = conn.cursor()
 
-            # Check which tables actually exist in the database
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
             existing_tables = [row[0] for row in cursor.fetchall()]
             cursor.close()
@@ -288,7 +289,7 @@ class MimicSchema:
         except sqlite3.Error as e:
             print(f"SQLite database error: {e}")
             print("Falling back to synthetic sample values")
-            return
+            return  # self._generate_synthetic_sample_values(sample_size)
 
         except Exception as e:
             print(f"Unexpected error during sample value extraction: {e}")
@@ -341,3 +342,313 @@ class MimicSchema:
     def get_tables_with_column(self, column_name: str) -> List[str]:
         """Get all tables that have a specific column"""
         return [table for table in self.tables if column_name in self.columns[table]]
+
+
+class QueryTemplateGenerator:
+    """Base class for query template generation"""
+    
+    def __init__(self, schema: MimicSchema):
+        self.schema = schema
+        
+        self.operators = ["=", ">", "<", ">=", "<=", "<>", "LIKE", "IN", "NOT IN", "IS NULL", "IS NOT NULL"]
+        self.logical_ops = ["AND", "OR"]
+        self.aggregations = ["COUNT", "AVG", "MAX", "MIN", "SUM"]
+        self.sort_dirs = ["ASC", "DESC"]
+        self.limit_values = [3, 5, 10, 15, 20, 25, 50, 100]
+        
+        self.operator_phrases = {
+            "=": ["equal to", "is", "matching"],
+            ">": ["greater than", "more than", "exceeding", "above"],
+            "<": ["less than", "lower than", "below", "under"],
+            ">=": ["at least", "greater than or equal to", "no less than"],
+            "<=": ["at most", "less than or equal to", "no more than", "up to"],
+            "<>": ["not equal to", "different from", "not", "excluding"],
+            "LIKE": ["containing", "including", "with", "like"],
+            "IN": ["in", "among", "one of", "included in"],
+            "NOT IN": ["not in", "not among", "not one of", "excluded from"],
+            "IS NULL": ["is missing", "is not recorded", "is null", "is empty"],
+            "IS NOT NULL": ["is recorded", "is available", "is not null", "is not empty"]
+        }
+        
+        self.aggregation_phrases = {
+            "COUNT": ["count", "total number", "quantity"],
+            "AVG": ["average", "mean", "typical"],
+            "MAX": ["maximum", "highest", "largest", "greatest"],
+            "MIN": ["minimum", "lowest", "smallest", "least"],
+            "SUM": ["sum", "total", "combined"]
+        }
+    
+    def random_columns(self, table: str, min_cols: int = 1, max_cols: int = 3) -> List[str]:
+        """Select random columns from a table"""
+        columns = self.schema.columns[table]
+        num_cols = min(random.randint(min_cols, max_cols), len(columns))
+        return random.sample(columns, num_cols)
+
+    def random_filter(self, table: str, column: str) -> Tuple[str, str]:
+        """Generate a random filter condition and its NL description"""
+        
+        op = random.choice(self.operators)
+        column_type = self.schema.get_column_type(table, column)
+        sample_value = self.schema.get_sample_value(table, column)
+                
+        if isinstance(sample_value, list):
+            if sample_value:
+                sample_value = random.choice(sample_value)
+            else:
+                print("Sample Values have NoneType present. Please fix")
+                return
+
+        if op == "LIKE":
+            if "char" in column_type or "text" in column_type:
+                if isinstance(sample_value, str):
+                    words = sample_value.split()
+                    if len(words) > 1:
+                        non_empty_words = [w for w in words if len(w) > 0]
+                        if non_empty_words:
+                            pattern = random.choice(non_empty_words)
+                        else:
+                            pattern = sample_value
+                    else:
+                        pattern = sample_value
+                    
+                    pattern = re.sub(r'[^\w\s]', '', pattern).strip()
+                    
+                    if not pattern:
+                        pattern = DEFAULT_PATTERN_FOR_LIKE_OPERATION
+                    
+                    sql_value = f"'%{pattern}%'"
+                    display_value = pattern
+                else:
+                    pattern = str(sample_value)
+                    sql_value = f"'%{pattern}%'"
+                    display_value = pattern
+            else:
+                pattern = str(sample_value)
+                sql_value = f"'%{pattern}%'"
+                display_value = pattern
+                
+        
+        elif op in ["IN", "NOT IN"]:
+            samples_list_size = random.randint(1,10)
+            if "int" in column_type or "float" in column_type:
+                if isinstance(sample_value, (int, float)):
+                    base_value = int(sample_value)
+                    all_samples = self.schema.default_sample_values.get(table, {}).get(column, [])
+                    if len(all_samples) >= samples_list_size:
+                        numeric_samples = []
+                        for val in all_samples:
+                            try:
+                                if isinstance(val, (int, float)):
+                                    numeric_samples.append(val)
+                                elif isinstance(val, str) and val.replace('.', '', 1).isdigit():
+                                    numeric_samples.append(float(val))
+                            except:
+                                continue
+                        
+                        if len(numeric_samples) >= samples_list_size:
+                            values = random.sample(numeric_samples, samples_list_size)
+                        else:
+                            values = [base_value, base_value + random.randint(1, 10), base_value + random.randint(11, 20)]
+                    else:
+                        values = [base_value, base_value + random.randint(1, 10), base_value + random.randint(11, 20)]
+                else:
+                    values = [random.randint(1, 100) for _ in range(samples_list_size)]
+                
+                sql_value = f"({', '.join(map(str, values))})"
+                display_value = ", ".join(map(str, values))
+            
+            else:
+                all_samples = self.schema.default_sample_values.get(table, {}).get(column, [])
+                string_samples = [s for s in all_samples if isinstance(s, str) and s]
+                
+                if len(string_samples) >= samples_list_size:
+                    values = random.sample(string_samples, samples_list_size)
+                else:
+                    if isinstance(sample_value, str) and sample_value:
+                        values = [sample_value]
+                        if len(all_samples) > 1:
+                            for s in all_samples:
+                                if s != sample_value and isinstance(s, str) and s:
+                                    values.append(s)
+                                    if len(values) >= samples_list_size:
+                                        break
+                        
+                        domain_alternatives = []
+                        if column == 'gender':
+                            domain_alternatives = ['M', 'F']
+                        elif column == 'admission_type':
+                            domain_alternatives = ['EMERGENCY', 'ELECTIVE', 'URGENT']
+                        elif column == 'ethnicity':
+                            domain_alternatives = ['WHITE', 'BLACK', 'HISPANIC', 'ASIAN']
+                        elif column == 'insurance':
+                            domain_alternatives = ['Medicare', 'Medicaid', 'Private']
+                        
+                        for alt in domain_alternatives:
+                            if alt != sample_value and alt not in values:
+                                values.append(alt)
+                                if len(values) >= samples_list_size:
+                                    break
+                        
+                        # Fill in with generic values if needed
+                        while len(values) < samples_list_size:
+                            values.append(f"Sample{random.randint(1, 100)}")
+                    else:
+                        values = [f"Sample{i}" for i in range(1, 4)]
+                
+                # Format for SQL
+                sql_value = "(" + ", ".join(f"'{v}'" for v in values) + ")"
+                display_value = f"{', '.join(map(str, values))}"
+
+                
+        elif op in ["IS NULL", "IS NOT NULL"]:
+            sql_value = ""
+            display_value = ""
+            sql_filter = f"{column} {op}"
+            
+        else:
+            if "char" in column_type or "text" in column_type or "datetime" in column_type:
+                sql_value = f"'{sample_value}'"
+                display_value = str(sample_value)
+            else:
+                sql_value = str(sample_value)
+                display_value = str(sample_value)
+        
+        if op not in ["IS NULL", "IS NOT NULL"]:
+            sql_filter = f"{column} {op} {sql_value}"
+        
+        op_phrase = random.choice(self.operator_phrases[op])
+        
+        if op in ["IS NULL", "IS NOT NULL"]:
+            nl_filter = f"{column.replace('_', ' ')} {op_phrase}"
+        else:
+            nl_filter = f"{column.replace('_', ' ')} {op_phrase} {display_value}"
+        
+        return sql_filter, nl_filter
+
+    def random_join_condition(self, table1: str, table2: str) -> Tuple[str, str]:
+        """Generate a join condition between two tables"""
+        
+        possible_joins = []
+        print(table1, table2)
+        if table1 in self.schema.dict_mappings:
+            for dict_info in self.schema.dict_mappings[table1]:
+                if dict_info["dict_table"] == table2:
+                    col1 = dict_info["code_column"]
+                    col2 = dict_info["dict_code_column"]
+                    dict_sql_join = f"{table1}.{col1} = {table2}.{col2}"
+                    desc_column = dict_info["dict_desc_column"]
+                    possible_joins.append(("dictionary", dict_sql_join, col1, desc_column))
+        
+        if table2 in self.schema.dict_mappings:
+            for dict_info in self.schema.dict_mappings[table2]:
+                if dict_info["dict_table"] == table1:
+                    col1 = dict_info["dict_code_column"]
+                    col2 = dict_info["code_column"]
+                    dict_sql_join = f"{table1}.{col1} = {table2}.{col2}"
+                    desc_column = dict_info["dict_desc_column"]
+                    possible_joins.append(("dictionary", dict_sql_join, col1, desc_column))
+    
+        join_columns = self.schema.get_join_columns(table1, table2)
+        
+        if join_columns:
+            for join_column in join_columns:
+                regular_sql_join = f"{table1}.{join_column} = {table2}.{join_column}"
+                possible_joins.append(("regular", regular_sql_join, join_column, None))
+        
+        if not possible_joins:
+            return None, None
+        
+        join_info = random.choice(possible_joins)
+        join_type, sql_join, join_column, desc_column = join_info
+        
+        nl_join = self._get_natural_join_phrase(
+            table1, table2, join_column, 
+            is_dict_join=(join_type == "dictionary"),
+            desc_column=desc_column
+        )
+        
+        return sql_join, nl_join
+
+    def _get_natural_join_phrase(self, table1: str, table2: str, join_column: str, is_dict_join: bool = False, desc_column: str = None) -> str:
+        """Generate a natural language phrase for a join based on the tables involved"""
+        
+        if is_dict_join:
+            if 'diagnoses' in table1 or 'diagnoses' in table2:
+                if desc_column == 'long_title':
+                    return "with their complete diagnosis descriptions"
+                else:
+                    return "with their diagnosis information"
+                    
+            elif 'procedures' in table1 or 'procedures' in table2:
+                if desc_column == 'long_title':
+                    return "with their complete procedure descriptions"
+                else:
+                    return "with their procedure details"
+                    
+            elif 'lab' in table1 or 'lab' in table2:
+                if desc_column == 'label':
+                    return "with their lab test names"
+                else:
+                    return "with their lab test information"
+                    
+            elif 'chart' in table1 or 'chart' in table2:
+                if desc_column == 'label':
+                    return "with their chart item descriptions"
+                else:
+                    return "with their chart details"
+                    
+            elif 'hcpcs' in table1 or 'hcpcs' in table2:
+                if desc_column == 'short_description' or desc_column == 'long_description':
+                    return "with their healthcare service descriptions"
+                else:
+                    return "with their healthcare service details"
+                    
+            else:
+                return "with their associated descriptions"
+            
+        if ('patients' in table1 and 'admissions' in table2) or ('patients' in table2 and 'admissions' in table1):
+            return "during their hospital admissions"
+        
+        if ('patients' in table1 and 'diagnoses' in table2) or ('patients' in table2 and 'diagnoses' in table1):
+            return "who were diagnosed with"
+        
+        if ('patients' in table1 and 'procedures' in table2) or ('patients' in table2 and 'procedures' in table1):
+            return "who underwent"
+        
+        if ('patients' in table1 and 'prescriptions' in table2) or ('patients' in table2 and 'prescriptions' in table1):
+            return "who were prescribed"
+        
+        if ('patients' in table1 and 'labevents' in table2) or ('patients' in table2 and 'labevents' in table1):
+            return "who had lab tests for"
+        
+        if ('admissions' in table1 and 'transfers' in table2) or ('admissions' in table2 and 'transfers' in table1):
+            return "with their transfer details"
+        
+        if ('admissions' in table1 and 'services' in table2) or ('admissions' in table2 and 'services' in table1):
+            return "with their assigned services"
+        
+        if ('admissions' in table1 and 'icustays' in table2) or ('admissions' in table2 and 'icustays' in table1):
+            return "including ICU stay information"
+        
+        if join_column == 'subject_id':
+            return "for each patient"
+        
+        if join_column == 'hadm_id':
+            return "during their hospital stays"
+        
+        if join_column == 'stay_id':
+            return "during their unit stays"
+        
+        return "along with their related data"
+
+    def operator_to_nl(self, op: str) -> str:
+        """Convert SQL operator to natural language"""
+        return random.choice(self.operator_phrases.get(op, [op]))
+    
+    def aggregation_to_nl(self, agg: str) -> str:
+        """Convert aggregation function to natural language"""
+        return random.choice(self.aggregation_phrases.get(agg, [agg.lower()]))
+    
+    def generate(self, count: int = 1) -> List[Dict[str, str]]:
+        """Generate query templates - to be implemented by subclasses"""
+        raise NotImplementedError("Subclasses must implement generate()")
