@@ -350,7 +350,7 @@ class QueryTemplateGenerator:
     def __init__(self, schema: MimicSchema):
         self.schema = schema
         
-        self.operators = ["=", ">", "<", ">=", "<=", "<>", "LIKE", "IN", "NOT IN", "IS NULL", "IS NOT NULL"]
+        self.operators = ["=", ">", "<", ">=", "<=", "<>", "LIKE", "IN", "NOT IN", "IS NULL", "IS NOT NULL", "BETWEEN", "NOT BETWEEN"]
         self.logical_ops = ["AND", "OR"]
         self.aggregations = ["COUNT", "AVG", "MAX", "MIN", "SUM"]
         self.sort_dirs = ["ASC", "DESC"]
@@ -367,7 +367,9 @@ class QueryTemplateGenerator:
             "IN": ["in", "among", "one of", "included in"],
             "NOT IN": ["not in", "not among", "not one of", "excluded from"],
             "IS NULL": ["is missing", "is not recorded", "is null", "is empty"],
-            "IS NOT NULL": ["is recorded", "is available", "is not null", "is not empty"]
+            "IS NOT NULL": ["is recorded", "is available", "is not null", "is not empty"],
+            "BETWEEN": ["between {sample_1} and {sample_2}", "in the range from {sample_1} to {sample_2}", "within the range of {sample_1} and {sample_2}", "falling between {sample_1} and {sample_2}", "from {sample_1} to {sample_2}", "in the interval from {sample_1} to {sample_2}", "ranging from {sample_1} to {sample_2}"],
+            "NOT BETWEEN": ["not between {sample_1} and {sample_2}", "outside the range from {sample_1} to {sample_2}", "not within the range of {sample_1} and {sample_2}", "not falling between {sample_1} and {sample_2}", "excluding values from {sample_1} to {sample_2}", "not in the interval from {sample_1} to {sample_2}", "not ranging from {sample_1} to {sample_2}", "less than {sample_1} or greater than {sample_2}"]
         }
         
         self.aggregation_phrases = {
@@ -428,6 +430,67 @@ class QueryTemplateGenerator:
                 display_value = pattern
                 
         
+        if op in ["BETWEEN", "NOT BETWEEN"]:
+            sample_value_2 = self.schema.get_sample_value(table, column)
+            
+            if "char" in column_type or "text" in column_type:
+                sql_value = f"'{sample_value}' AND '{sample_value_2}'"
+                display_value = (str(sample_value), str(sample_value_2))
+            
+            elif "datetime" in column_type:
+                try:                    
+                    original_timestamp = datetime.strptime(sample_value, '%Y-%m-%d %H:%M:%S')
+                    original_timestamp_2 = datetime.strptime(sample_value_2, '%Y-%m-%d %H:%M:%S')
+                    
+                    date_format_choice = random.choice([
+                        "full_datetime",  # "January 15, 2020 at 08:30 AM"
+                        "date_only",      # "January 15, 2020"
+                        "month_year",     # "January 2020"
+                        "date_simple"     # "2020-01-15"
+                    ])
+                    
+                    if date_format_choice == "full_datetime":
+                        # Keep original with full date and time
+                        sql_value = f"'{sample_value}' AND '{sample_value_2}'"
+                        
+                        date_str = original_timestamp.strftime('%B %d, %Y')
+                        time_str = original_timestamp.strftime('%I:%M %p')
+
+                        date_str_2 = original_timestamp_2.strftime('%B %d, %Y')
+                        time_str_2 = original_timestamp_2.strftime('%I:%M %p')
+
+                        display_value = (f"{date_str} at {time_str}", f"{date_str_2} at {time_str_2}")
+                        
+                    elif date_format_choice == "date_only":
+                        # Set time to midnight for date-only comparison
+                        date_only = original_timestamp.replace(hour=0, minute=0, second=0)
+                        date_only_2 = original_timestamp_2.replace(hour=0, minute=0, second=0)
+                        sql_value = f"'{date_only.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_only_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                        display_value = (date_only.strftime('%B %d, %Y'), date_only_2.strftime('%B %d, %Y'))
+                        
+                    elif date_format_choice == "month_year":
+                        # Set to first day of month at midnight
+                        month_year = original_timestamp.replace(day=1, hour=0, minute=0, second=0)
+                        month_year_2 = original_timestamp_2.replace(day=1, hour=0, minute=0, second=0)
+                        sql_value = f"'{month_year.strftime('%Y-%m-%d %H:%M:%S')}' AND '{month_year_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                        display_value = (month_year.strftime('%B %Y'), month_year_2.strftime('%B %Y'))
+                        
+                    else:
+                        # Date in YYYY-MM-DD format with midnight time
+                        date_simple = original_timestamp.replace(hour=0, minute=0, second=0)
+                        date_simple_2 = original_timestamp_2.replace(hour=0, minute=0, second=0)
+                        sql_value = f"'{date_simple.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_simple_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                        display_value = (date_simple.strftime('%Y-%m-%d'), date_simple_2.strftime('%Y-%m-%d'))
+                
+                except (ValueError, TypeError):
+                    sql_value = f"'{sample_value}' AND {sample_value_2}"
+                    display_value = (str(sample_value), str(sample_value_2))
+            
+            else:
+                sql_value = f"{sample_value} AND {sample_value_2}"
+                display_value = (str(sample_value), str(sample_value_2))
+
+
         elif op in ["IN", "NOT IN"]:
             samples_list_size = random.randint(1,10)
             if "int" in column_type or "float" in column_type:
