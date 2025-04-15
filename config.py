@@ -12,6 +12,11 @@ DICTIONARY_MAP_PATH: Final[Path] = DATA_DIR / "dictionary.json"
 
 OPENAI_API_KEY: Final[str] = os.getenv("OPENAI_API_KEY", "")
 
+MIMIC_SAMPLE_DIR = PROJECT_ROOT / "data" / "custom_dataset" / "sample_data"
+QUERY_SAMPLE_DIR = PROJECT_ROOT / "data" / "custom_dataset" / "sample_query_sets"
+MIMIC_SAMPLE_PATH = MIMIC_SAMPLE_DIR / "default.json"
+
+
 def _validate_paths() -> None:
     """Check if critical files/dirs exist at startup."""
     required_paths = [
@@ -24,9 +29,13 @@ def _validate_paths() -> None:
         if not path.exists():
             raise FileNotFoundError(f"Config error: {path} does not exist")
 
+
 def _validate_api_key() -> None:
     if not OPENAI_API_KEY:
         raise ValueError("OPENAI_API_KEY is not set in environment variables")
 
+
 _validate_paths()
 _validate_api_key()
+
+DEFAULT_PATTERN_FOR_LIKE_OPERATION = "itis"
