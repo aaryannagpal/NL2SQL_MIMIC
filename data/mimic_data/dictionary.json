@@ -101,6 +101,12 @@
             "dict_table": "poe_detail",
             "dict_code_column": "poe_id",
             "dict_desc_column": "field_value"
+        },
+        {
+            "code_column": "formulary_drug_cd",
+            "dict_table": "emar_detail",
+            "dict_code_column": "product_code",
+            "dict_desc_column": "product_description"
         }
     ],
     "pharmacy": [
