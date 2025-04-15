@@ -552,10 +552,6 @@ class QueryTemplateGenerator:
                                 values.append(alt)
                                 if len(values) >= samples_list_size:
                                     break
-                        
-                        # Fill in with generic values if needed
-                        while len(values) < samples_list_size:
-                            values.append(f"Sample{random.randint(1, 100)}")
                     else:
                         values = [f"Sample{i}" for i in range(1, 4)]
                 
@@ -625,6 +621,9 @@ class QueryTemplateGenerator:
         op_phrase = random.choice(self.operator_phrases[op])
         
         if op in ["IS NULL", "IS NOT NULL"]:
+            nl_filter = f"{column.replace('_', ' ')} {op_phrase}"
+        elif op == ["BETWEEN", "NOT BETWEEN"]:
+            op_phrase = op_phrase.format(sample_1=display_value[0], sample_2=display_value[1])
             nl_filter = f"{column.replace('_', ' ')} {op_phrase}"
         else:
             nl_filter = f"{column.replace('_', ' ')} {op_phrase} {display_value}"
