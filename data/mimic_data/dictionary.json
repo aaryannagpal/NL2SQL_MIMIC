@@ -1,86 +1,114 @@
 {
-    "diagnoses_icd": {
-        "code_column": "icd_code",
-        "dict_table": "d_icd_diagnoses",
-        "dict_code_column": "icd_code",
-        "dict_desc_column": "long_title"
-    },
-    "procedures_icd": {
-        "code_column": "icd_code",
-        "dict_table": "d_icd_procedures",
-        "dict_code_column": "icd_code",
-        "dict_desc_column": "long_title"
-    },
-    "chartevents": {
-        "code_column": "itemid",
-        "dict_table": "d_items",
-        "dict_code_column": "itemid",
-        "dict_desc_column": "label"
-    },
-    "datetimeevents": {
-        "code_column": "itemid",
-        "dict_table": "d_items",
-        "dict_code_column": "itemid",
-        "dict_desc_column": "label"
-    },
-    "ingredientevents": {
-        "code_column": "itemid",
-        "dict_table": "d_items",
-        "dict_code_column": "itemid",
-        "dict_desc_column": "label"
-    },
-    "inputevents": {
-        "code_column": "itemid",
-        "dict_table": "d_items",
-        "dict_code_column": "itemid",
-        "dict_desc_column": "label"
-    },
-    "procedureevents": {
-        "code_column": "itemid",
-        "dict_table": "d_items",
-        "dict_code_column": "itemid",
-        "dict_desc_column": "label"
-    },
-    "outputevents": {
-        "code_column": "itemid",
-        "dict_table": "d_items",
-        "dict_code_column": "itemid",
-        "dict_desc_column": "label"
-    },
-    "labevents": {
-        "code_column": "itemid",
-        "dict_table": "d_labitems",
-        "dict_code_column": "itemid",
-        "dict_desc_column": "label"
-    },
-    "hcpcsevents": {
-        "code_column": "hcpcs_cd",
-        "dict_table": "d_hcpcs",
-        "dict_code_column": "code",
-        "dict_desc_column": "short_description"
-    },
-    "poe": {
-        "code_column": "poe_id",
-        "dict_table": "poe_detail",
-        "dict_code_column": "poe_id",
-        "dict_desc_column": "field_value"
-    },
-    "emar": {
-        "code_column": "poe_id",
-        "dict_table": "poe_detail",
-        "dict_code_column": "poe_id",
-        "dict_desc_column": "field_value"
-    },
-    "prescriptions": {
-        "code_column": "poe_id",
-        "dict_table": "poe_detail",
-        "dict_code_column": "poe_id",
-        "dict_desc_column": "field_value"
-    },
-    "pharmacy": {
-        "code_column": "poe_id",
-        "dict_table": "poe_detail",
-        "dict_code_column": "poe_id",
-        "dict_desc_column": "field_value"
-    }
+    "diagnoses_icd": [
+        {
+            "code_column": "icd_code",
+            "dict_table": "d_icd_diagnoses",
+            "dict_code_column": "icd_code",
+            "dict_desc_column": "long_title"
+        }
+    ],
+    "procedures_icd": [
+        {
+            "code_column": "icd_code",
+            "dict_table": "d_icd_procedures",
+            "dict_code_column": "icd_code",
+            "dict_desc_column": "long_title"
+        }
+    ],
+    "chartevents": [
+        {
+            "code_column": "itemid",
+            "dict_table": "d_items",
+            "dict_code_column": "itemid",
+            "dict_desc_column": "label"
+        }
+    ],
+    "datetimeevents": [
+        {
+            "code_column": "itemid",
+            "dict_table": "d_items",
+            "dict_code_column": "itemid",
+            "dict_desc_column": "label"
+        }
+    ],
+    "ingredientevents": [
+        {
+            "code_column": "itemid",
+            "dict_table": "d_items",
+            "dict_code_column": "itemid",
+            "dict_desc_column": "label"
+        }
+    ],
+    "inputevents": [
+        {
+            "code_column": "itemid",
+            "dict_table": "d_items",
+            "dict_code_column": "itemid",
+            "dict_desc_column": "label"
+        }
+    ],
+    "procedureevents": [
+        {
+            "code_column": "itemid",
+            "dict_table": "d_items",
+            "dict_code_column": "itemid",
+            "dict_desc_column": "label"
+        }
+    ],
+    "outputevents": [
+        {
+            "code_column": "itemid",
+            "dict_table": "d_items",
+            "dict_code_column": "itemid",
+            "dict_desc_column": "label"
+        }
+    ],
+    "labevents": [
+        {
+            "code_column": "itemid",
+            "dict_table": "d_labitems",
+            "dict_code_column": "itemid",
+            "dict_desc_column": "label"
+        }
+    ],
+    "hcpcsevents": [
+        {
+            "code_column": "hcpcs_cd",
+            "dict_table": "d_hcpcs",
+            "dict_code_column": "code",
+            "dict_desc_column": "short_description"
+        }
+    ],
+    "poe": [
+        {
+            "code_column": "poe_id",
+            "dict_table": "poe_detail",
+            "dict_code_column": "poe_id",
+            "dict_desc_column": "field_value"
+        }
+    ],
+    "emar": [
+        {
+            "code_column": "poe_id",
+            "dict_table": "poe_detail",
+            "dict_code_column": "poe_id",
+            "dict_desc_column": "field_value"
+        }
+    ],
+    "prescriptions": [
+        {
+            "code_column": "poe_id",
+            "dict_table": "poe_detail",
+            "dict_code_column": "poe_id",
+            "dict_desc_column": "field_value"
+        }
+    ],
+    "pharmacy": [
+        {
+            "code_column": "poe_id",
+            "dict_table": "poe_detail",
+            "dict_code_column": "poe_id",
+            "dict_desc_column": "field_value"
+        }
+    ]
 }
