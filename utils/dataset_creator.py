@@ -622,7 +622,7 @@ class QueryTemplateGenerator:
         
         if op in ["IS NULL", "IS NOT NULL"]:
             nl_filter = f"{column.replace('_', ' ')} {op_phrase}"
-        elif op == ["BETWEEN", "NOT BETWEEN"]:
+        elif op in ["BETWEEN", "NOT BETWEEN"]:
             op_phrase = op_phrase.format(sample_1=display_value[0], sample_2=display_value[1])
             nl_filter = f"{column.replace('_', ' ')} {op_phrase}"
         else:
