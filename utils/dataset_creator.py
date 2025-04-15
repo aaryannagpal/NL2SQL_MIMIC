@@ -439,50 +439,91 @@ class QueryTemplateGenerator:
                 display_value = (str(sample_value), str(sample_value_2))
             
             elif "datetime" in column_type:
-                try:                    
-                    original_timestamp = datetime.strptime(sample_value, '%Y-%m-%d %H:%M:%S')
-                    original_timestamp_2 = datetime.strptime(sample_value_2, '%Y-%m-%d %H:%M:%S')
-                    
-                    date_format_choice = random.choice([
-                        "full_datetime",  # "January 15, 2020 at 08:30 AM"
-                        "date_only",      # "January 15, 2020"
-                        "month_year",     # "January 2020"
-                        "date_simple"     # "2020-01-15"
-                    ])
-                    
-                    if date_format_choice == "full_datetime":
-                        # Keep original with full date and time
-                        sql_value = f"'{sample_value}' AND '{sample_value_2}'"
+                try:
+                    if len(sample_value.split(' ')) > 1:    
+                        original_timestamp = datetime.strptime(sample_value, '%Y-%m-%d %H:%M:%S')
+                        original_timestamp_2 = datetime.strptime(sample_value_2, '%Y-%m-%d %H:%M:%S')
                         
-                        date_str = original_timestamp.strftime('%B %d, %Y')
-                        time_str = original_timestamp.strftime('%I:%M %p')
+                        date_format_choice = random.choice([
+                            "full_datetime",  # "January 15, 2020 at 08:30 AM"
+                            "date_only",      # "January 15, 2020"
+                            "month_year",     # "January 2020"
+                            "date_simple"     # "2020-01-15"
+                        ])
+                        
+                        if date_format_choice == "full_datetime":
+                            # Keep original with full date and time
+                            sql_value = f"'{sample_value}' AND '{sample_value_2}'"
+                            
+                            date_str = original_timestamp.strftime('%B %d, %Y')
+                            time_str = original_timestamp.strftime('%I:%M %p')
 
-                        date_str_2 = original_timestamp_2.strftime('%B %d, %Y')
-                        time_str_2 = original_timestamp_2.strftime('%I:%M %p')
+                            date_str_2 = original_timestamp_2.strftime('%B %d, %Y')
+                            time_str_2 = original_timestamp_2.strftime('%I:%M %p')
 
-                        display_value = (f"{date_str} at {time_str}", f"{date_str_2} at {time_str_2}")
-                        
-                    elif date_format_choice == "date_only":
-                        # Set time to midnight for date-only comparison
-                        date_only = original_timestamp.replace(hour=0, minute=0, second=0)
-                        date_only_2 = original_timestamp_2.replace(hour=0, minute=0, second=0)
-                        sql_value = f"'{date_only.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_only_2.strftime('%Y-%m-%d %H:%M:%S')}'"
-                        display_value = (date_only.strftime('%B %d, %Y'), date_only_2.strftime('%B %d, %Y'))
-                        
-                    elif date_format_choice == "month_year":
-                        # Set to first day of month at midnight
-                        month_year = original_timestamp.replace(day=1, hour=0, minute=0, second=0)
-                        month_year_2 = original_timestamp_2.replace(day=1, hour=0, minute=0, second=0)
-                        sql_value = f"'{month_year.strftime('%Y-%m-%d %H:%M:%S')}' AND '{month_year_2.strftime('%Y-%m-%d %H:%M:%S')}'"
-                        display_value = (month_year.strftime('%B %Y'), month_year_2.strftime('%B %Y'))
-                        
+                            display_value = (f"{date_str} at {time_str}", f"{date_str_2} at {time_str_2}")
+                            
+                        elif date_format_choice == "date_only":
+                            # Set time to midnight for date-only comparison
+                            date_only = original_timestamp.replace(hour=0, minute=0, second=0)
+                            date_only_2 = original_timestamp_2.replace(hour=0, minute=0, second=0)
+                            sql_value = f"'{date_only.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_only_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = (date_only.strftime('%B %d, %Y'), date_only_2.strftime('%B %d, %Y'))
+                            
+                        elif date_format_choice == "month_year":
+                            # Set to first day of month at midnight
+                            month_year = original_timestamp.replace(day=1, hour=0, minute=0, second=0)
+                            month_year_2 = original_timestamp_2.replace(day=1, hour=0, minute=0, second=0)
+                            sql_value = f"'{month_year.strftime('%Y-%m-%d %H:%M:%S')}' AND '{month_year_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = (month_year.strftime('%B %Y'), month_year_2.strftime('%B %Y'))
+                            
+                        else:
+                            # Date in YYYY-MM-DD format with midnight time
+                            date_simple = original_timestamp.replace(hour=0, minute=0, second=0)
+                            date_simple_2 = original_timestamp_2.replace(hour=0, minute=0, second=0)
+                            sql_value = f"'{date_simple.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_simple_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = (date_simple.strftime('%Y-%m-%d'), date_simple_2.strftime('%Y-%m-%d'))
                     else:
-                        # Date in YYYY-MM-DD format with midnight time
-                        date_simple = original_timestamp.replace(hour=0, minute=0, second=0)
-                        date_simple_2 = original_timestamp_2.replace(hour=0, minute=0, second=0)
-                        sql_value = f"'{date_simple.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_simple_2.strftime('%Y-%m-%d %H:%M:%S')}'"
-                        display_value = (date_simple.strftime('%Y-%m-%d'), date_simple_2.strftime('%Y-%m-%d'))
-                
+                        original_date = datetime.strptime(sample_value, '%Y-%m-%d')
+                        original_date_2 = datetime.strptime(sample_value_2, '%Y-%m-%d')
+                        
+                        date_format_choice = random.choice([
+                            "date_only",      # "January 15, 2020"
+                            "month_year",     # "January 2020"
+                            "date_simple"     # "2020-01-15"
+                        ])
+                        
+                        if date_format_choice == "date_only":
+                            # Set time to midnight for both dates
+                            date_only = original_date.replace(hour=0, minute=0, second=0)
+                            date_only_2 = original_date_2.replace(hour=0, minute=0, second=0)
+                            sql_value = f"'{date_only.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_only_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = (
+                                date_only.strftime('%B %d, %Y'), 
+                                date_only_2.strftime('%B %d, %Y')
+                            )
+                            
+                        elif date_format_choice == "month_year":
+                            # Set to first day of month at midnight for both dates
+                            month_year = original_date.replace(day=1, hour=0, minute=0, second=0)
+                            month_year_2 = original_date_2.replace(day=1, hour=0, minute=0, second=0)
+                            sql_value = f"'{month_year.strftime('%Y-%m-%d %H:%M:%S')}' AND '{month_year_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = (
+                                month_year.strftime('%B %Y'), 
+                                month_year_2.strftime('%B %Y')
+                            )
+                            
+                        else:  # date_simple
+                            # Simple YYYY-MM-DD format with midnight time for both dates
+                            date_simple = original_date.replace(hour=0, minute=0, second=0)
+                            date_simple_2 = original_date_2.replace(hour=0, minute=0, second=0)
+                            sql_value = f"'{date_simple.strftime('%Y-%m-%d %H:%M:%S')}' AND '{date_simple_2.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = (
+                                date_simple.strftime('%Y-%m-%d'), 
+                                date_simple_2.strftime('%Y-%m-%d')
+                            )
+
+
                 except (ValueError, TypeError):
                     sql_value = f"'{sample_value}' AND {sample_value_2}"
                     display_value = (str(sample_value), str(sample_value_2))
@@ -572,42 +613,64 @@ class QueryTemplateGenerator:
                 display_value = str(sample_value)
             
             elif "datetime" in column_type:
-                try:                    
-                    original_timestamp = datetime.strptime(sample_value, '%Y-%m-%d %H:%M:%S')
-                    
-                    date_format_choice = random.choice([
-                        "full_datetime",  # "January 15, 2020 at 08:30 AM"
-                        "date_only",      # "January 15, 2020"
-                        "month_year",     # "January 2020"
-                        "date_simple"     # "2020-01-15"
-                    ])
-                    
-                    if date_format_choice == "full_datetime":
-                        # Keep original with full date and time
-                        sql_value = f"'{sample_value}'"
-                        date_str = original_timestamp.strftime('%B %d, %Y')
-                        time_str = original_timestamp.strftime('%I:%M %p')
-                        display_value = f"{date_str} at {time_str}"
+                try:
+                    if len(sample_value.split(' ')) > 1:                 
+                        original_timestamp = datetime.strptime(sample_value, '%Y-%m-%d %H:%M:%S')
                         
-                    elif date_format_choice == "date_only":
-                        # Set time to midnight for date-only comparison
-                        date_only = original_timestamp.replace(hour=0, minute=0, second=0)
-                        sql_value = f"'{date_only.strftime('%Y-%m-%d %H:%M:%S')}'"
-                        display_value = date_only.strftime('%B %d, %Y')
+                        date_format_choice = random.choice([
+                            "full_datetime",  # "January 15, 2020 at 08:30 AM"
+                            "date_only",      # "January 15, 2020"
+                            "month_year",     # "January 2020"
+                            "date_simple"     # "2020-01-15"
+                        ])
                         
-                    elif date_format_choice == "month_year":
-                        # Set to first day of month at midnight
-                        month_year = original_timestamp.replace(day=1, hour=0, minute=0, second=0)
-                        sql_value = f"'{month_year.strftime('%Y-%m-%d %H:%M:%S')}'"
-                        display_value = month_year.strftime('%B %Y')
-                        
+                        if date_format_choice == "full_datetime":
+                            # Keep original with full date and time
+                            sql_value = f"'{sample_value}'"
+                            date_str = original_timestamp.strftime('%B %d, %Y')
+                            time_str = original_timestamp.strftime('%I:%M %p')
+                            display_value = f"{date_str} at {time_str}"
+                            
+                        elif date_format_choice == "date_only":
+                            # Set time to midnight for date-only comparison
+                            date_only = original_timestamp.replace(hour=0, minute=0, second=0)
+                            sql_value = f"'{date_only.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = date_only.strftime('%B %d, %Y')
+                            
+                        elif date_format_choice == "month_year":
+                            # Set to first day of month at midnight
+                            month_year = original_timestamp.replace(day=1, hour=0, minute=0, second=0)
+                            sql_value = f"'{month_year.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = month_year.strftime('%B %Y')
+                            
+                        else:
+                            # Date in YYYY-MM-DD format with midnight time
+                            date_simple = original_timestamp.replace(hour=0, minute=0, second=0)
+                            sql_value = f"'{date_simple.strftime('%Y-%m-%d %H:%M:%S')}'"
+                            display_value = date_simple.strftime('%Y-%m-%d')
                     else:
-                        # Date in YYYY-MM-DD format with midnight time
-                        date_simple = original_timestamp.replace(hour=0, minute=0, second=0)
-                        sql_value = f"'{date_simple.strftime('%Y-%m-%d %H:%M:%S')}'"
-                        display_value = date_simple.strftime('%Y-%m-%d')
+                        original_date = datetime.strptime(sample_value, '%Y-%m-%d')
+    
+                        date_format_choice = random.choice([
+                            "date_only",      # "January 15, 2020"
+                            "month_year",     # "January 2020" 
+                            "date_simple"     # "2020-01-15"
+                        ])
+                        
+                        if date_format_choice == "date_only":
+                            sql_value = f"'{original_date.strftime('%Y-%m-%d')} 00:00:00'"
+                            display_value = original_date.strftime('%B %d, %Y')
+                            
+                        elif date_format_choice == "month_year":
+                            month_year = original_date.replace(day=1)
+                            sql_value = f"'{month_year.strftime('%Y-%m-%d')} 00:00:00'"
+                            display_value = month_year.strftime('%B %Y')
+                            
+                        else:  # date_simple
+                            sql_value = f"'{original_date.strftime('%Y-%m-%d')} 00:00:00'"
+                            display_value = original_date.strftime('%Y-%m-%d')
                 
-                except (ValueError, TypeError):
+                except (ValueError, TypeError) as e:
                     sql_value = f"'{sample_value}'"
                     display_value = str(sample_value)
             
