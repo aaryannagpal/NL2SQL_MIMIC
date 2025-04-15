@@ -1,0 +1,3320 @@
+{
+  "d_icd_diagnoses": {
+    "icd_code": [
+      "0010",
+      "0011",
+      "0019",
+      "0020",
+      "0021",
+      "0022",
+      "0023",
+      "0029",
+      "0030",
+      "0031"
+    ],
+    "icd_version": [
+      9,
+      10
+    ],
+    "long_title": [
+      "Cholera due to vibrio cholerae",
+      "Cholera due to vibrio cholerae el tor",
+      "Cholera, unspecified",
+      "Typhoid fever",
+      "Paratyphoid fever A",
+      "Paratyphoid fever B",
+      "Paratyphoid fever C",
+      "Paratyphoid fever, unspecified",
+      "Salmonella gastroenteritis",
+      "Salmonella septicemia"
+    ]
+  },
+  "services": {
+    "subject_id": [
+      10000032,
+      10000068,
+      10000084,
+      10000108,
+      10000117,
+      10000248,
+      10000280,
+      10000560,
+      10000635,
+      10000719
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      25742920,
+      29079034,
+      25022803,
+      23052089,
+      29888819,
+      27250926,
+      22927623,
+      27988844
+    ],
+    "transfertime": [
+      "2180-05-06 22:24:57",
+      "2180-06-26 18:28:08",
+      "2180-08-05 23:44:50",
+      "2180-07-23 12:36:04",
+      "2160-03-03 23:17:17",
+      "2160-11-21 01:57:17",
+      "2160-12-28 05:13:06",
+      "2163-09-27 23:18:04",
+      "2181-11-15 02:06:42",
+      "2183-09-18 18:11:32"
+    ],
+    "prev_service": [
+      "MED",
+      "NMED",
+      "GU",
+      "ORTHO",
+      "VSURG",
+      "CMED",
+      "OMED",
+      "TRAUM",
+      "SURG",
+      "NSURG"
+    ],
+    "curr_service": [
+      "MED",
+      "ORTHO",
+      "GU",
+      "CMED",
+      "OBS",
+      "PSYCH",
+      "ENT",
+      "OMED",
+      "SURG",
+      "NSURG"
+    ]
+  },
+  "d_icd_procedures": {
+    "icd_code": [
+      "0001",
+      "0002",
+      "0003",
+      "0009",
+      "001",
+      "0010",
+      "0011",
+      "0012",
+      "0013",
+      "0014"
+    ],
+    "icd_version": [
+      9,
+      10
+    ],
+    "long_title": [
+      "Therapeutic ultrasound of vessels of head and neck",
+      "Therapeutic ultrasound of heart",
+      "Therapeutic ultrasound of peripheral vascular vessels",
+      "Other therapeutic ultrasound",
+      "Central Nervous System and Cranial Nerves, Bypass",
+      "Implantation of chemotherapeutic agent",
+      "Infusion of drotrecogin alfa (activated)",
+      "Administration of inhaled nitric oxide",
+      "Injection or infusion of nesiritide",
+      "Injection or infusion of oxazolidinone class of antibiotics"
+    ]
+  },
+  "d_hcpcs": {
+    "code": [
+      "00000",
+      "0001F",
+      "0002F",
+      "0003F",
+      "0004F",
+      "0005F",
+      "0006F",
+      "0007F",
+      "0008F",
+      "0009F"
+    ],
+    "category": [
+      2.0,
+      1.0,
+      3.0
+    ],
+    "long_description": [
+      "Ambulance service, outside state per mile, transport (medicaid only)",
+      "Non-emergency transportation, per mile - vehicle provided by volunteer (individual or organization), with no vested interest",
+      "Non-emergency transportation, per mile - vehicle provided by individual (family member, self, neighbor) with vested interest",
+      "Non-emergency transportation; taxi",
+      "Non-emergency transportation and bus, intra or inter state carrier",
+      "Non-emergency transportation: mini-bus, mountain area transports, or other transportation systems",
+      "Non-emergency transportation: wheelchair van",
+      "Non-emergency transportation and air travel (private or commercial) intra or inter state",
+      "Non-emergency transportation: per mile - case worker or social worker",
+      "Transportation ancillary: parking fees, tolls, other"
+    ],
+    "short_description": [
+      "Invalid Code",
+      "Composite measures",
+      "Head",
+      "Various Services - Category III Codes",
+      "Neck",
+      "Thorax",
+      "Intrathoracic",
+      "Spine and spinal cord",
+      "Upper abdomen",
+      "Lower abdomen"
+    ]
+  },
+  "poe_detail": {
+    "poe_id": [
+      "10000032-104",
+      "10000032-109",
+      "10000032-111",
+      "10000032-112",
+      "10000032-133",
+      "10000032-140",
+      "10000032-155",
+      "10000032-16",
+      "10000032-170",
+      "10000032-19"
+    ],
+    "poe_seq": [
+      104,
+      109,
+      111,
+      112,
+      133,
+      140,
+      155,
+      16,
+      170,
+      19
+    ],
+    "subject_id": [
+      10000032,
+      10000068,
+      10000084,
+      10000108,
+      10000117,
+      10000248,
+      10000280,
+      10000560,
+      10000635,
+      10000719
+    ],
+    "field_name": [
+      "Admit category",
+      "Admit to",
+      "Discharge Planning",
+      "Discharge When",
+      "Code status",
+      "Transfer to",
+      "Consult Status",
+      "Consult Status Time",
+      "Level of Urgency",
+      "Tubes & Drains type"
+    ],
+    "field_value": [
+      "Admit to inpatient",
+      "Medicine",
+      "Finalized",
+      "Discharge Now",
+      "MICU - Orange",
+      "Resuscitate (Full code)",
+      "Place in observation",
+      "Do not resuscitate (DNR/DNI)",
+      "ED - Observation",
+      "Full code  (attempt resuscitation)"
+    ]
+  },
+  "emar": {
+    "subject_id": [
+      10000032,
+      10000084,
+      10000117,
+      10000178,
+      10000248,
+      10000285,
+      10000473,
+      10000492,
+      10000635,
+      10000764
+    ],
+    "hadm_id": [
+      22595853.0,
+      22841357.0,
+      25742920.0,
+      29079034.0,
+      23052089.0,
+      29888819.0,
+      27988844.0,
+      20600184.0,
+      27897940.0,
+      20897796.0
+    ],
+    "emar_id": [
+      "10000032-10",
+      "10000032-11",
+      "10000032-12",
+      "10000032-13",
+      "10000032-14",
+      "10000032-15",
+      "10000032-16",
+      "10000032-17",
+      "10000032-18",
+      "10000032-19"
+    ],
+    "emar_seq": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "poe_id": [
+      "10000032-36",
+      "10000032-22",
+      "10000032-37",
+      "10000032-28",
+      "10000032-29",
+      "10000032-27",
+      "10000032-32",
+      "10000032-31",
+      "10000032-30",
+      "10000032-33"
+    ],
+    "pharmacy_id": [
+      48770010.0,
+      14779570.0,
+      93463122.0,
+      42497745.0,
+      69131933.0,
+      28781051.0,
+      20256254.0,
+      19796602.0,
+      98975439.0,
+      51588577.0
+    ],
+    "charttime": [
+      "2180-05-07 00:44:00",
+      "2180-05-07 06:10:00",
+      "2180-05-07 05:00:00",
+      "2180-05-07 07:51:00",
+      "2180-05-07 08:00:00",
+      "2180-05-07 12:00:00",
+      "2180-05-07 11:39:00",
+      "2180-05-07 11:54:00",
+      "2180-05-07 14:15:00",
+      "2180-05-07 16:52:00"
+    ],
+    "medication": [
+      "Potassium Chloride",
+      "Sodium Chloride 0.9%  Flush",
+      "Ipratropium Bromide Neb",
+      "Albuterol Inhaler",
+      "Emtricitabine-Tenofovir (Truvada)",
+      "Heparin",
+      "Raltegravir",
+      "Nicotine Patch",
+      "Furosemide",
+      "Spironolactone"
+    ],
+    "event_txt": [
+      "Administered",
+      "Flushed",
+      "Not Applied",
+      "Not Given",
+      "Partial Administered",
+      "Hold Dose",
+      "Not Flushed",
+      "Applied",
+      "Assessed",
+      "Removed"
+    ],
+    "scheduletime": [
+      "2180-05-07 00:44:00",
+      "2180-05-07 06:00:00",
+      "2180-05-07 06:29:00",
+      "2180-05-07 08:00:00",
+      "2180-05-07 07:51:00",
+      "2180-05-07 12:00:00",
+      "2180-05-07 11:39:00",
+      "2180-05-07 10:00:00",
+      "2180-05-07 14:00:00",
+      "2180-05-07 14:15:00"
+    ],
+    "storetime": [
+      "2180-05-07 00:44:00",
+      "2180-05-07 06:10:00",
+      "2180-05-07 06:29:00",
+      "2180-05-07 07:56:00",
+      "2180-05-07 07:57:00",
+      "2180-05-07 09:27:00",
+      "2180-05-07 11:39:00",
+      "2180-05-07 11:40:00",
+      "2180-05-07 11:54:00",
+      "2180-05-07 14:17:00"
+    ]
+  },
+  "d_labitems": {
+    "itemid": [
+      50801,
+      50802,
+      50803,
+      50804,
+      50805,
+      50806,
+      50808,
+      50809,
+      50810,
+      50811
+    ],
+    "label": [
+      "Alveolar-arterial Gradient",
+      "Base Excess",
+      "Calculated Bicarbonate, Whole Blood",
+      "Calculated Total CO2",
+      "Carboxyhemoglobin",
+      "Chloride, Whole Blood",
+      "Free Calcium",
+      "Glucose",
+      "Hematocrit, Calculated",
+      "Hemoglobin"
+    ],
+    "fluid": [
+      "Blood",
+      "Other Body Fluid",
+      "Ascites",
+      "Joint Fluid",
+      "Pleural",
+      "Stool",
+      "Urine",
+      "Bone Marrow",
+      "Cerebrospinal Fluid",
+      "Fluid"
+    ],
+    "category": [
+      "Blood Gas",
+      "Chemistry",
+      "Hematology"
+    ],
+    "loinc_code": [
+      "loinc_code"
+    ]
+  },
+  "hcpcsevents": {
+    "subject_id": [
+      10000068,
+      10000084,
+      10000108,
+      10000117,
+      10000248,
+      10000280,
+      10000635,
+      10000883,
+      10000886,
+      10000904
+    ],
+    "hadm_id": [
+      25022803,
+      29888819,
+      27250926,
+      22927623,
+      20600184,
+      25852320,
+      26134563,
+      29957930,
+      21927847,
+      28328117
+    ],
+    "chartdate": [
+      "2160-03-04",
+      "2160-12-28",
+      "2163-09-27",
+      "2181-11-15",
+      "2192-11-30",
+      "2151-03-18",
+      "2136-06-19",
+      "2124-05-14",
+      "2178-05-08",
+      "2180-10-09"
+    ],
+    "hcpcs_cd": [
+      "99218",
+      "G0378",
+      "99219",
+      "43239",
+      "99220",
+      "45380",
+      "37221",
+      "92980",
+      "93510",
+      "93539"
+    ],
+    "seq_num": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      7,
+      10,
+      11
+    ],
+    "short_description": [
+      "Hospital observation services",
+      "Hospital observation per hr",
+      "Digestive system",
+      "Cardiovascular system",
+      "Cardiovascular",
+      "Occlusive device in vein art",
+      "Musculoskeletal system",
+      "Integumentary system",
+      "Hemic and lymphatic systems",
+      "Nervous system"
+    ]
+  },
+  "d_items": {
+    "itemid": [
+      220001,
+      220003,
+      220045,
+      220046,
+      220047,
+      220048,
+      220050,
+      220051,
+      220052,
+      220056
+    ],
+    "label": [
+      "Problem List",
+      "ICU Admission date",
+      "Heart Rate",
+      "Heart rate Alarm - High",
+      "Heart Rate Alarm - Low",
+      "Heart Rhythm",
+      "Arterial Blood Pressure systolic",
+      "Arterial Blood Pressure diastolic",
+      "Arterial Blood Pressure mean",
+      "Arterial Blood Pressure Alarm - Low"
+    ],
+    "abbreviation": [
+      "Problem List",
+      "ICU Admission date",
+      "HR",
+      "HR Alarm - High",
+      "HR Alarm - Low",
+      "Heart Rhythm",
+      "ABPs",
+      "ABPd",
+      "ABPm",
+      "ABP Alarm - Low"
+    ],
+    "linksto": [
+      "chartevents",
+      "datetimeevents",
+      "ingredientevents",
+      "inputevents",
+      "procedureevents",
+      "outputevents"
+    ],
+    "category": [
+      "General",
+      "ADT",
+      "Routine Vital Signs",
+      "Alarms",
+      "Hemodynamics",
+      "IABP",
+      "Cardiovascular (Pacer Data)",
+      "Respiratory",
+      "Labs",
+      "Ingredients - general (Not In Use)"
+    ],
+    "unitname": [
+      "bpm",
+      "mmHg",
+      "L/min",
+      "msec",
+      "insp/min",
+      "Liters",
+      "%",
+      "g/dl",
+      "ml/min",
+      "cmH2O/L/seconds"
+    ],
+    "param_type": [
+      "Text",
+      "Date and time",
+      "Numeric",
+      "Ingredient",
+      "Solution",
+      "Processes",
+      "Checkbox",
+      "Numeric with tag"
+    ],
+    "lownormalvalue": [
+      90.0,
+      60.0,
+      15.0,
+      8.0,
+      10.0,
+      6.0,
+      4.0,
+      299.0,
+      -2.0,
+      0.0
+    ],
+    "highnormalvalue": [
+      140.0,
+      90.0,
+      25.0,
+      15.0,
+      20.0,
+      12.0,
+      8.0,
+      80.0,
+      30.0,
+      750.0
+    ]
+  },
+  "procedures_icd": {
+    "subject_id": [
+      10000032,
+      10000068,
+      10000117,
+      10000280,
+      10000560,
+      10000635,
+      10000719,
+      10000826,
+      10000886,
+      10000935
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      25742920,
+      25022803,
+      27988844,
+      25852320,
+      28979390,
+      26134563,
+      24558333,
+      20032235
+    ],
+    "seq_num": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "chartdate": [
+      "2180-05-07",
+      "2180-06-27",
+      "2180-08-06",
+      "2160-03-03",
+      "2183-09-19",
+      "2151-03-18",
+      "2189-10-16",
+      "2136-06-19",
+      "2140-04-16",
+      "2146-12-05"
+    ],
+    "icd_code": [
+      "5491",
+      "8938",
+      "0QS734Z",
+      "5551",
+      "3734",
+      "3728",
+      "3727",
+      "7569",
+      "5011",
+      "4562"
+    ],
+    "icd_version": [
+      9,
+      10
+    ]
+  },
+  "patients": {
+    "subject_id": [
+      10000032,
+      10000048,
+      10000068,
+      10000084,
+      10000102,
+      10000108,
+      10000115,
+      10000117,
+      10000178,
+      10000248
+    ],
+    "gender": [
+      "F",
+      "M"
+    ],
+    "anchor_age": [
+      52,
+      23,
+      19,
+      72,
+      27,
+      25,
+      24,
+      48,
+      59,
+      34
+    ],
+    "anchor_year": [
+      2180,
+      2126,
+      2160,
+      2136,
+      2163,
+      2154,
+      2174,
+      2157,
+      2192,
+      2151
+    ],
+    "anchor_year_group": [
+      "2014 - 2016",
+      "2008 - 2010",
+      "2017 - 2019",
+      "2011 - 2013",
+      "2020 - 2022"
+    ],
+    "dod": [
+      "2180-09-09",
+      "2161-02-13",
+      "2187-11-12",
+      "2193-08-26",
+      "2174-04-23",
+      "2131-01-20",
+      "2124-12-20",
+      "2128-03-21",
+      "2131-03-10",
+      "2130-01-11"
+    ]
+  },
+  "icustays": {
+    "subject_id": [
+      10000032,
+      10000980,
+      10001217,
+      10001725,
+      10001884,
+      10002013,
+      10002155,
+      10002348,
+      10002428,
+      10002430
+    ],
+    "hadm_id": [
+      29079034,
+      26913865,
+      24597018,
+      27703517,
+      25563031,
+      26184834,
+      23581541,
+      20345487,
+      23822395,
+      28994087
+    ],
+    "stay_id": [
+      39553978,
+      39765666,
+      37067082,
+      34592300,
+      31205490,
+      37510196,
+      39060235,
+      32358465,
+      33685454,
+      31090461
+    ],
+    "first_careunit": [
+      "Medical Intensive Care Unit (MICU)",
+      "Surgical Intensive Care Unit (SICU)",
+      "Medical/Surgical Intensive Care Unit (MICU/SICU)",
+      "Cardiac Vascular Intensive Care Unit (CVICU)",
+      "Coronary Care Unit (CCU)",
+      "Neuro Intermediate",
+      "Trauma SICU (TSICU)",
+      "Neuro Stepdown",
+      "Neuro Surgical Intensive Care Unit (Neuro SICU)"
+    ],
+    "last_careunit": [
+      "Medical Intensive Care Unit (MICU)",
+      "Surgical Intensive Care Unit (SICU)",
+      "Medical/Surgical Intensive Care Unit (MICU/SICU)",
+      "Cardiac Vascular Intensive Care Unit (CVICU)",
+      "Coronary Care Unit (CCU)",
+      "Neuro Intermediate",
+      "Trauma SICU (TSICU)",
+      "Neuro Stepdown",
+      "Neuro Surgical Intensive Care Unit (Neuro SICU)"
+    ],
+    "intime": [
+      "2180-07-23 14:00:00",
+      "2189-06-27 08:42:00",
+      "2157-11-20 19:18:02",
+      "2157-12-19 15:42:24",
+      "2110-04-11 15:52:22",
+      "2131-01-11 04:20:05",
+      "2160-05-18 10:00:53",
+      "2131-03-09 21:33:00",
+      "2129-08-04 12:45:00",
+      "2130-09-24 00:50:00"
+    ],
+    "outtime": [
+      "2180-07-23 23:50:47",
+      "2189-06-27 20:38:27",
+      "2157-11-21 22:08:00",
+      "2157-12-20 14:27:41",
+      "2110-04-12 23:59:56",
+      "2131-01-20 08:27:30",
+      "2160-05-19 17:33:33",
+      "2131-03-10 18:09:21",
+      "2129-08-10 17:02:38",
+      "2130-09-27 22:13:41"
+    ],
+    "los": [
+      0.4102662037037037,
+      0.4975347222222222,
+      1.1180324074074075,
+      0.9481134259259258,
+      1.338587962962963,
+      9.171817129629629,
+      1.3143518518518518,
+      0.8585763888888889,
+      6.178912037037037,
+      3.89144675925926
+    ]
+  },
+  "drgcodes": {
+    "subject_id": [
+      10000032,
+      10000084,
+      10000117,
+      10000560,
+      10000719,
+      10000764,
+      10000826,
+      10000883,
+      10000935,
+      10000980
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      25742920,
+      29079034,
+      23052089,
+      27988844,
+      28979390,
+      24558333,
+      27897940,
+      20032235
+    ],
+    "drg_type": [
+      "APR",
+      "HCFA"
+    ],
+    "drg_code": [
+      283,
+      442,
+      279,
+      207,
+      312,
+      42,
+      57,
+      308,
+      482,
+      658
+    ],
+    "description": [
+      "OTHER DISORDERS OF THE LIVER",
+      "DISORDERS OF LIVER EXCEPT MALIG,CIRR,ALC HEPA W CC",
+      "HEPATIC COMA & OTHER MAJOR ACUTE LIVER DISORDERS",
+      "OTHER CIRCULATORY SYSTEM DIAGNOSES",
+      "SYNCOPE & COLLAPSE",
+      "DEGENERATIVE NERVOUS SYSTEM DISORDERS EXC MULT SCLEROSIS",
+      "DEGENERATIVE NERVOUS SYSTEM DISORDERS W/O MCC",
+      "HIP & FEMUR FRACTURE REPAIR",
+      "HIP & FEMUR PROCEDURES EXCEPT MAJOR JOINT W/O CC/MCC",
+      "KIDNEY & URINARY TRACT PROCEDURES FOR MALIGNANCY"
+    ],
+    "drg_severity": [
+      2.0,
+      3.0,
+      1.0,
+      4.0
+    ],
+    "drg_mortality": [
+      2.0,
+      3.0,
+      1.0,
+      4.0
+    ]
+  },
+  "admissions": {
+    "subject_id": [
+      10000032,
+      10000068,
+      10000084,
+      10000108,
+      10000117,
+      10000248,
+      10000280,
+      10000560,
+      10000635,
+      10000719
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      25742920,
+      29079034,
+      25022803,
+      23052089,
+      29888819,
+      27250926,
+      22927623,
+      27988844
+    ],
+    "admittime": [
+      "2180-05-06 22:23:00",
+      "2180-06-26 18:27:00",
+      "2180-08-05 23:44:00",
+      "2180-07-23 12:35:00",
+      "2160-03-03 23:16:00",
+      "2160-11-21 01:56:00",
+      "2160-12-28 05:11:00",
+      "2163-09-27 23:17:00",
+      "2181-11-15 02:05:00",
+      "2183-09-18 18:10:00"
+    ],
+    "dischtime": [
+      "2180-05-07 17:15:00",
+      "2180-06-27 18:49:00",
+      "2180-08-07 17:50:00",
+      "2180-07-25 17:55:00",
+      "2160-03-04 06:26:00",
+      "2160-11-25 14:52:00",
+      "2160-12-28 16:07:00",
+      "2163-09-28 09:04:00",
+      "2181-11-15 14:52:00",
+      "2183-09-21 16:30:00"
+    ],
+    "deathtime": [
+      "2131-01-20 05:15:00",
+      "2131-03-10 21:53:00",
+      "2137-09-02 17:05:00",
+      "2144-06-18 21:30:00",
+      "2186-11-17 18:30:00",
+      "2138-04-19 11:30:00",
+      "2135-01-19 18:36:00",
+      "2111-11-15 17:20:00",
+      "2146-07-12 20:50:00",
+      "2147-11-19 04:00:00"
+    ],
+    "admission_type": [
+      "URGENT",
+      "EW EMER.",
+      "EU OBSERVATION",
+      "OBSERVATION ADMIT",
+      "SURGICAL SAME DAY ADMISSION",
+      "AMBULATORY OBSERVATION",
+      "DIRECT EMER.",
+      "DIRECT OBSERVATION",
+      "ELECTIVE"
+    ],
+    "admission_location": [
+      "TRANSFER FROM HOSPITAL",
+      "EMERGENCY ROOM",
+      "WALK-IN/SELF REFERRAL",
+      "PHYSICIAN REFERRAL",
+      "PROCEDURE SITE",
+      "CLINIC REFERRAL",
+      "TRANSFER FROM SKILLED NURSING FACILITY",
+      "PACU",
+      "INTERNAL TRANSFER TO OR FROM PSYCH",
+      "INFORMATION NOT AVAILABLE"
+    ],
+    "discharge_location": [
+      "HOME",
+      "HOSPICE",
+      "HOME HEALTH CARE",
+      "SKILLED NURSING FACILITY",
+      "REHAB",
+      "DIED",
+      "CHRONIC/LONG TERM ACUTE CARE",
+      "PSYCH FACILITY",
+      "ACUTE HOSPITAL",
+      "AGAINST ADVICE"
+    ],
+    "insurance": [
+      "Other",
+      "Medicaid",
+      "Medicare"
+    ],
+    "language": [
+      "ENGLISH",
+      "?"
+    ],
+    "marital_status": [
+      "WIDOWED",
+      "SINGLE",
+      "MARRIED",
+      "DIVORCED"
+    ],
+    "ethnicity": [
+      "ethnicity"
+    ],
+    "edregtime": [
+      "2180-05-06 19:17:00",
+      "2180-06-26 15:54:00",
+      "2180-08-05 20:58:00",
+      "2180-07-23 05:54:00",
+      "2160-03-03 21:55:00",
+      "2160-11-20 20:36:00",
+      "2160-12-27 18:32:00",
+      "2163-09-27 16:18:00",
+      "2181-11-14 21:51:00",
+      "2183-09-18 08:41:00"
+    ],
+    "edouttime": [
+      "2180-05-06 23:30:00",
+      "2180-06-26 21:31:00",
+      "2180-08-06 01:44:00",
+      "2180-07-23 14:00:00",
+      "2160-03-04 06:26:00",
+      "2160-11-21 03:20:00",
+      "2160-12-28 16:07:00",
+      "2163-09-28 09:04:00",
+      "2181-11-15 09:57:00",
+      "2183-09-18 20:20:00"
+    ],
+    "hospital_expire_flag": [
+      0,
+      1
+    ]
+  },
+  "transfers": {
+    "subject_id": [
+      10000032,
+      10000048,
+      10000068,
+      10000084,
+      10000102,
+      10000108,
+      10000115,
+      10000117,
+      10000178,
+      10000248
+    ],
+    "hadm_id": [
+      22595853.0,
+      22841357.0,
+      25742920.0,
+      29079034.0,
+      25022803.0,
+      23052089.0,
+      29888819.0,
+      27250926.0,
+      22927623.0,
+      27988844.0
+    ],
+    "transfer_id": [
+      33258284,
+      35223874,
+      36904543,
+      34100253,
+      34703856,
+      38112554,
+      35509340,
+      35968195,
+      38883756,
+      32952584
+    ],
+    "eventtype": [
+      "ED",
+      "admit",
+      "discharge",
+      "transfer"
+    ],
+    "careunit": [
+      "Emergency Department",
+      "Transplant",
+      "Medical Intensive Care Unit (MICU)",
+      "Emergency Department Observation",
+      "Medicine",
+      "Med/Surg",
+      "Surgery/Trauma",
+      "Discharge Lounge",
+      "Medical/Surgical (Gynecology)",
+      "Medicine/Cardiology"
+    ],
+    "intime": [
+      "2180-05-06 19:17:00",
+      "2180-05-06 23:30:00",
+      "2180-05-07 17:21:27",
+      "2180-06-27 18:49:12",
+      "2180-06-26 21:31:00",
+      "2180-06-26 15:54:00",
+      "2180-08-06 01:44:00",
+      "2180-08-05 20:58:00",
+      "2180-08-07 17:50:44",
+      "2180-07-22 16:24:00"
+    ],
+    "outtime": [
+      "2180-05-06 23:30:00",
+      "2180-05-07 17:21:27",
+      "2180-06-27 18:49:12",
+      "2180-06-26 21:31:00",
+      "2180-08-07 17:50:44",
+      "2180-08-06 01:44:00",
+      "2180-07-23 05:54:00",
+      "2180-07-24 19:52:58",
+      "2180-07-25 17:55:43",
+      "2180-07-23 14:00:00"
+    ]
+  },
+  "procedureevents": {
+    "subject_id": [
+      10000032,
+      10000980,
+      10001217,
+      10001725,
+      10001884,
+      10002013,
+      10002155,
+      10002348,
+      10002428,
+      10002430
+    ],
+    "hadm_id": [
+      29079034,
+      26913865,
+      24597018,
+      27703517,
+      25563031,
+      26184834,
+      23581541,
+      20345487,
+      23822395,
+      28994087
+    ],
+    "stay_id": [
+      39553978,
+      39765666,
+      37067082,
+      34592300,
+      31205490,
+      37510196,
+      39060235,
+      32358465,
+      33685454,
+      31090461
+    ],
+    "starttime": [
+      "2180-07-23 14:43:00",
+      "2180-07-23 14:24:00",
+      "2189-06-27 09:01:00",
+      "2189-06-27 09:15:00",
+      "2189-06-27 09:16:00",
+      "2157-11-21 20:30:00",
+      "2157-11-21 14:00:00",
+      "2157-12-19 20:19:00",
+      "2157-12-19 17:41:00",
+      "2157-12-19 17:42:00"
+    ],
+    "endtime": [
+      "2180-07-23 14:44:00",
+      "2180-07-23 23:50:00",
+      "2189-06-27 20:38:00",
+      "2157-11-21 20:31:00",
+      "2157-11-21 22:06:00",
+      "2157-11-21 14:01:00",
+      "2157-12-19 20:20:00",
+      "2157-12-20 01:24:00",
+      "2157-12-20 14:27:00",
+      "2110-04-12 23:59:00"
+    ],
+    "storetime": [
+      "2180-07-23 14:43:00",
+      "2180-07-23 23:50:49.983",
+      "2189-06-27 20:38:29.047",
+      "2157-11-21 21:36:00",
+      "2157-11-21 21:35:00",
+      "2157-11-21 15:45:00",
+      "2157-12-19 21:19:00",
+      "2157-12-19 17:42:00",
+      "2157-12-20 14:27:42.22",
+      "2110-04-13 00:00:02.04"
+    ],
+    "itemid": [
+      225966,
+      224275,
+      224277,
+      225794,
+      228129,
+      224274,
+      221214,
+      224264,
+      227194,
+      228128
+    ],
+    "value": [
+      1.0,
+      566.0,
+      697.0,
+      683.0,
+      682.0,
+      0.0666666666666666,
+      0.3215277777777778,
+      1245.0,
+      1917.0,
+      1884.0
+    ],
+    "valueuom": [
+      "min",
+      "day",
+      "hour"
+    ],
+    "location": [
+      "Right Basilic Lower Arm",
+      "Right Metacarpal",
+      "Left Antecubital",
+      "Right Proximal Tibia",
+      "Right IJ",
+      "Right Antecubital",
+      "Right Femoral",
+      "Right Radial",
+      "Left Cephalic Lower Arm",
+      "Right Femoral."
+    ],
+    "locationcategory": [
+      "Peripheral",
+      "Intraosseous",
+      "Invasive Venous",
+      "Invasive Arterial",
+      "Catheter, GU",
+      "Dialysis",
+      "Peripheral - old",
+      "ICP Line",
+      "Peritoneal Dialysis"
+    ],
+    "orderid": [
+      6416557,
+      6497934,
+      9643097,
+      5989583,
+      476764,
+      3149795,
+      3280088,
+      3448258,
+      3969862,
+      2956175
+    ],
+    "linkorderid": [
+      6416557,
+      6497934,
+      9643097,
+      5989583,
+      476764,
+      3149795,
+      3280088,
+      3448258,
+      3969862,
+      2956175
+    ],
+    "ordercategoryname": [
+      "Procedures",
+      "Peripheral Lines",
+      "Ventilation",
+      "Communication",
+      "Imaging",
+      "Invasive Lines",
+      "Intubation/Extubation",
+      "Tubes",
+      "Significant Events",
+      "Dialysis"
+    ],
+    "secondaryordercategoryname": [
+      "secondaryordercategoryname"
+    ],
+    "ordercategorydescription": [
+      "Task",
+      "ContinuousProcess"
+    ],
+    "patientweight": [
+      39.4,
+      76.2,
+      71.2,
+      74.8,
+      72.2,
+      65.0,
+      96.0,
+      21.1,
+      53.0,
+      48.0
+    ],
+    "totalamount": [
+      "totalamount"
+    ],
+    "totalamountuom": [
+      "totalamountuom"
+    ],
+    "isopenbag": [
+      0,
+      1
+    ],
+    "continueinnextdept": [
+      0,
+      1
+    ],
+    "cancelreason": [
+      "cancelreason"
+    ],
+    "statusdescription": [
+      "FinishedRunning",
+      "Stopped",
+      "Paused"
+    ],
+    "comments_date": [
+      "comments_date"
+    ],
+    "originalamount": [
+      1.0,
+      566.0,
+      697.0,
+      683.0,
+      682.0,
+      4.0,
+      1245.0,
+      1917.0,
+      1884.0,
+      390.0
+    ],
+    "originalrate": [
+      0,
+      1
+    ]
+  },
+  "diagnoses_icd": {
+    "subject_id": [
+      10000032,
+      10000068,
+      10000084,
+      10000108,
+      10000117,
+      10000248,
+      10000280,
+      10000560,
+      10000635,
+      10000719
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      25742920,
+      29079034,
+      25022803,
+      23052089,
+      29888819,
+      27250926,
+      22927623,
+      27988844
+    ],
+    "seq_num": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "icd_code": [
+      "5723",
+      "78959",
+      "5715",
+      "07070",
+      "496",
+      "29680",
+      "30981",
+      "V1582",
+      "07071",
+      "2875"
+    ],
+    "icd_version": [
+      9,
+      10
+    ]
+  },
+  "datetimeevents": {
+    "subject_id": [
+      10000032,
+      10000980,
+      10001217,
+      10001725,
+      10001884,
+      10002013,
+      10002155,
+      10002348,
+      10002428,
+      10002430
+    ],
+    "hadm_id": [
+      29079034,
+      26913865,
+      24597018,
+      27703517,
+      25563031,
+      26184834,
+      23581541,
+      20345487,
+      23822395,
+      28994087
+    ],
+    "stay_id": [
+      39553978,
+      39765666,
+      37067082,
+      34592300,
+      31205490,
+      37510196,
+      39060235,
+      32358465,
+      33685454,
+      31090461
+    ],
+    "charttime": [
+      "2180-07-23 21:02:00",
+      "2180-07-23 14:24:00",
+      "2189-06-27 09:13:00",
+      "2189-06-27 09:14:00",
+      "2189-06-27 09:15:00",
+      "2189-06-27 09:16:00",
+      "2189-06-27 16:20:00",
+      "2157-11-21 20:30:00",
+      "2157-11-21 21:32:00",
+      "2157-11-21 00:44:00"
+    ],
+    "storetime": [
+      "2180-07-23 21:02:00",
+      "2180-07-23 14:24:00",
+      "2189-06-27 09:13:00",
+      "2189-06-27 09:14:00",
+      "2189-06-27 09:16:00",
+      "2189-06-27 16:20:00",
+      "2157-11-21 21:35:00",
+      "2157-11-21 21:33:00",
+      "2157-11-21 00:44:00",
+      "2157-11-21 08:06:00"
+    ],
+    "itemid": [
+      225754,
+      225755,
+      225753,
+      224186,
+      224187,
+      229352,
+      224261,
+      224279,
+      224280,
+      224282
+    ],
+    "value": [
+      "2180-07-23 00:00:00",
+      "2180-07-23 14:24:00",
+      "2189-06-27 09:13:00",
+      "2189-06-27 09:14:00",
+      "2189-06-27 09:15:00",
+      "2189-06-27 09:16:00",
+      "2189-06-27 00:00:00",
+      "2157-11-21 21:34:00",
+      "2157-11-20 00:00:00",
+      "2157-11-20 19:54:00"
+    ],
+    "valueuom": [
+      "Date",
+      "Date and Time"
+    ],
+    "warning": [
+      0,
+      1
+    ]
+  },
+  "microbiologyevents": {
+    "microevent_id": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "subject_id": [
+      10000032,
+      10000084,
+      10000108,
+      10000117,
+      10000248,
+      10000280,
+      10000285,
+      10000473,
+      10000560,
+      10000635
+    ],
+    "hadm_id": [
+      22595853.0,
+      22841357.0,
+      29079034.0,
+      25742920.0,
+      23052089.0,
+      28979390.0,
+      27897940.0,
+      20032235.0,
+      21086876.0,
+      28289260.0
+    ],
+    "micro_specimen_id": [
+      636109,
+      1836584,
+      4131591,
+      6028147,
+      6700137,
+      7713497,
+      7951493,
+      8952741,
+      9087909,
+      8536332
+    ],
+    "chartdate": [
+      "2180-03-23 00:00:00",
+      "2180-05-06 00:00:00",
+      "2180-05-07 00:00:00",
+      "2180-06-26 00:00:00",
+      "2180-07-23 00:00:00",
+      "2180-07-24 00:00:00",
+      "2180-08-06 00:00:00",
+      "2160-11-21 00:00:00",
+      "2160-12-28 00:00:00",
+      "2163-09-27 00:00:00"
+    ],
+    "charttime": [
+      "2180-03-23 11:51:00",
+      "2180-05-06 22:25:00",
+      "2180-05-07 00:10:00",
+      "2180-05-07 00:19:00",
+      "2180-05-07 10:11:00",
+      "2180-06-26 18:15:00",
+      "2180-06-26 18:30:00",
+      "2180-06-26 19:00:00",
+      "2180-06-26 22:39:00",
+      "2180-06-26 22:45:00"
+    ],
+    "spec_itemid": [
+      70093,
+      70017,
+      70087,
+      70088,
+      70046,
+      70012,
+      70079,
+      70070,
+      70053,
+      70091
+    ],
+    "spec_type_desc": [
+      "Blood (Toxo)",
+      "SEROLOGY/BLOOD",
+      "Blood (CMV AB)",
+      "Blood (EBV)",
+      "IMMUNOLOGY",
+      "BLOOD CULTURE",
+      "URINE",
+      "SWAB",
+      "PERITONEAL FLUID",
+      "MRSA SCREEN"
+    ],
+    "test_seq": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "storedate": [
+      "2180-03-26 00:00:00",
+      "2180-03-24 00:00:00",
+      "2180-03-25 00:00:00",
+      "2180-05-12 00:00:00",
+      "2180-05-08 00:00:00",
+      "2180-05-09 00:00:00",
+      "2180-05-07 00:00:00",
+      "2180-05-10 00:00:00",
+      "2180-05-13 00:00:00",
+      "2180-07-02 00:00:00"
+    ],
+    "storetime": [
+      "2180-03-26 10:17:00",
+      "2180-03-24 12:40:00",
+      "2180-03-26 10:06:00",
+      "2180-03-25 11:54:00",
+      "2180-03-25 12:46:00",
+      "2180-03-24 11:50:00",
+      "2180-03-26 10:25:00",
+      "2180-03-26 13:38:00",
+      "2180-03-26 10:54:00",
+      "2180-03-24 05:27:00"
+    ],
+    "test_itemid": [
+      90144,
+      90127,
+      90143,
+      90136,
+      90101,
+      90135,
+      90134,
+      90254,
+      90175,
+      90091
+    ],
+    "test_name": [
+      "TOXOPLASMA IgG ANTIBODY",
+      "RUBEOLA ANTIBODY, IgG",
+      "CMV IgG ANTIBODY",
+      "CMV IgM ANTIBODY",
+      "EPSTEIN-BARR VIRUS VCA-IgG AB",
+      "EPSTEIN-BARR VIRUS EBNA IgG AB",
+      "EPSTEIN-BARR VIRUS VCA-IgM AB",
+      "RUBELLA IgG SEROLOGY",
+      "HIV-1 Viral Load/Ultrasensitive",
+      "VARICELLA-ZOSTER IgG SEROLOGY"
+    ],
+    "org_itemid": [
+      80053.0,
+      90383.0,
+      80185.0,
+      80139.0,
+      80023.0,
+      90760.0,
+      80222.0,
+      80002.0,
+      80081.0,
+      80099.0
+    ],
+    "org_name": [
+      "ENTEROCOCCUS SP.",
+      "ACTINOBACILLUS ACTINOMYCETEMCOMITANS",
+      "CAMPYLOBACTER JEJUNI",
+      "CLOSTRIDIUM DIFFICILE",
+      "STAPH AUREUS COAG +",
+      "CANCELLED",
+      "POSITIVE FOR GROUP B BETA STREPTOCOCCI",
+      "ESCHERICHIA COLI",
+      "GRAM POSITIVE BACTERIA",
+      "CANDIDA PARAPSILOSIS"
+    ],
+    "isolate_num": [
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0
+    ],
+    "quantity": [
+      "FEW",
+      "MODERATE-NUMBER",
+      "1",
+      "SPARSE GROWTH",
+      "10,000-100,000 CFU/mL",
+      ">100,000 CFU/mL",
+      "RARE"
+    ],
+    "ab_itemid": [
+      90004.0,
+      90010.0,
+      90011.0,
+      90015.0,
+      90003.0,
+      90006.0,
+      90008.0,
+      90012.0,
+      90016.0,
+      90025.0
+    ],
+    "ab_name": [
+      "AMPICILLIN",
+      "NITROFURANTOIN",
+      "TETRACYCLINE",
+      "VANCOMYCIN",
+      "PENICILLIN G",
+      "ERYTHROMYCIN",
+      "TRIMETHOPRIM/SULFA",
+      "GENTAMICIN",
+      "OXACILLIN",
+      "LEVOFLOXACIN"
+    ],
+    "dilution_text": [
+      "<=2",
+      "<=16",
+      "=>16",
+      "1",
+      "=>0.5",
+      "=>8",
+      "<=0.5",
+      "0.5",
+      "<=0.12",
+      "<=0.25"
+    ],
+    "dilution_comparison": [
+      "<=        ",
+      "=>        ",
+      "=         "
+    ],
+    "dilution_value": [
+      2.0,
+      16.0,
+      1.0,
+      0.5,
+      8.0,
+      0.12,
+      0.25,
+      4.0,
+      32.0,
+      0.06
+    ],
+    "interpretation": [
+      "S",
+      "R",
+      "I",
+      "P"
+    ],
+    "comments": [
+      "NEGATIVE FOR TOXOPLASMA IgG ANTIBODY BY EIA.  0.0 IU/ML.  Reference Range:  Negative < 4 IU/ml, Positive >= 8 IU/ml.  If acute infection is suspected request IgM antibody testing and/or  submit convalescent serum in 2-3 weeks.  ",
+      "POSITIVE BY EIA.  A positive IgG result generally indicates past exposure and/or immunity.  ",
+      "___",
+      "NEGATIVE FOR CMV IgM ANTIBODY BY EIA.  INTERPRETATION:  INFECTION AT UNDETERMINED TIME.  A positive IgG result generally indicates past exposure.  Infection with CMV once contracted remains latent and may reactivate when immunity is compromised.  Greatly elevated serum protein with IgG levels >2000 mg/dl may cause  interference with CMV IgM results.  If current infection is suspected, submit follow-up serum in 2-3 weeks.  ",
+      "POSITIVE BY EIA.  ",
+      "NEGATIVE <1:10 BY IFA.  INTERPRETATION: RESULTS INDICATIVE OF PAST EBV INFECTION.  In most populations, 90% of adults have been infected at sometime with EBV and will have measurable VCA IgG and EBNA antibodies. Antibodies to EBNA develop 6-8 weeks after primary infection and remain present for life. Presence of VCA IgM antibodies indicates recent primary infection.  ",
+      "HIV-1 RNA is not detected.  Performed using the ___ HIV-1 Test v2.0.  Detection Range: 20-10,000,000 copies/mL.  This test is approved for monitoring HIV-1 viral load in known HIV-positive patients. It is not approved for diagnosis of acute HIV infection.  In symptomatic acute HIV infection (acute retroviral syndrome), the viral load is usually very high (>>1000 copies/mL). If acute HIV infection is clinically suspected and there is a detectable but low viral load, please contact the laboratory for interpretation.  It is recommended that any NEW positive HIV-1 viral load result, in the absence of positive serology, be confirmed by submitting a new sample FOR HIV-1 PCR, in addition to serological testing.  ",
+      "NONREACTIVE.  Reference Range: Non-Reactive.  ",
+      "NO GROWTH.  ",
+      "MIXED BACTERIAL FLORA ( >= 3 COLONY TYPES), CONSISTENT WITH SKIN AND/OR GENITAL CONTAMINATION.  "
+    ]
+  },
+  "prescriptions": {
+    "subject_id": [
+      10000032,
+      10000084,
+      10000117,
+      10000248,
+      10000560,
+      10000635,
+      10000719,
+      10000764,
+      10000826,
+      10000883
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      25742920,
+      29079034,
+      23052089,
+      22927623,
+      27988844,
+      20600184,
+      28979390,
+      26134563
+    ],
+    "pharmacy_id": [
+      11700683,
+      14779570,
+      19796602,
+      20256254,
+      28781051,
+      42497745,
+      48770010,
+      69131933,
+      88534507,
+      90650714
+    ],
+    "starttime": [
+      "2180-05-07 01:00:00",
+      "2180-05-07 00:00:00",
+      "2180-05-08 08:00:00",
+      "2180-05-07 02:00:00",
+      "2180-06-26 23:00:00",
+      "2180-06-27 08:00:00",
+      "2180-06-26 22:00:00",
+      "2180-06-27 18:00:00",
+      "2180-08-06 17:00:00",
+      "2180-08-06 03:00:00"
+    ],
+    "stoptime": [
+      "2180-05-07 22:00:00",
+      "2180-05-07 01:00:00",
+      "2180-05-07 09:00:00",
+      "2180-06-27 23:00:00",
+      "2180-06-26 22:00:00",
+      "2180-08-06 19:00:00",
+      "2180-08-07 22:00:00",
+      "2180-08-06 11:00:00",
+      "2180-08-06 02:00:00",
+      "2180-07-25 09:00:00"
+    ],
+    "drug_type": [
+      "MAIN",
+      "BASE",
+      "ADDITIVE"
+    ],
+    "drug": [
+      "Acetaminophen",
+      "Sodium Chloride 0.9%  Flush",
+      "Furosemide",
+      "Raltegravir",
+      "Heparin",
+      "Albuterol Inhaler",
+      "Potassium Chloride",
+      "Emtricitabine-Tenofovir (Truvada)",
+      "Nicotine Patch",
+      "Spironolactone"
+    ],
+    "gsn": [
+      "004490",
+      "008209",
+      "063231",
+      "006549",
+      "028090",
+      "001275",
+      "057883",
+      "016426",
+      "006817",
+      "072514"
+    ],
+    "ndc": [
+      904198861.0,
+      0.0,
+      51079007320.0,
+      6022761.0,
+      63323026201.0,
+      173068224.0,
+      245004101.0,
+      61958070101.0,
+      135019502.0,
+      63739054410.0
+    ],
+    "prod_strength": [
+      "500mg Tablet",
+      "10 mL Syringe",
+      "40mg Tablet",
+      "400 mg Tablet",
+      "5000 Units / mL- 1mL Vial",
+      "8 g Inhaler",
+      "10mEq ER Tablet",
+      "200-300mg Tablet",
+      "14mg/24Hr Patch",
+      "25mg Tablet"
+    ],
+    "form_rx": [
+      "DROPS",
+      "TAB",
+      "INH",
+      "CAP",
+      "SOLN",
+      "CREA",
+      "INJ",
+      "SUPP",
+      "TABLET",
+      "GEL"
+    ],
+    "dose_val_rx": [
+      "500",
+      "3",
+      "40",
+      "400",
+      "5000",
+      "2",
+      "1",
+      "14",
+      "50",
+      "0.5"
+    ],
+    "dose_unit_rx": [
+      "mg",
+      "mL",
+      "UNIT",
+      "PUFF",
+      "mEq",
+      "TAB",
+      "NEB",
+      "CAP",
+      "g",
+      "gm"
+    ],
+    "form_val_disp": [
+      "1",
+      "0.3",
+      "0.02",
+      "4",
+      "2",
+      "3",
+      "0.5",
+      "0.1",
+      "0.01",
+      "0.5-1"
+    ],
+    "form_unit_disp": [
+      "TAB",
+      "SYR",
+      "mL",
+      "INH",
+      "PTCH",
+      "VIAL",
+      "UDCUP",
+      "CAP",
+      "BAG",
+      "BTL"
+    ],
+    "doses_per_24_hrs": [
+      3.0,
+      1.0,
+      2.0,
+      0.0,
+      4.0,
+      6.0,
+      12.0,
+      8.0,
+      5.0,
+      24.0
+    ],
+    "route": [
+      "PO/NG",
+      "IV",
+      "PO",
+      "SC",
+      "IH",
+      "TD",
+      "IM",
+      "PR",
+      "TRANSDERMAL",
+      "TP"
+    ]
+  },
+  "outputevents": {
+    "subject_id": [
+      15518708,
+      11043763,
+      16810657,
+      10702864,
+      18769728,
+      12857719,
+      17406634,
+      12598279,
+      18494866,
+      12800545
+    ],
+    "hadm_id": [
+      24797722,
+      27785561,
+      23882329,
+      24535950,
+      29278629,
+      27389082,
+      21896053,
+      25332373,
+      25877435,
+      20978087
+    ],
+    "stay_id": [
+      31354995,
+      39402538,
+      39471865,
+      36630531,
+      39160439,
+      38540180,
+      37394659,
+      31794031,
+      36872175,
+      39937540
+    ],
+    "charttime": [
+      "2151-05-29 05:15:00",
+      "2150-11-07 01:40:00",
+      "2135-08-12 18:00:00",
+      "2161-11-20 15:12:00",
+      "2156-07-15 21:00:00",
+      "2174-04-04 19:00:00",
+      "2132-04-01 18:00:00",
+      "2167-07-14 20:00:00",
+      "2114-02-21 00:03:00",
+      "2181-04-22 13:00:00"
+    ],
+    "storetime": [
+      "2156-04-07 06:57:00",
+      "2125-01-05 07:44:00",
+      "2183-10-15 08:34:00",
+      "2176-07-22 05:21:00",
+      "2185-10-13 21:29:00",
+      "2182-08-17 17:53:00",
+      "2172-05-02 03:33:00",
+      "2139-11-19 17:06:00",
+      "2168-03-03 04:56:00",
+      "2175-01-04 20:07:00"
+    ],
+    "itemid": [
+      226589,
+      226565,
+      226567,
+      226597,
+      226576,
+      226571,
+      226630,
+      226631,
+      226601,
+      226574
+    ],
+    "value": [
+      1895.0,
+      1669.0,
+      1115.0,
+      68.0,
+      808.0,
+      133.0,
+      339.0,
+      1765.0,
+      3695.0,
+      2125.0
+    ],
+    "valueuom": [
+      "ml"
+    ]
+  },
+  "poe": {
+    "poe_id": [
+      "10000032-10",
+      "10000032-100",
+      "10000032-102",
+      "10000032-103",
+      "10000032-104",
+      "10000032-105",
+      "10000032-106",
+      "10000032-108",
+      "10000032-109",
+      "10000032-11"
+    ],
+    "poe_seq": [
+      10,
+      100,
+      102,
+      103,
+      104,
+      105,
+      106,
+      108,
+      109,
+      11
+    ],
+    "subject_id": [
+      10000032,
+      10000068,
+      10000084,
+      10000108,
+      10000117,
+      10000248,
+      10000280,
+      10000560,
+      10000635,
+      10000719
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      29079034,
+      25742920,
+      25022803,
+      23052089,
+      29888819,
+      27250926,
+      27988844,
+      22927623
+    ],
+    "ordertime": [
+      "2180-05-06 20:50:49",
+      "2180-06-26 22:25:43",
+      "2180-06-26 22:37:06",
+      "2180-06-27 07:06:36",
+      "2180-06-27 11:53:16",
+      "2180-06-27 17:05:25",
+      "2180-06-27 17:50:27",
+      "2180-05-06 20:51:19",
+      "2180-06-27 17:51:43",
+      "2180-06-27 17:52:19"
+    ],
+    "order_type": [
+      "Lab",
+      "Respiratory",
+      "Medications",
+      "ADT orders",
+      "Radiology",
+      "General Care",
+      "Nutrition",
+      "IV therapy",
+      "Consults",
+      "Cardiology"
+    ],
+    "order_subtype": [
+      "Oxygen Therapy",
+      "Admit",
+      "Discharge",
+      "General Xray",
+      "CT Scan",
+      "Vitals/Monitoring",
+      "Activity",
+      "Telemetry",
+      "Diet Order",
+      "Ultrasound"
+    ],
+    "transaction_type": [
+      "New",
+      "D/C",
+      "Change",
+      "H",
+      "T"
+    ],
+    "discontinue_of_poe_id": [
+      "10000032-93",
+      "10000032-89",
+      "10000032-75",
+      "10000032-109",
+      "10000032-130",
+      "10000032-155",
+      "10000032-170",
+      "10000032-175",
+      "10000032-174",
+      "10000032-173"
+    ],
+    "discontinued_by_poe_id": [
+      "10000032-110",
+      "10000032-131",
+      "10000032-193",
+      "10000032-198",
+      "10000032-205",
+      "10000032-204",
+      "10000032-203",
+      "10000032-206",
+      "10000032-211",
+      "10000032-208"
+    ],
+    "order_status": [
+      "Inactive",
+      "Active"
+    ]
+  },
+  "pharmacy": {
+    "subject_id": [
+      10000032,
+      10000084,
+      10000117,
+      10000248,
+      10000560,
+      10000635,
+      10000719,
+      10000764,
+      10000826,
+      10000883
+    ],
+    "hadm_id": [
+      22595853,
+      22841357,
+      25742920,
+      29079034,
+      23052089,
+      22927623,
+      27988844,
+      20600184,
+      28979390,
+      26134563
+    ],
+    "pharmacy_id": [
+      11700683,
+      14779570,
+      19796602,
+      20256254,
+      28781051,
+      42497745,
+      48770010,
+      69131933,
+      88534507,
+      90650714
+    ],
+    "poe_id": [
+      "10000032-34",
+      "10000032-22",
+      "10000032-50",
+      "10000032-32",
+      "10000032-27",
+      "10000032-28",
+      "10000032-36",
+      "10000032-29",
+      "10000032-31",
+      "10000032-33"
+    ],
+    "starttime": [
+      "2180-05-07 01:00:00",
+      "2180-05-07 00:00:00",
+      "2180-05-08 08:00:00",
+      "2180-05-07 02:00:00",
+      "2180-06-26 23:00:00",
+      "2180-06-27 08:00:00",
+      "2180-06-26 22:00:00",
+      "2180-06-27 18:00:00",
+      "2180-08-06 17:00:00",
+      "2180-08-06 03:00:00"
+    ],
+    "stoptime": [
+      "2180-05-07 22:00:00",
+      "2180-05-07 01:00:00",
+      "2180-05-07 09:00:00",
+      "2180-06-27 23:00:00",
+      "2180-06-26 22:00:00",
+      "2180-08-06 19:00:00",
+      "2180-08-07 22:00:00",
+      "2180-08-06 11:00:00",
+      "2180-08-06 02:00:00",
+      "2180-07-25 09:00:00"
+    ],
+    "medication": [
+      "Acetaminophen",
+      "Sodium Chloride 0.9%  Flush",
+      "Furosemide",
+      "Raltegravir",
+      "Heparin",
+      "Albuterol Inhaler",
+      "Potassium Chloride",
+      "Emtricitabine-Tenofovir (Truvada)",
+      "Nicotine Patch",
+      "Spironolactone"
+    ],
+    "proc_type": [
+      "Unit Dose",
+      "IV Piggyback",
+      "IV Large Volume",
+      "TPN",
+      "Non-Formulary",
+      "Miscellaneous Charges",
+      "Discharge Med",
+      "Irrigation"
+    ],
+    "status": [
+      "Discontinued via patient discharge",
+      "Discontinued",
+      "Inactive (Due to a change order)",
+      "Expired",
+      "Active",
+      "H",
+      "TPN Order (Acknowledged, Not Pumped)",
+      "U"
+    ],
+    "entertime": [
+      "2180-05-07 00:09:24",
+      "2180-05-07 00:00:54",
+      "2180-05-07 09:32:35",
+      "2180-05-07 01:49:23",
+      "2180-06-26 22:29:19",
+      "2180-06-26 22:27:46",
+      "2180-06-26 22:38:36",
+      "2180-06-26 21:56:13",
+      "2180-06-26 22:33:11",
+      "2180-06-27 17:23:38"
+    ],
+    "verifiedtime": [
+      "2180-05-07 00:09:24",
+      "2180-05-07 00:00:54",
+      "2180-05-07 09:32:35",
+      "2180-05-07 01:49:23",
+      "2180-06-26 22:29:19",
+      "2180-06-26 22:27:46",
+      "2180-06-26 22:38:36",
+      "2180-06-26 21:56:13",
+      "2180-06-26 22:33:11",
+      "2180-06-27 17:23:38"
+    ],
+    "route": [
+      "PO/NG",
+      "IV",
+      "PO",
+      "SC",
+      "IH",
+      "TD",
+      "IM",
+      "PR",
+      "TRANSDERMAL",
+      "TP"
+    ],
+    "frequency": [
+      "Q6H:PRN",
+      "Q8H",
+      "DAILY",
+      "BID",
+      "TID",
+      "Q4H:PRN",
+      "ONCE",
+      "NOW X1",
+      "Q6H",
+      "ONCE:PRN"
+    ],
+    "disp_sched": [
+      "0, 8, 16",
+      "08",
+      "08, 20",
+      "08, 14, 20",
+      "1",
+      "2, 8, 14, 20",
+      "22, 6, 14",
+      "18",
+      "17",
+      "9"
+    ],
+    "infusion_type": [
+      "C",
+      "B",
+      "N",
+      "R",
+      "O",
+      "N1"
+    ],
+    "sliding_scale": [
+      "N",
+      "Y"
+    ],
+    "lockout_interval": [
+      "6",
+      "3",
+      "4",
+      "10",
+      "8",
+      "30",
+      "15",
+      "20",
+      "7",
+      "12"
+    ],
+    "basal_rate": [
+      0.0,
+      2.4,
+      1.2,
+      10.0,
+      4.0,
+      7.0,
+      8.0,
+      2.0,
+      0.8,
+      1.0
+    ],
+    "one_hr_max": [
+      2.5,
+      15.0,
+      10.0,
+      1.2,
+      0.0,
+      0.5,
+      2.4,
+      5.0,
+      0.6,
+      6.0
+    ],
+    "doses_per_24_hrs": [
+      3.0,
+      1.0,
+      2.0,
+      0.0,
+      4.0,
+      6.0,
+      12.0,
+      8.0,
+      5.0,
+      24.0
+    ],
+    "duration": [
+      1.0,
+      2.0,
+      24.0,
+      3.0,
+      30.0,
+      5.0,
+      10.0,
+      4.0,
+      6.0,
+      72.0
+    ],
+    "duration_interval": [
+      "Ongoing",
+      "Doses",
+      "Hours",
+      "Days",
+      "Months",
+      "Weeks"
+    ],
+    "expiration_value": [
+      36.0,
+      365.0,
+      48.0,
+      24.0,
+      30.0,
+      14.0,
+      9.0,
+      7.0,
+      18.0,
+      6.0
+    ],
+    "expiration_unit": [
+      "Hours",
+      "Days",
+      "Enter on Label"
+    ],
+    "expirationdate": [
+      "2142-06-05 00:00:00",
+      "2142-04-20 00:00:00",
+      "2121-02-03 00:00:00",
+      "2118-08-01 00:00:00",
+      "2118-06-20 00:00:00",
+      "2118-07-29 00:00:00",
+      "2118-07-23 00:00:00",
+      "2118-07-22 00:00:00",
+      "2118-07-20 00:00:00",
+      "2118-04-20 00:00:00"
+    ],
+    "dispensation": [
+      "Omnicell",
+      "Floor Stock Item",
+      "Bulk Item",
+      "OmniCell",
+      "LET CALL",
+      "PATIENT MAY TAKE OWN",
+      "Distribution-Floor Stock",
+      "Pharmacy Meds",
+      "IV MED",
+      "NON FORM BULK MED"
+    ],
+    "fill_quantity": [
+      "3",
+      "180",
+      "10",
+      "4",
+      "2",
+      "8",
+      "6",
+      "1",
+      "12",
+      "5"
+    ]
+  },
+  "emar_detail": {
+    "subject_id": [
+      10000032,
+      10000084,
+      10000117,
+      10000178,
+      10000248,
+      10000285,
+      10000473,
+      10000492,
+      10000635,
+      10000764
+    ],
+    "emar_id": [
+      "10000032-10",
+      "10000032-100",
+      "10000032-101",
+      "10000032-102",
+      "10000032-103",
+      "10000032-104",
+      "10000032-105",
+      "10000032-106",
+      "10000032-107",
+      "10000032-108"
+    ],
+    "emar_seq": [
+      10,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108
+    ],
+    "parent_field_ordinal": [
+      1.1,
+      1.2,
+      1.3,
+      1.4,
+      2.1,
+      2.2,
+      1.5,
+      1.6,
+      1.7,
+      1.8
+    ],
+    "administration_type": [
+      "Standard Maintenance Medication",
+      "IV Flush",
+      "Transdermal Patch",
+      "IV Infusion",
+      "Medication Infusion",
+      "Heparin IV Infusion",
+      "Insulin SC Sliding Scale",
+      "Insulin SC Fixed Dose",
+      "Heparin IV Bolus",
+      "PCA"
+    ],
+    "pharmacy_id": [
+      48770010.0,
+      77528823.0,
+      12891410.0,
+      36451019.0,
+      82541937.0,
+      71423977.0,
+      64180642.0,
+      36947271.0,
+      14779570.0,
+      58741716.0
+    ],
+    "barcode_type": [
+      "if",
+      "iv",
+      "pmto",
+      "bc",
+      "tpn",
+      "ppn"
+    ],
+    "reason_for_no_barcode": [
+      "Discarded Packaging",
+      "Barcode Damaged",
+      "Hardware issue: scanner",
+      "___",
+      "Given in O.R. Holding",
+      "Stopped: Barcode not found on any pharmacy products",
+      "cant reach",
+      "not in area",
+      "Hardware issue: computer",
+      "at desk"
+    ],
+    "complete_dose_not_given": [
+      "No",
+      "Yes"
+    ],
+    "dose_due": [
+      "40",
+      "30",
+      "10",
+      "4",
+      "3",
+      "500",
+      "5000",
+      "400",
+      "550",
+      "1"
+    ],
+    "dose_due_unit": [
+      "mEq",
+      "mL",
+      "mg",
+      "UNIT",
+      "TAB",
+      "PUFF",
+      "CAP",
+      "g",
+      "gm",
+      "NEB"
+    ],
+    "dose_given": [
+      "10",
+      "30",
+      "5",
+      "4",
+      "3",
+      "500",
+      "5000",
+      "400",
+      "550",
+      "1"
+    ],
+    "dose_given_unit": [
+      "mEq",
+      "mL",
+      "mg",
+      "UNIT",
+      "TAB",
+      "PUFF",
+      "g",
+      "gm",
+      "NEB",
+      "units"
+    ],
+    "will_remainder_of_dose_be_given": [
+      "No",
+      "Yes"
+    ],
+    "product_amount_given": [
+      "1",
+      "0.3",
+      "0.1",
+      "0.5",
+      "100",
+      "0.4",
+      "0.13",
+      "1000",
+      "0.54",
+      "4.89"
+    ],
+    "product_unit": [
+      "TAB",
+      "UDCUP",
+      "SYR",
+      "VIAL",
+      "mL",
+      "BTL",
+      "BAG",
+      "CAP",
+      "PTCH",
+      "LOZ"
+    ],
+    "product_code": [
+      "MICROK10",
+      "MAAL30L",
+      "BELL5L",
+      "ONDAN4I",
+      "NACLFLUSH",
+      "CALC500",
+      "HEPA5I",
+      "RALT400",
+      "RIFA550",
+      "TRUV200/300"
+    ],
+    "product_description": [
+      "Potassium Chloride 10mEq ER Tablet",
+      "Aluminum-Magnesium Hydrox.-Simethicone 30 mL UDCup",
+      "Donnatal (Elixir) 5mL Oral Syringe",
+      "Ondansetron 2mg/mL-2mL",
+      "Sodium Chloride 0.9%  Flush",
+      "Calcium Carbonate (Tums) 500mg Tablet",
+      "Heparin Sodium 5000 Units / mL- 1mL Vial",
+      "Raltegravir 400 mg Tablet",
+      "Rifaximin 550mg Tablet",
+      "Emtricitabine-Tenofovir (Truvada) 200-300mg Tablet"
+    ],
+    "product_description_other": [
+      "Insulin Human Regular",
+      "Morphine",
+      "Enoxaparin",
+      "HYDROmorphone",
+      "Acetaminophen (Liquid)",
+      "Insulin Mix 70/30",
+      "Furosemide",
+      "Insulin - Insulin Humalog",
+      "Insulin Glargine",
+      "Insulin - "
+    ],
+    "prior_infusion_rate": [
+      80.0,
+      1100.0,
+      1000.0,
+      700.0,
+      400.0,
+      100.0,
+      200.0,
+      300.0,
+      500.0,
+      1400.0
+    ],
+    "infusion_rate": [
+      80.0,
+      800.0,
+      1000.0,
+      700.0,
+      400.0,
+      100.0,
+      200.0,
+      300.0,
+      500.0,
+      1400.0
+    ],
+    "infusion_rate_adjustment": [
+      "Initial Rate",
+      "No Change in Rate",
+      "Increase",
+      "Rate Changed",
+      "Documented Current Rate",
+      "See Flowsheet for Titration",
+      "Decrease",
+      "See Flowsheet for IV Management",
+      "Hold",
+      "Change Rate "
+    ],
+    "infusion_rate_adjustment_amount": [
+      100.0,
+      150.0,
+      300.0,
+      200.0,
+      1300.0,
+      50.0,
+      350.0,
+      1050.0,
+      250.0,
+      400.0
+    ],
+    "infusion_rate_unit": [
+      "mL/hr",
+      "units/hr",
+      "mcg/kg/min",
+      "mcg/hr",
+      "mg/kg/hr",
+      "mg/hr",
+      "UNIT/HR",
+      "MILLI UNITS/MIN",
+      "mcg/kg/hr",
+      "mg/min"
+    ],
+    "route": [
+      "PO",
+      "IM",
+      "NG",
+      "SC",
+      "PR",
+      "IV",
+      "po",
+      "OG",
+      "PEG",
+      "Po"
+    ],
+    "infusion_complete": [
+      "Y",
+      "N"
+    ],
+    "completion_interval": [
+      "within 12 hours",
+      "within 15 minutes",
+      "within 4 hours",
+      "within 1 hour",
+      "within 2 hours",
+      "within 8 hours",
+      "within 9 hours",
+      "PRN",
+      "within 5 hours",
+      "within 1.5 hours"
+    ],
+    "new_iv_bag_hung": [
+      "Y"
+    ],
+    "continued_infusion_in_other_location": [
+      "Y"
+    ],
+    "restart_interval": [
+      "within 1 hour",
+      "within 2 hours",
+      "PRN",
+      "within 6 hours",
+      "within 4 hours",
+      "within 30 minutes",
+      "within 1.5 hours",
+      "within 1 minutes",
+      "within 60 minutes",
+      "within 15 minutes"
+    ],
+    "side": [
+      "Left",
+      "Center",
+      "Right"
+    ],
+    "site": [
+      "delt",
+      "lower abdomen",
+      "abdomen",
+      "back",
+      "lower back",
+      "deltoid",
+      "arm",
+      "shoulder",
+      "Deltoid",
+      "upper back"
+    ],
+    "non_formulary_visual_verification": [
+      "Y"
+    ]
+  },
+  "inputevents": {
+    "subject_id": [
+      17395049,
+      17815868,
+      12191647,
+      10804794,
+      16094649,
+      15461049,
+      17933313,
+      11384521,
+      14620541,
+      11020740
+    ],
+    "hadm_id": [
+      20530461,
+      22993450,
+      22007481,
+      20146658,
+      20437552,
+      24551558,
+      23788641,
+      22933854,
+      26086151,
+      24110990
+    ],
+    "stay_id": [
+      36405440,
+      34662440,
+      32554129,
+      38649297,
+      35914030,
+      33240155,
+      39560755,
+      39115013,
+      35200432,
+      38419239
+    ],
+    "starttime": [
+      "2176-06-28 16:45:00",
+      "2181-02-25 03:19:00",
+      "2155-12-18 22:31:00",
+      "2167-11-27 05:17:00",
+      "2124-04-09 23:45:00",
+      "2135-03-01 12:16:00",
+      "2186-02-10 07:34:00",
+      "2163-10-11 12:25:00",
+      "2143-04-04 21:51:00",
+      "2140-11-16 09:28:00"
+    ],
+    "endtime": [
+      "2184-03-13 04:38:00",
+      "2124-12-16 00:01:00",
+      "2131-08-11 13:45:00",
+      "2135-02-05 03:01:00",
+      "2185-01-12 00:01:00",
+      "2163-07-06 11:17:00",
+      "2124-09-09 22:13:00",
+      "2181-10-06 00:27:00",
+      "2123-03-07 02:41:00",
+      "2110-08-23 15:16:00"
+    ],
+    "storetime": [
+      "2115-03-24 14:56:00",
+      "2188-10-15 01:14:00",
+      "2145-03-29 12:29:00",
+      "2132-08-30 12:52:00",
+      "2133-10-27 20:30:00",
+      "2114-07-08 12:49:00",
+      "2136-04-02 05:46:00",
+      "2177-12-17 22:00:00",
+      "2150-11-16 12:14:00",
+      "2138-03-06 22:43:00"
+    ],
+    "itemid": [
+      227524,
+      225881,
+      222037,
+      222318,
+      225150,
+      225970,
+      229014,
+      229709,
+      228142,
+      221623
+    ],
+    "amount": [
+      7.736516088247299,
+      20.667679906182457,
+      0.3417746229388285,
+      2.3630002106074244,
+      5.394736424088478,
+      17.818404033780098,
+      1.5980969692463989,
+      0.0833159137982875,
+      24888.76350402832,
+      0.6021899243933149
+    ],
+    "amountuom": [
+      "nMol/ml/min",
+      "ml",
+      "mm^3",
+      "/hour",
+      "dose",
+      "pg",
+      "mcg",
+      "units",
+      "mg",
+      "pL"
+    ],
+    "rate": [
+      75.00492858886719,
+      7.155046463012695,
+      0.511460704728961,
+      0.6007677802699618,
+      6.972430229187012,
+      0.010041449968412,
+      61.1870231628418,
+      17.39899444580078,
+      35.974891662597656,
+      1.3409695820882916
+    ],
+    "rateuom": [
+      "mcg/kg/min",
+      "mL/min",
+      "mg/kg/min",
+      "grams/hour",
+      "grams/min",
+      "mcg/kg/hour",
+      "ng/kg/min",
+      "mg/hour",
+      "mL/kg/hour",
+      "units/hour"
+    ],
+    "orderid": [
+      1849215,
+      749853,
+      2812188,
+      9464765,
+      6882614,
+      7010473,
+      8174585,
+      2756141,
+      804690,
+      1245533
+    ],
+    "linkorderid": [
+      4759169,
+      5247314,
+      5489061,
+      9093515,
+      2724751,
+      779350,
+      9698654,
+      4141593,
+      6550711,
+      5443146
+    ],
+    "ordercategoryname": [
+      "05-Med Bolus",
+      "06-Insulin (Non IV)",
+      "12-Parenteral Nutrition",
+      "04-Fluids (Colloids)",
+      "13-Enteral Nutrition",
+      "08-Antibiotics (IV)",
+      "16-Pre Admission/Non-ICU",
+      "01-Drips",
+      "03-IV Fluid Bolus",
+      "14-Oral/Gastric Intake"
+    ],
+    "secondaryordercategoryname": [
+      "02-Fluids (Crystalloids)",
+      "Additive (Crystalloid)",
+      "Additives (EN)",
+      "Additives (PN)"
+    ],
+    "ordercomponenttypedescription": [
+      "Additives                                         Ampoule                                           ",
+      "Main order parameter",
+      "Mixed solution"
+    ],
+    "ordercategorydescription": [
+      "Non Iv Meds",
+      "Drug Push",
+      "Bolus",
+      "Continuous IV",
+      "Continuous Med"
+    ],
+    "patientweight": [
+      55.9,
+      128.9,
+      47.6,
+      161.5,
+      266.8,
+      139.7,
+      136.8,
+      167.8,
+      112.1,
+      123.0
+    ],
+    "totalamount": [
+      90.3000030517578,
+      2718.0,
+      433.0,
+      929.0,
+      1921.0,
+      232.1999969482422,
+      441.0,
+      1699.0,
+      41.59999847412109,
+      5029.0
+    ],
+    "totalamountuom": [
+      "ml"
+    ],
+    "isopenbag": [
+      1,
+      0
+    ],
+    "continueinnextdept": [
+      0,
+      1
+    ],
+    "cancelreason": [
+      "cancelreason"
+    ],
+    "statusdescription": [
+      "Stopped",
+      "Paused",
+      "Bolus",
+      "Reported",
+      "ChangeDose/Rate",
+      "FinishedRunning"
+    ],
+    "originalamount": [
+      1.2388060092926023,
+      202.9434967041016,
+      5.2090163230896,
+      195.25897216796875,
+      96.70932006835938,
+      233.87612915039065,
+      71.3759994506836,
+      26.024999618530277,
+      22.728614807128903,
+      630.39013671875
+    ],
+    "originalrate": [
+      53.930850982666016,
+      100.10999298095705,
+      18.235883712768555,
+      25.99266242980957,
+      59.3699951171875,
+      0.6006807088851929,
+      99.68209075927734,
+      66.08831024169922,
+      31.151554107666016,
+      6.603277206420898
+    ]
+  },
+  "labevents": {
+    "labevent_id": [
+      17116928,
+      33849945,
+      65640585,
+      87008323,
+      109114077,
+      78820087,
+      6346345,
+      6237555,
+      54959384,
+      98873066
+    ],
+    "subject_id": [
+      18559978,
+      13849411,
+      14637365,
+      10240642,
+      17602938,
+      14652875,
+      15082451,
+      14069243,
+      14419020,
+      14241105
+    ],
+    "hadm_id": [
+      21829206.0,
+      28170905.0,
+      26487604.0,
+      27347855.0,
+      20776452.0,
+      21531361.0,
+      20452508.0,
+      20393734.0,
+      21557920.0,
+      25405472.0
+    ],
+    "specimen_id": [
+      28617547,
+      18805791,
+      35820605,
+      91702545,
+      28307955,
+      59718085,
+      56089008,
+      69127005,
+      19155449,
+      76556433
+    ],
+    "itemid": [
+      52007,
+      51517,
+      51278,
+      50993,
+      50975,
+      51341,
+      51791,
+      51310,
+      50868,
+      50911
+    ],
+    "charttime": [
+      "2122-06-10 10:50:00",
+      "2209-08-28 05:34:00",
+      "2147-09-26 06:25:00",
+      "2157-02-11 04:27:00",
+      "2150-09-30 23:31:00",
+      "2152-11-13 04:23:00",
+      "2188-01-05 20:11:00",
+      "2171-11-23 11:48:00",
+      "2154-11-06 08:35:00",
+      "2123-05-20 18:16:00"
+    ],
+    "storetime": [
+      "2144-11-03 09:37:00",
+      "2164-04-18 19:37:00",
+      "2120-11-12 00:47:00",
+      "2205-01-31 15:03:00",
+      "2165-04-04 02:49:00",
+      "2118-01-01 12:46:00",
+      "2116-12-19 11:27:00",
+      "2120-08-24 23:51:00",
+      "2160-06-08 14:16:00",
+      "2159-08-12 19:12:00"
+    ],
+    "value": [
+      "83.27",
+      "29.29",
+      "200.1",
+      "14144",
+      "4543.9",
+      "9341",
+      "202.3",
+      "268.19",
+      "28/.",
+      "35.32"
+    ],
+    "valuenum": [
+      100.6,
+      30125.0,
+      76.09,
+      551000.0,
+      28.87,
+      24.3,
+      3817.0,
+      24267.0,
+      954.0,
+      97.05
+    ],
+    "valueuom": [
+      "EU/dL",
+      "umol/L",
+      "mOsm/kg",
+      "ng/mL DDU",
+      "Pos/Neg",
+      "GPL",
+      "mIU/mL",
+      "ng/dL",
+      "nmol/L",
+      "ng/mL FEU"
+    ],
+    "ref_range_lower": [
+      11.2,
+      2.0,
+      10.0,
+      150.0,
+      0.0,
+      39.0,
+      8.4,
+      0.01,
+      27.0,
+      55.2
+    ],
+    "ref_range_upper": [
+      16.3,
+      13.1,
+      70.0,
+      246.0,
+      7.5,
+      174.0,
+      185.0,
+      1.65,
+      310.0,
+      15.0
+    ],
+    "flag": [
+      "abnormal"
+    ],
+    "priority": [
+      "ROUTINE",
+      "STAT"
+    ],
+    "comments": [
+      "LESS THAN 0.02.",
+      "Using this patient's age, gender, and serum creatinine value of 9.9,.  Estimated GFR = 6 if non African-American (mL/min/1.73 m2).  Estimated GFR = 7 if African-American (mL/min/1.73 m2).  For comparison, mean GFR for age group 40-49 is 99 (mL/min/1.73 m2).  GFR<60 = Chronic Kidney Disease, GFR<15 = Kidney Failure.",
+      "Using this patient's age, gender, and serum creatinine value of 1.6,.  estimated GFR (eGFR) is likely between 42 and 51 mL/min/1.73m2, .  provided the serum creatinine value is stable..  (Patients with more muscle mass and better nutritional status are more .  likely to be at the higher end of this range.).  An eGFR < 60 suggests kidney disease in those below the age of 65 .  and there may be kidney disease in those over 65..",
+      "Using this patient's age, gender, and serum creatinine value of 8.7,.  Estimated GFR = 5 if non African-American (mL/min/1.73 m2).  Estimated GFR = 6 if African-American (mL/min/1.73 m2).  For comparison, mean GFR for age group 40-49 is 99 (mL/min/1.73 m2).  GFR<60 = Chronic Kidney Disease, GFR<15 = Kidney Failure.",
+      "Using this patient's age, gender, and serum creatinine value of 2.3, .  estimated GFR (eGFR) is likely between 21 and 26 mL/min/1.73 m2, .  provided the serum creatinine value is stable. .  (Patients with more muscle mass and better nutritional status are more .  likely to be at the higher end of this range.) .  An eGFR < 60 suggests kidney disease in those below the age of 65 .  and there may be kidney disease in those over 65..",
+      "Using this patient's age, gender, and serum creatinine value of 1.6,.  Estimated GFR = 50 if non African-American (mL/min/1.73 m2).  Estimated GFR = 60 if African-American (mL/min/1.73 m2).  For comparison, mean GFR for age group 30-39 is 107 (mL/min/1.73 m2).  GFR<60 = Chronic Kidney Disease, GFR<15 = Kidney Failure.",
+      "Using this patient's age, gender, and serum creatinine value of 2.8,.  estimated GFR (eGFR) is likely between 23 and 28 mL/min/1.73m2, .  provided the serum creatinine value is stable..  (Patients with more muscle mass and better nutritional status are more .  likely to be at the higher end of this range.).  An eGFR < 60 suggests kidney disease in those below the age of 65 .  and there may be kidney disease in those over 65..",
+      "Using this patient's age, gender, and serum creatinine value of 2.4,.  Estimated GFR = 28 if non African-American (mL/min/1.73 m2).  Estimated GFR = 34 if African-American (mL/min/1.73 m2).  For comparison, mean GFR for age group 50-59 is 93 (mL/min/1.73 m2).  GFR<60 = Chronic Kidney Disease, GFR<15 = Kidney Failure.",
+      "Anion Gap verified.  Verified By Replicate Analysis.  New reference range as of ___.",
+      "Using this patient's age, gender, and serum creatinine value of 1.8,.  Estimated GFR = 36 if non African-American (mL/min/1.73 m2).  Estimated GFR = 43 if African-American (mL/min/1.73 m2).  For comparison, mean GFR for age group 70+ is 75 (mL/min/1.73 m2).  GFR<60 = Chronic Kidney Disease, GFR<15 = Kidney Failure0000."
+    ]
+  },
+  "chartevents": {
+    "subject_id": [
+      14530333,
+      18903832,
+      10141035,
+      11872017,
+      18908226,
+      11843949,
+      19016834,
+      16205005,
+      13448345,
+      16406930
+    ],
+    "hadm_id": [
+      28241526,
+      28468286,
+      28862003,
+      20577916,
+      29235044,
+      28069781,
+      26801862,
+      22956799,
+      24988386,
+      29291201
+    ],
+    "stay_id": [
+      36917892,
+      35085907,
+      33215290,
+      38424273,
+      30146566,
+      35974112,
+      37679272,
+      31477134,
+      33206797,
+      39653946
+    ],
+    "charttime": [
+      "2157-06-08 08:35:00",
+      "2188-02-16 10:05:00",
+      "2127-09-25 04:18:00",
+      "2179-10-27 04:29:00",
+      "2114-09-14 19:10:00",
+      "2147-06-26 16:39:00",
+      "2172-05-17 16:04:00",
+      "2140-06-08 13:11:00",
+      "2172-05-03 05:05:00",
+      "2199-08-15 14:00:00"
+    ],
+    "storetime": [
+      "2110-06-23 09:07:00",
+      "2137-03-09 15:02:00",
+      "2160-07-23 20:42:00",
+      "2140-08-23 01:33:00",
+      "2179-04-29 15:56:00",
+      "2155-03-09 21:13:00",
+      "2120-09-17 03:48:00",
+      "2151-06-12 04:25:00",
+      "2142-11-20 07:54:00",
+      "2208-05-24 20:34:00"
+    ],
+    "itemid": [
+      224947,
+      224310,
+      229670,
+      227474,
+      229140,
+      228373,
+      227579,
+      220644,
+      228211,
+      224418
+    ],
+    "value": [
+      "5219",
+      "28.95",
+      "15893",
+      "18054",
+      "7328",
+      "609.845",
+      "Dyspnea",
+      "281.261",
+      "716.8",
+      "2509"
+    ],
+    "valuenum": [
+      3509.0,
+      494.178,
+      -158.0,
+      6440.0,
+      8024.0,
+      6.19,
+      2332.0,
+      2260.0,
+      6073.0,
+      28220.0
+    ],
+    "valueuom": [
+      "Inch",
+      "psi",
+      "kcal/kg",
+      "RPM",
+      "ml/kg",
+      "mA",
+      "dynes*sec/cm5/m2",
+      "K/uL",
+      "min",
+      "mg/L"
+    ],
+    "warning": [
+      1.0,
+      0.0
+    ]
+  }
+}
