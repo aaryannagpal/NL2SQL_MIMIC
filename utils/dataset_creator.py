@@ -854,3 +854,146 @@ class QueryTemplateGenerator:
     def generate(self, count: int = 1) -> List[Dict[str, str]]:
         """Generate query templates - to be implemented by subclasses"""
         raise NotImplementedError("Subclasses must implement generate()")
+
+
+class BasicSelectGenerator(QueryTemplateGenerator):
+    """Generate basic SELECT queries with various filters, limits and ordered"""
+    
+    def generate(self, count: int = 1) -> List[Dict[str, str]]:
+        """Generate basic SELECT queries with various WHERE conditions"""
+        results = []
+        
+        for _ in tqdm(range(count), desc = "Generating Queries"):
+            table = random.choice(self.schema.tables)            
+            columns = self.random_columns(table, min_cols=1, max_cols=3) # input this also
+            
+            use_where = random.random() > 0.3 #input this value
+            where_clause = ""
+            nl_filter = ""
+            
+            if use_where:
+                num_conditions = random.choices([1, 2, 3], weights=[0.1, 0.3, 0.6])[0] # input
+                conditions = []
+                nl_conditions = []
+
+                for i in range(num_conditions):
+                    filter_col = random.choice(self.schema.columns[table])
+                    
+                    filter_sql, filter_nl = self.random_filter(table, filter_col)
+                    if filter_sql and filter_nl:
+                        conditions.append(filter_sql)
+                        nl_conditions.append(filter_nl)
+                
+                if len(conditions) > 1:
+                    logical_ops = [random.choice(["AND", "OR"]) for _ in range(len(conditions)-1)]
+                    where_clause = "WHERE " + conditions[0]
+                    nl_filter = "where " + nl_conditions[0]
+                    
+                    for i in range(1, len(conditions)):
+                        op = logical_ops[i-1]
+                        where_clause += f" {op} {conditions[i]}"
+                        nl_filter += f" {op.lower()} {nl_conditions[i]}"
+                elif len(conditions) == 1:
+                    where_clause = f"WHERE {conditions[0]}"
+                    nl_filter = f"where {nl_conditions[0]}"
+
+            use_order = random.random() > 0.7 #input
+            order_clause = ""
+            nl_order = ""
+            
+            if use_order:
+                if len(columns) == 1 and columns[0] == "*":
+                    order_col = self.schema.get_random_column(table)
+                else:
+                    order_col = random.choice(columns)
+                order_dir = random.choice(self.sort_dirs)
+                order_clause = f"ORDER BY {order_col} {order_dir}"
+              
+                nl_dir = random.choice(self.sort_phrases[order_dir])
+                nl_order = random.choice(self.order_phrases).format(order_col=order_col.replace('_', ' '), nl_dir=nl_dir)    
+            
+            use_limit = random.random() > 0.5 #input
+            limit_clause = ""
+            nl_limit = ""
+            
+            if use_limit:
+                limit = random.choice(self.limit_values)
+                limit_clause = f"LIMIT {limit}"
+                
+                nl_limit = random.choice(self.limit_phrases).format(limit=limit)
+
+            if len(columns) == 1 and columns[0] == "*":
+                select_clause = f"SELECT * FROM {table}"
+            else:
+                select_clause = f"SELECT {', '.join(columns)} FROM {table}"
+            sql_parts = [
+                select_clause,
+                where_clause,
+                order_clause,
+                limit_clause,
+                ';'
+            ]
+            sql_query = " ".join([part for part in sql_parts if part])
+            
+            entity_type = self._get_entity_type(table)
+            
+            column_descriptions = []
+            if len(columns) == 1 and columns[0] == "*":
+                column_descriptions.append(random.choice(self.star_column))
+            else:
+                for col in columns:
+                    readable_col = col.replace('_', ' ')
+                    column_descriptions.append(readable_col)
+            
+            # look over this
+            query_templates = [
+                f"Show me {', '.join(column_descriptions)} for {entity_type}",
+                f"What are the {', '.join(column_descriptions)} of {entity_type}",
+                f"List {', '.join(column_descriptions)} from {entity_type}",
+                f"Get {', '.join(column_descriptions)} for {entity_type}"
+            ]
+            template_weights = [0.4, 0.2, 0.2, 0.2]
+            base_question = random.choices(query_templates, weights=template_weights)[0]
+            
+            nl_parts = [
+                base_question,
+                nl_filter,
+                nl_order,
+                nl_limit
+            ]
+            nl_question = " ".join([part for part in nl_parts if part])
+            
+            if not nl_question.endswith('.'):
+                nl_question += '.'
+            nl_question = nl_question[0].upper() + nl_question[1:]
+            
+            results.append({"question": nl_question, "query": sql_query})
+        
+        return results
+    
+    def _get_entity_type(self, table: str) -> str:
+        """Get a descriptive entity name for a table"""
+        entity_mappings = {
+            'patients': 'patients',
+            'admissions': 'hospital admissions',
+            'diagnoses_icd': 'patient diagnoses',
+            'procedures_icd': 'patient procedures',
+            'prescriptions': 'medications',
+            'labevents': 'lab results',
+            'chartevents': 'chart entries',
+            'icustays': 'ICU stays',
+            'transfers': 'patient transfers',
+            'services': 'hospital services',
+            'microbiologyevents': 'microbiology results',
+            'outputevents': 'patient outputs',
+            'inputevents': 'patient inputs',
+            'emar': 'medication administration records',
+            'pharmacy': 'pharmacy orders',
+            'poe': 'provider orders',
+            'd_icd_diagnoses': 'diagnosis codes',
+            'd_icd_procedures': 'procedure codes',
+            'd_labitems': 'laboratory tests',
+            'd_items': 'charted items'
+        }
+        
+        return entity_mappings.get(table, table.replace('_', ' '))
