@@ -427,10 +427,13 @@ class QueryTemplateGenerator:
         op = random.choice(self.operators)
         column_type = self.schema.get_column_type(table, column)
         sample_value = self.schema.get_sample_value(table, column)
-                
+        if isinstance(sample_value, str):
+            sample_value = sample_value.replace("'", "''")  
         if isinstance(sample_value, list):
             if sample_value:
                 sample_value = random.choice(sample_value)
+                if isinstance(sample_value, str):
+                    sample_value = sample_value.replace("'", "''")  
             else:
                 print("Sample Values have NoneType present. Please fix")
                 return
@@ -469,6 +472,8 @@ class QueryTemplateGenerator:
             sample_value_2 = self.schema.get_sample_value(table, column)
             
             if "char" in column_type or "text" in column_type:
+                if isinstance(sample_value_2, str):
+                    sample_value_2 = sample_value_2.replace("'", "''")
                 sql_value = f"'{sample_value}' AND '{sample_value_2}'"
                 display_value = (str(sample_value), str(sample_value_2))
             
@@ -598,7 +603,7 @@ class QueryTemplateGenerator:
             
             else:
                 all_samples = self.schema.default_sample_values.get(table, {}).get(column, [])
-                string_samples = [s for s in all_samples if isinstance(s, str) and s]
+                string_samples = [s.replace("'", "''") for s in all_samples if isinstance(s, str) and s]
                 
                 if len(string_samples) >= samples_list_size:
                     values = random.sample(string_samples, samples_list_size)
