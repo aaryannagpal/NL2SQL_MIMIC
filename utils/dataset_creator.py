@@ -372,6 +372,38 @@ class QueryTemplateGenerator:
             "BETWEEN": ["between {sample_1} and {sample_2}", "in the range from {sample_1} to {sample_2}", "within the range of {sample_1} and {sample_2}", "falling between {sample_1} and {sample_2}", "from {sample_1} to {sample_2}", "in the interval from {sample_1} to {sample_2}", "ranging from {sample_1} to {sample_2}"],
             "NOT BETWEEN": ["not between {sample_1} and {sample_2}", "outside the range from {sample_1} to {sample_2}", "not within the range of {sample_1} and {sample_2}", "not falling between {sample_1} and {sample_2}", "excluding values from {sample_1} to {sample_2}", "not in the interval from {sample_1} to {sample_2}", "not ranging from {sample_1} to {sample_2}", "less than {sample_1} or greater than {sample_2}"]
         }
+
+        self.star_column = [
+            "records",
+            "all columns",
+            "results",
+            "all items",
+            "rows",
+            "complete rows"
+        ]
+
+        self.limit_phrases = [
+            "show {limit} results",
+            "give me {limit} examples",
+            "fetch {limit} rows",
+            "limit to {limit} results",
+            "show the first {limit} results",
+            "display up to {limit} records",
+            "return a maximum of {limit} items"
+        ]
+
+        self.sort_phrases = {
+            "ASC": ["smallest first", "in ascending order", "ascendingly", "increasingly", "in increasing order", "least first"],
+            "DESC": ["largest first", "in descending order", "descendingly", "decreasingly", "in decreasing order", "greatest first"]
+        }
+
+        self.order_phrases = [
+            "ordered by {order_col} {nl_dir}",
+            "sorted by {order_col} {nl_dir}",
+            "arranged by {order_col} {nl_dir}",
+            "listed by {order_col} {nl_dir}",
+            "ranked by {order_col} {nl_dir}",
+        ]
         
         self.aggregation_phrases = {
             "COUNT": ["count", "total number", "quantity"],
@@ -381,8 +413,10 @@ class QueryTemplateGenerator:
             "SUM": ["sum", "total", "combined"]
         }
     
-    def random_columns(self, table: str, min_cols: int = 1, max_cols: int = 3) -> List[str]:
+    def random_columns(self, table: str, min_cols: int = 1, max_cols: int = 3, all_col = 0.8) -> List[str]:
         """Select random columns from a table"""
+        if random.random() > all_col:
+            return ["*"]
         columns = self.schema.columns[table]
         num_cols = min(random.randint(min_cols, max_cols), len(columns))
         return random.sample(columns, num_cols)
@@ -697,7 +731,7 @@ class QueryTemplateGenerator:
         """Generate a join condition between two tables"""
         
         possible_joins = []
-        print(table1, table2)
+        # print(table1, table2)
         if table1 in self.schema.dict_mappings:
             for dict_info in self.schema.dict_mappings[table1]:
                 if dict_info["dict_table"] == table2:
