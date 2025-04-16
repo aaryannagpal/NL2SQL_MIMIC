@@ -877,7 +877,7 @@ class BasicSelectGenerator(QueryTemplateGenerator):
             nl_filter = ""
             
             if use_where:
-                num_conditions = random.choices([1, 2, 3], weights=[0.1, 0.3, 0.6])[0] # input
+                num_conditions = random.choices([1, 2, 3], weights=[0.6, 0.3, 0.1])[0] # input
                 conditions = []
                 nl_conditions = []
 
@@ -917,7 +917,7 @@ class BasicSelectGenerator(QueryTemplateGenerator):
                 nl_dir = random.choice(self.sort_phrases[order_dir])
                 nl_order = random.choice(self.order_phrases).format(order_col=order_col.replace('_', ' '), nl_dir=nl_dir)    
             
-            use_limit = random.random() > 0.5 #input
+            use_limit = random.random() > 0.25 #input
             limit_clause = ""
             nl_limit = ""
             
