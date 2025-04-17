@@ -9,6 +9,7 @@ import difflib
 from typing import Dict, Any, List, Optional, Union, Set, Tuple
 from pathlib import Path
 from tqdm import tqdm
+import math
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
@@ -26,7 +27,7 @@ class QueryEvaluator:
     
     def evaluate_query(self, row: Dict[str, Any]) -> Dict[str, Any]:
         query = row.get('true_query')
-        if not query or query is np.NaN or query is pd.NA:
+        if not query or math.isnan(query):
             return {**row, 'success': False, 'error': 'No query provided'}
         
         try:
