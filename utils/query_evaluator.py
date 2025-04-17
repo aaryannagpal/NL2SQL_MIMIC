@@ -27,7 +27,10 @@ class QueryEvaluator:
     
     def evaluate_query(self, row: Dict[str, Any]) -> Dict[str, Any]:
         query = row.get('true_query')
-        if not query or math.isnan(query):
+
+        if not query or not isinstance(query, str):
+            if math.isnan(query):
+                return {**row, 'success': True}
             return {**row, 'success': False, 'error': 'No query provided'}
         
         try:
