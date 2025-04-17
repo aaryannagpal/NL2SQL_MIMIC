@@ -17,16 +17,8 @@ This project investigates and implements various approaches to convert natural l
 - [x] MIMIC Loaded to MySQL
 - [x] Database schema setup
 - [x] Schema management system
-- [ ] Custom Dataset Creation
-    - [x] Randomly Sampled Database values
-    - [x] Random Query Filter Class
-    - [ ] Random Query Aggregate/Group Class
-    - [ ] Random Query Sub-Query Class
-    - [ ] Random Query Ordering/Limit Class
-    - [ ] Random Query Join Class
-    - [ ] Random Query Misc Class
-    - [ ] Randomized Combining
-- [ ] Evaluation Metrics Class
+- [x] Evaluation Metrics Class
+- [ ] Query Comparision Class
 - [ ] Inferring models for M1
 - [ ] Fine-Tuning M1
 - [ ] Inferring models for M2
