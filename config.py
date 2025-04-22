@@ -10,10 +10,19 @@ MYSQL_DB_PATH: Final[Path] = DATA_DIR / "mimic4.db"
 MIMIC_SCHEMA_PATH: Final[Path] = DATA_DIR / "mimic.json"
 DICTIONARY_MAP_PATH: Final[Path] = DATA_DIR / "dictionary.json"
 
+DATASET_PATH = PROJECT_ROOT / "data"
+TRAINING_DATA = DATASET_PATH / "train.csv"
+
+MODEL_DIR = PROJECT_ROOT / "model"
+MODEL_LIST = MODEL_DIR / "model_list.csv"
+MODELS_DIR = "/media/chs.gpu/DATA/nagpal/models/"
+
 MIMIC_SAMPLE_DIR = PROJECT_ROOT / "data" / "custom_dataset" / "sample_data"
-QUERY_SAMPLE_DIR = PROJECT_ROOT / "data" / "custom_dataset" / "sample_query_sets"
 MIMIC_SAMPLE_PATH = MIMIC_SAMPLE_DIR / "default.json"
 
+STORE_RESULT_DIR = PROJECT_ROOT / "results"
+RAW_RESULT_DIR = STORE_RESULT_DIR / "raw"
+PROCESSED_RESULT_DIR = STORE_RESULT_DIR / "processed"
 
 def _validate_paths() -> None:
     """Check if critical files/dirs exist at startup."""
@@ -22,6 +31,9 @@ def _validate_paths() -> None:
         MYSQL_DB_PATH,
         MIMIC_SCHEMA_PATH,
         DICTIONARY_MAP_PATH,
+        TRAINING_DATA,
+        MODEL_LIST,
+        # MODELS_DIR
     ]
     for path in required_paths:
         if not path.exists():
