@@ -69,6 +69,13 @@ for model_name, model_path in tqdm(models.items()):
             generated_sqls.extend(batch_sqls)
             actual_response.extend(responses)
 
+            n = len(generated_sqls)
+            df_model = df.iloc[:n].copy() 
+            df_model["generated_sql"] = generated_sqls
+            csv_filename = RAW_RESULT_DIR / model_type / test / f"{model_name}_test.csv"
+            df_model.to_csv(csv_filename, index=False)
+            print(f"Saved results to {csv_filename}")
+
         df_model = df.copy()
         df_model["generated_sql"] = generated_sqls
         csv_filename = RAW_RESULT_DIR / model_type / test / f"{model_name}_results.csv"
