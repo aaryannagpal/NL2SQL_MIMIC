@@ -54,7 +54,7 @@ analysis_df = analysis_df[
     ]
 ]
 
-analysis_df.to_csv(f"./{test}_analysis.csv")
+analysis_df.to_csv(f"./{test}_analysis.csv", index = False)
 
 overall_scores = (
     analysis_df.groupby(["model_name"])
