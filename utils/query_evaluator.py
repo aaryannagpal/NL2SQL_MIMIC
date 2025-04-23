@@ -11,17 +11,58 @@ import sys
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
+import concurrent.futures
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 from utils.query_handler import QueryHandler
 
 def _process_row_helper(row_dict, query_column):
-    evaluator = QueryEvaluator()
-    return evaluator.evaluate_query(row_dict, query_column)
+    import signal
+    
+    def timeout_handler(signum, frame):
+        raise TimeoutError("Query execution timed out")
+    
+    signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(20)  # Hard timeout of 20 seconds for the entire processing
+    
+    try:
+        evaluator = QueryEvaluator()
+        result = evaluator.evaluate_query(row_dict, query_column)
+        signal.alarm(0)
+        return result
+    except TimeoutError:
+        return {
+            **row_dict,
+            "success": False,
+            "execution_time": 20.0,
+            "total_time": 20.0,
+            "row_count": 0,
+            "results": None,
+            "result_columns": None,
+            "execution_plan": None,
+            "error": "worker process timeout"
+        }
+    except Exception as e:
+        signal.alarm(0)
+        return {
+            **row_dict,
+            "success": False,
+            "execution_time": 0,
+            "total_time": 0,
+            "row_count": 0,
+            "results": None,
+            "result_columns": None,
+            "execution_plan": None,
+            "error": f"worker error: {str(e)}"
+        }
 
 class QueryEvaluator:
+    QUERY_TIMEOUT = 20
+    SAVE_EVERY = 20
+
     def __init__(self, db_path: Optional[str] = None):
+        self.db_path = db_path
         self.query_handler = QueryHandler()
         if db_path:
             self.query_handler.update_path(db_path)
@@ -36,39 +77,22 @@ class QueryEvaluator:
                 return {**row, "success": True}
             return {**row, "success": False, "error": "No query provided"}
 
+        start_time = time.time()
+        
+        handler = QueryHandler()
+        if self.db_path:
+            handler.update_path(self.db_path)
+        
         try:
-            start_time = time.time()
-            result = self.query_handler.execute(query)
-            total_time = time.time() - start_time
-
-            evaluated_row = {**row}
-            evaluated_row["success"] = result["success"]
-            evaluated_row["execution_time"] = result["execution_time"]
-            evaluated_row["total_time"] = total_time
-            evaluated_row["row_count"] = result["row_count"]
-            evaluated_row["error"] = result["error"]
-
-            if result.get("results"):
-                evaluated_row["results"] = result["results"]
-                evaluated_row["result_columns"] = list(result["results"][0].keys())
-            else:
-                evaluated_row["results"] = None
-                evaluated_row["result_columns"] = None
-
-            plan = result.get("execution_plan")
-            if plan and plan != "Query plan not available":
-                evaluated_row["execution_plan"] = json.dumps(plan)
-            else:
-                evaluated_row["execution_plan"] = None
-
-            return evaluated_row
-
+            result = handler.execute(query)
+            
         except Exception as e:
+            total_time = time.time() - start_time
             return {
                 **row,
                 "success": False,
                 "execution_time": 0,
-                "total_time": time.time() - start_time,
+                "total_time": total_time,
                 "row_count": 0,
                 "results": None,
                 "result_columns": None,
@@ -76,44 +100,87 @@ class QueryEvaluator:
                 "error": str(e),
             }
 
+        total_time = time.time() - start_time
+        evaluated_row = {**row}
+        evaluated_row["success"] = result.get("success", False)
+        evaluated_row["execution_time"] = result.get("execution_time")
+        evaluated_row["total_time"] = total_time
+        evaluated_row["row_count"] = result.get("row_count", 0)
+        evaluated_row["error"] = result.get("error")
+
+        if result.get("results"):
+            evaluated_row["results"] = result["results"]
+            evaluated_row["result_columns"] = list(result["results"][0].keys())
+        else:
+            evaluated_row["results"] = None
+            evaluated_row["result_columns"] = None
+
+        plan = result.get("execution_plan")
+        if plan and plan != "Query plan not available":
+            evaluated_row["execution_plan"] = json.dumps(plan)
+        else:
+            evaluated_row["execution_plan"] = None
+
+        return evaluated_row
+
     def batch_evaluate(
         self,
         dataset: Union[pd.DataFrame, str, Path],
         output_path: Union[str, Path],
         query_column: str = "true_query",
         max_workers: int = None,
-    ) -> pd.DataFrame:
-
+    ):
         if max_workers is None:
-            max_workers = multiprocessing.cpu_count() - 4
-
-        try:
-            if isinstance(dataset, (str, Path)):
-                df = pd.read_csv(dataset)
-            else:
-                df = dataset
-            print(f"Loaded dataset with {len(df)} queries")
-        except Exception as e:
-            print(f"Error loading dataset: {e}")
-            return pd.DataFrame()
-
+            max_workers = multiprocessing.cpu_count() - 1
+        
+        if isinstance(dataset, (str, Path)):
+            df = pd.read_csv(dataset)
+        else:
+            df = dataset
+        print(f"Loaded dataset with {len(df)} queries")
+        
         required_columns = ["id", "question", query_column]
         missing_columns = [col for col in required_columns if col not in df.columns]
         if missing_columns:
             print(f"Dataset is missing required columns: {missing_columns}")
             return pd.DataFrame()
-
+        
         rows = df.to_dict("records")
         results = []
-
+        
         print(f"Starting evaluation with {max_workers} workers...")
-        worker = partial(_process_row_helper, query_column=query_column)
+        
         with multiprocessing.Pool(processes=max_workers) as pool:
-            for result in tqdm(
-                pool.imap(worker, rows), total=len(rows), desc="Evaluating queries"
-            ):
-                results.append(result)
-
+            worker = partial(_process_row_helper, query_column=query_column)
+            
+            iterator = pool.imap_unordered(worker, rows)
+            
+            for idx in tqdm(range(len(rows)), total=len(rows), desc="Evaluating queries"):
+                try:
+                    result = next(iterator, None)
+                    if result:
+                        results.append(result)
+                    else:
+                        print(f"Warning: No result returned for query {idx}")
+                        results.append({
+                            **rows[idx],
+                            "success": False,
+                            "error": "No result returned"
+                        })
+                    
+                    if (idx + 1) % self.SAVE_EVERY == 0:
+                        temp_df = pd.DataFrame(results)
+                        temp_df.to_csv(output_path, index=False)
+                        print(f"Periodic save after {idx+1} queries to {output_path}")
+                        
+                except Exception as e:
+                    print(f"Error processing query {idx}: {e}")
+                    results.append({
+                        **rows[idx],
+                        "success": False,
+                        "error": f"Processing error: {str(e)}"
+                    })
+        
         result_df = pd.DataFrame(results)
         result_df.to_csv(output_path, index=False)
         print(f"Evaluation complete. Results saved to {output_path}")
@@ -124,12 +191,10 @@ class QueryEvaluator:
             return set()
             
         try:
-            # Remove string literals and extract basic tables
             query = re.sub(r"'[^']*'", "", query)
             tables = set(re.findall(r'(?:FROM|JOIN)\s+([a-zA-Z_][a-zA-Z0-9_]*)', query, re.IGNORECASE))
             tables.update(re.findall(r'([a-zA-Z_][a-zA-Z0-9_]*)\.[a-zA-Z_][a-zA-Z0-9_]*', query, re.IGNORECASE))
             
-            # Process subqueries
             subqueries = re.findall(r'\(\s*SELECT\s+.+?FROM.+?\)', query, re.IGNORECASE | re.DOTALL)
             for subquery in subqueries:
                 if subquery != query and len(subquery) < len(query):
@@ -144,18 +209,15 @@ class QueryEvaluator:
             return set()
             
         try:
-            # Remove string literals
             query = re.sub(r"'[^']*'", "", query)
             columns = set(re.findall(r'([a-zA-Z_][a-zA-Z0-9_]*\.[a-zA-Z_][a-zA-Z0-9_]*)', query))
             
-            # Extract from SELECT clause
             select_match = re.search(r'SELECT\s+(.*?)(?:FROM|$)', query, re.IGNORECASE | re.DOTALL)
             if select_match:
                 select_clause = select_match.group(1).strip()
                 if '*' in select_clause:
                     columns.add('*')
                 else:
-                    # Parse columns handling functions and parentheses
                     parts = []
                     current = []
                     paren_level = 0
@@ -176,12 +238,10 @@ class QueryEvaluator:
                         if col_match:
                             columns.add(col_match.group(1).strip())
             
-            # Extract from WHERE clause
             where_match = re.search(r'WHERE\s+(.*?)(?:GROUP BY|ORDER BY|LIMIT|$)', query, re.IGNORECASE | re.DOTALL)
             if where_match:
                 columns.update(re.findall(r'([a-zA-Z0-9_]+)(?:\s*[=<>])', where_match.group(1)))
             
-            # Process subqueries
             subqueries = re.findall(r'\(\s*SELECT\s+.+?FROM.+?\)', query, re.IGNORECASE | re.DOTALL)
             for subquery in subqueries:
                 if subquery != query and len(subquery) < len(query):
@@ -196,7 +256,6 @@ class QueryEvaluator:
             return ""
         query = re.sub(r'\s+', ' ', query.strip())
         
-        # Find the WHERE clause
         where_match = re.search(r'\bWHERE\b', query, re.IGNORECASE)
         if not where_match:
             return ""
@@ -237,7 +296,6 @@ class QueryEvaluator:
                     if end_pos < len(query):
                         break
         
-        # Extract and clean the condition
         condition = query[start_pos:end_pos].strip()
         return condition
 
@@ -249,7 +307,6 @@ class QueryEvaluator:
         if isinstance(results2, float) and math.isnan(results2):
             results2 = []
         
-        # Handle empty results
         if (not results1 or len(results1) == 0) and (not results2 or len(results2) == 0):
             details['reason'] = "Both results are empty"
             return True, details
@@ -262,7 +319,6 @@ class QueryEvaluator:
             details['first_count'] = len(results1)
             return False, details
         
-        # Check row counts and columns
         if len(results1) != len(results2):
             details['reason'] = "Different number of rows"
             details['first_count'] = len(results1)
@@ -278,7 +334,6 @@ class QueryEvaluator:
             details['common_cols'] = list(cols1 & cols2)
             return False, details
             
-        # Compare actual data
         try:
             set1 = {tuple(sorted((k, str(v)) for k, v in row.items())) for row in results1}
             set2 = {tuple(sorted((k, str(v)) for k, v in row.items())) for row in results2}
@@ -287,12 +342,10 @@ class QueryEvaluator:
                 details['reason'] = "Results are identical (same rows, possibly different order)"
                 return True, details
                 
-            # Count differences
             diff_count = len(set1.symmetric_difference(set2))
             details['reason'] = f"{diff_count} rows differ between results"
             details['diff_percentage'] = (diff_count / len(results1)) * 100
             
-            # Sample difference
             for row1 in results1:
                 if all(any(str(row1.get(k)) != str(row2.get(k)) for k in cols1) for row2 in results2):
                     details['example_diff_row'] = row1
@@ -314,25 +367,20 @@ class QueryEvaluator:
         Returns:
             DataFrame with comparison metrics for each query
         """
-        # Verify required columns
         if 'true_query' not in df.columns or 'generated_sql' not in df.columns:
             print("Error: DataFrame must contain 'true_query' and 'generated_sql' columns")
             return pd.DataFrame()
             
         print(f"Comparing queries for {len(df)} rows...")
         
-        # Create result dataframe
         results = []
         
-        # Process each row
         for _, row in tqdm(df.iterrows(), total=len(df), desc="Comparing queries"):
             result = {}
             
-            # Basic info
             result['id'] = row.get('id', None)
             result['question'] = row.get('question', '')
             
-            # Extract queries
             true_query = row.get('true_query', '')
             gen_query = row.get('generated_sql', '')
             
@@ -340,17 +388,14 @@ class QueryEvaluator:
             result['gen_query'] = gen_query
             
             result['null_query'] = int(pd.isna(true_query))
-            # Handle NaN or None values
             if pd.isna(true_query) or true_query is None:
                 true_query = ""
             if pd.isna(gen_query) or gen_query is None:
                 gen_query = ""
                 
-            # Ensure queries are strings
             true_query = str(true_query)
             gen_query = str(gen_query)
             
-            # Tables comparison
             true_tables = self.extract_tables(true_query)
             gen_tables = self.extract_tables(gen_query)
             
@@ -362,13 +407,11 @@ class QueryEvaluator:
             result['tables_union'] = list(tables_union)
             result['tables_intersection'] = list(tables_intersection)
             
-            # Table access accuracy (intersection/union)
             if len(tables_union) > 0:
                 result['table_access_accuracy'] = len(tables_intersection) / len(tables_union)
             else:
                 result['table_access_accuracy'] = 0
                 
-            # Columns comparison
             true_columns = self.extract_columns(true_query)
             gen_columns = self.extract_columns(gen_query)
             
@@ -380,24 +423,20 @@ class QueryEvaluator:
             result['columns_union'] = list(columns_union)
             result['columns_intersection'] = list(columns_intersection)
             
-            # Column access accuracy
             if len(columns_union) > 0:
                 result['column_access_accuracy'] = len(columns_intersection) / len(columns_union)
             else:
                 result['column_access_accuracy'] = 0
                 
-            # Query similarity - handle possible NaN values
             try:
                 result['query_similarity'] = difflib.SequenceMatcher(None, true_query, gen_query).ratio()
             except Exception:
                 result['query_similarity'] = 0
             
-            # Execution plan similarity if available
             if 'execution_plan' in row and row['execution_plan'] and not pd.isna(row['execution_plan']):
                 try:
                     plan = json.loads(row['execution_plan']) if isinstance(row['execution_plan'], str) else row['execution_plan']
                     result['execution_plan_available'] = True
-                    # Since we don't have true execution plan, we set similarity to None
                     result['execution_plan_similarity'] = None
                 except:
                     result['execution_plan_available'] = False
@@ -406,17 +445,14 @@ class QueryEvaluator:
                 result['execution_plan_available'] = False
                 result['execution_plan_similarity'] = None
                 
-            # Results comparison
             true_result = row.get('true_result', [])
             gen_result = row.get('results', [])
             
-            # Handle NaN values
             if pd.isna(true_result):
                 true_result = []
             if pd.isna(gen_result):
                 gen_result = []
             
-            # Convert string results to lists if needed
             if isinstance(true_result, str):
                 try:
                     true_result = json.loads(true_result)
@@ -429,7 +465,6 @@ class QueryEvaluator:
                 except:
                     gen_result = []
             
-            # Compare results if both available
             gen_success = row.get('success', False)
             if gen_success and true_result and gen_result:
                 try:
