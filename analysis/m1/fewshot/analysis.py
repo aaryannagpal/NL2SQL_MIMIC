@@ -12,10 +12,10 @@ from config import PROCESSED_RESULT_DIR, STORE_ANALYSIS_DIR
 evaluator = QueryEvaluator()
 
 test = "fewshot"
-model = "m1"
+model_type = "m1"
 
-results_path = PROCESSED_RESULT_DIR / model / test
-analysis_path = STORE_ANALYSIS_DIR / model / test
+results_path = PROCESSED_RESULT_DIR / model_type / test
+analysis_path = STORE_ANALYSIS_DIR / model_type / test
 
 analysis_data = []
 for i in tqdm(os.listdir(results_path), desc="Processing files"):
@@ -150,12 +150,12 @@ def radar_plot(df, test, null_filter=None, group_chart=False, output_file=None):
                 )
                 ax.fill(angles, values, color=color, alpha=0.1)
 
-            ax.set_title(model, fontsize=11, fontweight="bold")
+            ax.set_title(model)
 
             if len(model_df) > 1:
                 ax.legend(loc="upper right", fontsize=8)
 
-        title = f"{test.capitalize()} Model Performance"
+        title = f"{test.capitalize()} Model Performance ({model_type.capitalize()})"
         if null_filter == 0:
             title += " - Valid Queries"
         elif null_filter == 1:
@@ -217,7 +217,7 @@ def radar_plot(df, test, null_filter=None, group_chart=False, output_file=None):
     return fig
 
 
-output_map = {0: "null", 1: "not_null", "overall": "all"}
+output_map = {1: "null", 0: "not_null", "overall": "all"}
 for i in [0, 1, "overall"]:
     radar_plot(
         scores,
@@ -278,7 +278,7 @@ def bar_chart(df, test, metric="results_match", output_file=None):
 
     metric_name = " ".join(word.capitalize() for word in metric.split("_"))
     ax.set_title(
-        f"{test.capitalize()} {metric_name} by Model", fontsize=14, fontweight="bold"
+        f"{test.capitalize()} {metric_name} by Model ({model_type.capitalize()})",
     )
     ax.set_ylim(0, 1)
     ax.set_xticks(x + width)
