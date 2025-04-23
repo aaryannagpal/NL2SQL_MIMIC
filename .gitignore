@@ -2,3 +2,4 @@ __pycache__
 .history
 model_files/untuned/*
 mimic4.db
+*.log
