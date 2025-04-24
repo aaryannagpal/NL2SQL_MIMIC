@@ -24,6 +24,9 @@ STORE_RESULT_DIR = PROJECT_ROOT / "results"
 RAW_RESULT_DIR = STORE_RESULT_DIR / "raw"
 PROCESSED_RESULT_DIR = STORE_RESULT_DIR / "processed"
 
+STORE_ANALYSIS_DIR = PROJECT_ROOT / "analysis"
+
+
 def _validate_paths() -> None:
     """Check if critical files/dirs exist at startup."""
     required_paths = [
