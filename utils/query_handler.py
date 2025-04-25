@@ -104,7 +104,7 @@ class QueryHandler:
 
         return response
 
-    def pretty_execute(self, query, keep_index=False):
+    def pretty_execute(self, sql_query, keep_index=False):
         """
         Execute SQL query and return as DataFrame.
         """

@@ -540,9 +540,9 @@ class QueryEvaluator:
                     gen_result = json.loads(gen_result)
                 except:
                     gen_result = []
-
-            gen_success = row.get("success", False)
-            if gen_success and true_result and gen_result:
+            
+            gen_success = row.get('success', False)
+            if gen_success:# and true_result and gen_result:
                 try:
                     results_equal, comparison_details = self.results_are_equivalent(
                         true_result, gen_result
