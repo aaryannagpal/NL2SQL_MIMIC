@@ -1,0 +1,61 @@
+{
+    "name": "transfers",
+    "columns": {
+        "subject_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the patient."
+        },
+        "hadm_id": {
+            "type": "int unsigned",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Admission identifier; may link to an admissions record."
+        },
+        "transfer_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unique identifier for the transfer event."
+        },
+        "eventtype": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Type of transfer event."
+        },
+        "careunit": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Care unit associated with the transfer."
+        },
+        "intime": {
+            "type": "datetime",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Time when the transfer began."
+        },
+        "outtime": {
+            "type": "datetime",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Time when the transfer ended."
+        }
+    }
+}

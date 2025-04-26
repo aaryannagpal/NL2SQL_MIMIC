@@ -1,0 +1,61 @@
+{
+    "name": "inputevents",
+    "columns": {
+        "subject_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the patient; may link to a patients table in a larger schema."
+        },
+        "hadm_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Admission identifier; typically links to an admissions record."
+        },
+        "stay_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unique identifier for the patient's ICU stay."
+        },
+        "starttime": {
+            "type": "datetime",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Start time of the input event."
+        },
+        "itemid": {
+            "type": "mediumint unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the item associated with the input event."
+        },
+        "totalamount": {
+            "type": "float",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Total amount administered, if applicable."
+        },
+        "totalamountuom": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unit of measurement for the total amount."
+        }
+    }
+}

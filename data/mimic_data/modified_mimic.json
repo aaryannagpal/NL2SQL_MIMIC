@@ -1,0 +1,815 @@
+{
+  "d_icd_procedures.json": {
+    "name": "d_icd_procedures",
+    "columns": {
+      "icd_code": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "ICD code identifier for procedures."
+      },
+      "long_title": {
+        "type": "text",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Long descriptive title for the ICD procedure."
+      }
+    }
+  },
+  "patients.json": {
+    "name": "patients",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the patient."
+      },
+      "gender": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Gender of the patient."
+      },
+      "dob": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Date of birth of the patient."
+      },
+      "dod": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Date of death of the patient, if applicable."
+      }
+    }
+  },
+  "microbiologyevents.json": {
+    "name": "microbiologyevents",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the microbiology event was charted."
+      },
+      "spec_type_desc": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Description of the specimen type."
+      },
+      "test_name": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Name of the test performed."
+      },
+      "org_name": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Name of the organism identified."
+      }
+    }
+  },
+  "d_icd_diagnoses.json": {
+    "name": "d_icd_diagnoses",
+    "columns": {
+      "icd_code": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "ICD code identifier."
+      },
+      "long_title": {
+        "type": "text",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Long descriptive title for the ICD code."
+      }
+    }
+  },
+  "d_labitems.json": {
+    "name": "d_labitems",
+    "columns": {
+      "itemid": {
+        "type": "smallint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the lab item."
+      },
+      "label": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Descriptive label for the lab item."
+      }
+    }
+  },
+  "labevents.json": {
+    "name": "labevents",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the lab event was recorded."
+      },
+      "valuenum": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Numeric value of the lab result, if applicable."
+      },
+      "valueuom": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the lab result."
+      }
+    }
+  },
+  "inputevents.json": {
+    "name": "inputevents",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "stay_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the patient's ICU stay."
+      },
+      "starttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Start time of the input event."
+      },
+      "itemid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the item associated with the input event."
+      },
+      "totalamount": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Total amount administered, if applicable."
+      },
+      "totalamountuom": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the total amount."
+      }
+    }
+  },
+  "outputevents.json": {
+    "name": "outputevents",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "stay_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the patient's ICU stay."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the output event was recorded."
+      },
+      "itemid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the item associated with the output event."
+      },
+      "value": {
+        "type": "float",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Numeric value of the output event."
+      },
+      "valueuom": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the output event value."
+      }
+    }
+  },
+  "admissions.json": {
+    "name": "admissions",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique admission identifier. Enforced as unique via admissions_idx04."
+      },
+      "admittime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the patient was admitted."
+      },
+      "dischtime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the patient was discharged."
+      },
+      "admission_type": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of admission (e.g., emergency, urgent, elective)."
+      },
+      "admission_location": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Location from where the admission originated."
+      },
+      "discharge_location": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Location where the patient was discharged to."
+      },
+      "insurance": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of insurance covering the admission."
+      },
+      "language": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Language spoken by the patient."
+      },
+      "marital_status": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Marital status of the patient."
+      },
+      "age": {
+        "type": "int",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Age of the patient at the time of admission."
+      }
+    }
+  },
+  "prescriptions.json": {
+    "name": "prescriptions",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "starttime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Start time for the prescription."
+      },
+      "stoptime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Stop time for the prescription."
+      },
+      "drug": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Name or description of the drug."
+      },
+      "dose_val_rx": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Dose value as prescribed."
+      },
+      "dose_unit_rx": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit for the prescribed dose."
+      },
+      "route": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Route of administration for the prescription."
+      }
+    }
+  },
+  "transfers.json": {
+    "name": "transfers",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; may link to an admissions record."
+      },
+      "transfer_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the transfer event."
+      },
+      "eventtype": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of transfer event."
+      },
+      "careunit": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Care unit associated with the transfer."
+      },
+      "intime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the transfer began."
+      },
+      "outtime": {
+        "type": "datetime",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the transfer ended."
+      }
+    }
+  },
+  "d_items.json": {
+    "name": "d_items",
+    "columns": {
+      "itemid": {
+        "type": "mediumint unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the item."
+      },
+      "label": {
+        "type": "text",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Descriptive label for the item."
+      }
+    }
+  },
+  "procedures_icd.json": {
+    "name": "procedures_icd",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier."
+      },
+      "icd_code": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "ICD code for the procedure."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Timestamp for when the procedure was recorded."
+      }
+    }
+  },
+  "icustays.json": {
+    "name": "icustays",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "stay_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the ICU stay."
+      },
+      "first_careunit": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Initial care unit during the ICU stay."
+      },
+      "last_careunit": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Last care unit during the ICU stay."
+      },
+      "intime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "ICU admission time."
+      },
+      "outtime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "ICU discharge time."
+      }
+    }
+  },
+  "diagnoses_icd.json": {
+    "name": "diagnoses_icd",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "icd_code": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "ICD code for the diagnosis."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Timestamp for when the diagnosis was recorded."
+      }
+    }
+  },
+  "cost.json": {
+    "name": "cost",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique admission identifier. Enforced as unique via admissions_idx04."
+      },
+      "event_type": {
+        "type": "varchar(255)",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Type of event (e.g., charge, payment)."
+      },
+      "event_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the event."
+      },
+      "chargetime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the charge was recorded."
+      },
+      "cost": {
+        "type": "float",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Cost associated with the event."
+      }
+    }
+  },
+  "chartevents.json": {
+    "name": "chartevents",
+    "columns": {
+      "subject_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the patient; may link to a patients table in a larger schema."
+      },
+      "hadm_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Admission identifier; typically links to an admissions record."
+      },
+      "stay_id": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unique identifier for the patient's stay within the hospital."
+      },
+      "itemid": {
+        "type": "int unsigned",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Identifier for the chart item; typically links to a items table."
+      },
+      "charttime": {
+        "type": "datetime",
+        "null": false,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Time when the chart event was recorded."
+      },
+      "valuenum": {
+        "type": "float",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Numeric value associated with the chart event, if applicable."
+      },
+      "valueuom": {
+        "type": "varchar(255)",
+        "null": true,
+        "primary_key": false,
+        "foreign_key": false,
+        "relation": "",
+        "description": "Unit of measurement for the numeric value."
+      }
+    }
+  }
+}

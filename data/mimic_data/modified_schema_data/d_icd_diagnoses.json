@@ -1,0 +1,21 @@
+{
+    "name": "d_icd_diagnoses",
+    "columns": {
+        "icd_code": {
+            "type": "varchar(255)",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "ICD code identifier."
+        },
+        "long_title": {
+            "type": "text",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Long descriptive title for the ICD code."
+        }
+    }
+}

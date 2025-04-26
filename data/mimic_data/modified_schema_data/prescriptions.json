@@ -1,0 +1,69 @@
+{
+    "name": "prescriptions",
+    "columns": {
+        "subject_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Identifier for the patient; may link to a patients table."
+        },
+        "hadm_id": {
+            "type": "int unsigned",
+            "null": false,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Admission identifier; typically links to an admissions record."
+        },
+        "starttime": {
+            "type": "datetime",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Start time for the prescription."
+        },
+        "stoptime": {
+            "type": "datetime",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Stop time for the prescription."
+        },
+        "drug": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Name or description of the drug."
+        },
+        "dose_val_rx": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Dose value as prescribed."
+        },
+        "dose_unit_rx": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Unit for the prescribed dose."
+        },
+        "route": {
+            "type": "varchar(255)",
+            "null": true,
+            "primary_key": false,
+            "foreign_key": false,
+            "relation": "",
+            "description": "Route of administration for the prescription."
+        }
+    }
+}
