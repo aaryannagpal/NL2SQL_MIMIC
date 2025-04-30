@@ -7,7 +7,7 @@ PROJECT_ROOT = Path(__file__).parent
 DATA_DIR: Final[Path] = PROJECT_ROOT / "data" / "mimic_data"
 
 MYSQL_DB_PATH: Final[Path] = DATA_DIR / "mimic4.db"
-MIMIC_SCHEMA_PATH: Final[Path] = DATA_DIR / "mimic.json"
+MIMIC_SCHEMA_PATH: Final[Path] = DATA_DIR / "modified_mimic.json"
 DICTIONARY_MAP_PATH: Final[Path] = DATA_DIR / "dictionary.json"
 
 DATASET_PATH = PROJECT_ROOT / "data"
@@ -26,6 +26,7 @@ PROCESSED_RESULT_DIR = STORE_RESULT_DIR / "processed"
 
 STORE_ANALYSIS_DIR = PROJECT_ROOT / "analysis"
 
+SAMPLE_M1_MODEL_DIR = PROJECT_ROOT / "model" / "m1" / "finetune" / "output"
 
 def _validate_paths() -> None:
     """Check if critical files/dirs exist at startup."""
