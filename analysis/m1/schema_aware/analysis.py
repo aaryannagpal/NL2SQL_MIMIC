@@ -21,4 +21,4 @@ output_dir = "./"
 
 print(model_results)
 
-analyze_model_results(ground_truth_path, model_results, output_dir)
+analyze_model_results(ground_truth_path, model_results, output_dir, 'generated_sql', test)
