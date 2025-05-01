@@ -18,7 +18,7 @@ sys.path.append(str(PROJECT_ROOT))
 from utils.query_handler import QueryHandler
 
 
-def _process_row_helper(row_dict, query_column):
+def _process_row_helper(row_dict, query_column, path):
     import signal
 
     def timeout_handler(signum, frame):
@@ -28,7 +28,7 @@ def _process_row_helper(row_dict, query_column):
     signal.alarm(20)  # Hard timeout of 20 seconds for the entire processing
 
     try:
-        evaluator = QueryEvaluator()
+        evaluator = QueryEvaluator(db_path=path)
         result = evaluator.evaluate_query(row_dict, query_column)
         signal.alarm(0)
         return result
@@ -69,10 +69,31 @@ class QueryEvaluator:
         if db_path:
             self.query_handler.update_path(db_path)
 
+    def clean_query(self, query: str) -> str:
+        if (isinstance(query, float) and math.isnan(query)) or not query:
+            return ""
+        orig = str(query)
+    
+        result = (
+            re.search(r'\[([^]]+)\]', orig)
+            .group(1) if re.search(r'\[([^]]+)\]', orig) else
+            re.sub(r'.*\[([^]]+)\].*', r'\1', orig).replace('[', '').replace(']', '')
+        )
+        
+        if 'SELECT' in orig.upper():
+            return result
+        elif 'No' in orig and 'Answer' in orig and 'query' in orig:
+            return ""
+        else:
+            return result
+
     def evaluate_query(
         self, row: Dict[str, Any], query_column: str = "true_query"
     ) -> Dict[str, Any]:
         query = row.get(query_column)
+        # first 500 characters of the query
+        if isinstance(query, str):
+            query = query[:500]
 
         if not query or not isinstance(query, str):
             if isinstance(query, float) and math.isnan(query):
@@ -153,7 +174,7 @@ class QueryEvaluator:
         print(f"Starting evaluation with {max_workers} workers...")
 
         with multiprocessing.Pool(processes=max_workers) as pool:
-            worker = partial(_process_row_helper, query_column=query_column)
+            worker = partial(_process_row_helper, query_column=query_column, path=self.db_path)
 
             iterator = pool.imap_unordered(worker, rows)
 
