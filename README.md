@@ -18,17 +18,14 @@ This project investigates and implements various approaches to convert natural l
 - [x] Database schema setup
 - [x] Schema management system
 - [x] Evaluation Metrics Class
-- [ ] Query Comparision Class
-- [ ] Inferring models for M1
-- [ ] Fine-Tuning M1
+- [x] Query Comparision Class
+- [x] Inferring models for M1
+- [x] Fine-Tuning M1
 - [ ] Inferring models for M2
 - [ ] Fine-Tuning M2
 - [ ] **Basic NL2SQL pipeline**
+- [ ] Report Submission
 
 ## Getting Started
 
 [To be added]
-
-## Documentation
-
-Detailed documentation can be found in the `/docs` directory.
