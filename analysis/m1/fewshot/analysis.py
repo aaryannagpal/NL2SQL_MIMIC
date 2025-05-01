@@ -6,34 +6,19 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
-from utils.query_scorer import M1Scoring
-from config import PROCESSED_RESULT_DIR, STORE_ANALYSIS_DIR
+from utils.query_visualizer import analyze_model_results
+from config import PROCESSED_RESULT_DIR, STORE_ANALYSIS_DIR, STORE_RESULT_DIR
 
 test = "fewshot"
 model_type = "m1"
 
-print(f"Initializing M1Scoring for test: {test}, model type: {model_type}")
-scorer = M1Scoring(
-    results_path=PROCESSED_RESULT_DIR / model_type / test,
-    analysis_path=STORE_ANALYSIS_DIR / model_type / test,
-    test=test,
-    model_type=model_type,
-)
 
-# Process results
-print("Processing result files...")
-scorer.process_results()
+ground_truth_path = str(STORE_RESULT_DIR / "original_query_eval" / "train_exec_results.csv")
+model_results_dir = str(PROCESSED_RESULT_DIR / model_type / test)
 
-# Calculate scores
-print("Calculating scores...")
-scorer.calculate_scores()
+model_results = {i.split('_results.csv')[0].replace('_', ' ') : os.path.join(model_results_dir, i) for i in os.listdir(model_results_dir)}
+output_dir = "./"
 
-# Save analysis and scores to CSV
-print("Saving analysis and scores...")
-scorer.save_analysis()
+print(model_results)
 
-# Generate all charts
-print("Generating visualizations...")
-scorer.generate_all_charts()
-
-print("Done!")
+analyze_model_results(ground_truth_path, model_results, output_dir)
