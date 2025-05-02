@@ -17,7 +17,7 @@ MODEL_DIR = PROJECT_ROOT / "model"
 MODEL_LIST = MODEL_DIR / "model_list.csv"
 MODELS_DIR = "/media/chs.gpu/DATA/nagpal/models/"
 
-MIMIC_SAMPLE_DIR = PROJECT_ROOT / "data" / "custom_dataset" / "sample_data"
+MIMIC_SAMPLE_DIR = PROJECT_ROOT / "data" / "sampled_MIMIC_values"
 MIMIC_SAMPLE_PATH = MIMIC_SAMPLE_DIR / "default.json"
 
 STORE_RESULT_DIR = PROJECT_ROOT / "results"
