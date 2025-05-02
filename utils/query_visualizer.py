@@ -6,40 +6,42 @@ import numpy as np
 import os, sys
 import json
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Union
+from typing import List, Dict, Any, Optional, Union, Tuple
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utils.query_analyzer import QueryAnalyzer
+
+
+ERROR_COLORS = {
+    "syntax": "#1f77b4",  # blue
+    "schema": "#ff7f0e",  # orange
+    "type": "#2ca02c",    # green
+    "function": "#d62728", # red
+    "constraint": "#9467bd", # purple
+    "timeout": "#8c564b",  # brown
+    "permission": "#e377c2", # pink
+    "other": "#7f7f7f",    # gray
+    "No error": "#17becf"  # cyan
+}
 
 def analyze_model_results(
     ground_truth_path: str,
     model_results_paths: Dict[str, str],
     output_dir: str,
-    to_compare: str = 'generated_sql'
-) -> None:
-    """
-    Analyze and visualize query performance across multiple models.
-    
-    Args:
-        ground_truth_path: Path to CSV with ground truth data
-        model_results_paths: Dictionary of model_name -> results_csv_path
-        output_dir: Directory to save visualizations
-        to_compare: Column name with generated queries
-        
-    Returns:
-        None (saves visualizations to output_dir)
-    """
-    # Create output directory if it doesn't exist
+    to_compare: str = 'generated_sql',
+    experiment_name: str = None,
+) -> Tuple[pd.DataFrame, Dict[str, pd.DataFrame]]:
+
     os.makedirs(output_dir, exist_ok=True)
     
-    # Load ground truth data
+
     ground_truth_df = pd.read_csv(ground_truth_path)
     print(f"Loaded ground truth data with {len(ground_truth_df)} queries")
     
-    # Initialize QueryAnalyzer
+
     analyzer = QueryAnalyzer()
     
-    # Analyze each model and collect results
+
     all_results = {}
     aggregate_metrics = []
     
@@ -47,17 +49,18 @@ def analyze_model_results(
         print(f"Analyzing {model_name}...")
         model_df = pd.read_csv(results_path)
         
-        # Run analysis
+
         analysis_df = analyzer.compare_queries(
             model_df, 
             true_df=ground_truth_df, 
             to_compare=to_compare
         )
         
-        # Store results
+        print(analysis_df.head())
+
         all_results[model_name] = analysis_df
         
-        # Collect aggregate metrics
+
         metrics = {
             "model": model_name,
             "total_queries": len(analysis_df),
@@ -74,42 +77,58 @@ def analyze_model_results(
         }
         aggregate_metrics.append(metrics)
     
-    # Create aggregate metrics dataframe
+
+
     metrics_df = pd.DataFrame(aggregate_metrics)
     
-    # Generate visualizations
+
+    if experiment_name:
+        metrics_df["experiment"] = experiment_name
+        for model_name in all_results:
+            all_results[model_name]["experiment"] = experiment_name
+
+
+
     generate_overall_performance_chart(metrics_df, output_dir)
     generate_component_similarity_chart(metrics_df, output_dir)
     generate_structural_accuracy_chart(metrics_df, output_dir)
     
-    # Generate error analysis charts for each model
+
     for model_name, analysis_df in all_results.items():
         if "gen_error_category" in analysis_df.columns:
             generate_error_category_chart(analysis_df, model_name, output_dir)
     
     if any("gen_error_category" in df.columns for df in all_results.values()):
         generate_combined_error_categories(all_results, output_dir)
-    # Generate query complexity analysis if possible
+    
+
     if all("query_complexity" in df.columns for df in all_results.values()):
         generate_complexity_performance_chart(all_results, output_dir)
 
-    # Generate comparison chart for empty results handling
+
     if all("both_empty" in df.columns for df in all_results.values()):
         generate_empty_results_chart(all_results, output_dir)
     
+
+    metrics_df.to_csv(os.path.join(output_dir, f"{experiment_name}.csv"), index=False)
+    
     print(f"All visualizations saved to {output_dir}")
+    return metrics_df, all_results
 
 
 def generate_overall_performance_chart(metrics_df: pd.DataFrame, output_dir: str) -> None:
-    """Generate chart showing overall performance metrics by model"""
-    # Select relevant metrics for overall performance
-    performance_metrics = [
-        "execution_success_rate", 
-        "result_match_rate", 
-        "avg_composite_score"
-    ]
+    performance_metrics = []
     
-    # Filter and reshape data for plotting
+
+    for metric in ["execution_success_rate", "result_match_rate", "avg_composite_score"]:
+        if metric in metrics_df.columns and not metrics_df[metric].isna().all():
+            performance_metrics.append(metric)
+    
+    if not performance_metrics:
+        print("No performance metrics available for chart")
+        return
+    
+
     plot_data = metrics_df.melt(
         id_vars=["model"], 
         value_vars=performance_metrics,
@@ -117,7 +136,7 @@ def generate_overall_performance_chart(metrics_df: pd.DataFrame, output_dir: str
         value_name="Value"
     )
     
-    # Create visualization
+
     fig = px.bar(
         plot_data, 
         x="model", 
@@ -127,7 +146,7 @@ def generate_overall_performance_chart(metrics_df: pd.DataFrame, output_dir: str
         category_orders={"Metric": performance_metrics}
     )
     
-    # Update layout
+
     fig.update_layout(
         yaxis_title="Score",
         xaxis_title="",
@@ -135,37 +154,33 @@ def generate_overall_performance_chart(metrics_df: pd.DataFrame, output_dir: str
         yaxis=dict(range=[0, 1])  # Force y-axis to be 0-1 for percentages
     )
     
-    # Save visualization
+
     fig.write_image(os.path.join(output_dir, "overall_performance.png"))
 
 def generate_component_similarity_chart(metrics_df: pd.DataFrame, output_dir: str) -> None:
-    """Generate chart showing component-level similarity by model"""
-    # Select component similarity metrics
-    component_metrics = [
-        "avg_select_similarity", 
-        "avg_from_similarity", 
-        "avg_where_similarity"
-    ]
+    component_metrics = []
     
-    # Only include metrics that exist in the data
-    available_metrics = [m for m in component_metrics if m in metrics_df.columns]
+
+    for metric in ["avg_select_similarity", "avg_from_similarity", "avg_where_similarity"]:
+        if metric in metrics_df.columns and not metrics_df[metric].isna().all():
+            component_metrics.append(metric)
     
-    if not available_metrics:
+    if not component_metrics:
         print("No component similarity metrics available")
         return
     
-    # Filter and reshape data for plotting
+
     plot_data = metrics_df.melt(
         id_vars=["model"], 
-        value_vars=available_metrics,
+        value_vars=component_metrics,
         var_name="Component", 
         value_name="Similarity"
     )
     
-    # Clean up component names for display
-    plot_data["Component"] = plot_data["Component"].str.replace("avg_", "").str.replace("_similarity", "")
+
+    plot_data["Component"] = plot_data["Component"].str.replace("avg_", "").str.replace("_similarity", "").str.replace("_clause", "")
     
-    # Create visualization
+
     fig = px.bar(
         plot_data, 
         x="model", 
@@ -174,7 +189,7 @@ def generate_component_similarity_chart(metrics_df: pd.DataFrame, output_dir: st
         barmode="group"
     )
     
-    # Update layout
+
     fig.update_layout(
         yaxis_title="Similarity",
         xaxis_title="",
@@ -182,19 +197,22 @@ def generate_component_similarity_chart(metrics_df: pd.DataFrame, output_dir: st
         yaxis=dict(range=[0, 1])
     )
     
-    # Save visualization
+
     fig.write_image(os.path.join(output_dir, "component_similarity.png"))
 
 def generate_structural_accuracy_chart(metrics_df: pd.DataFrame, output_dir: str) -> None:
-    """Generate chart showing structural accuracy metrics by model"""
-    # Select structural accuracy metrics
-    structural_metrics = [
-        "avg_table_access_accuracy", 
-        "avg_column_access_accuracy", 
-        "avg_query_similarity"
-    ]
+    structural_metrics = []
     
-    # Filter and reshape data for plotting
+
+    for metric in ["avg_table_access_accuracy", "avg_column_access_accuracy", "avg_query_similarity"]:
+        if metric in metrics_df.columns and not metrics_df[metric].isna().all():
+            structural_metrics.append(metric)
+    
+    if not structural_metrics:
+        print("No structural accuracy metrics available")
+        return
+    
+
     plot_data = metrics_df.melt(
         id_vars=["model"], 
         value_vars=structural_metrics,
@@ -202,10 +220,10 @@ def generate_structural_accuracy_chart(metrics_df: pd.DataFrame, output_dir: str
         value_name="Value"
     )
     
-    # Clean up metric names for display
+
     plot_data["Metric"] = plot_data["Metric"].str.replace("avg_", "").str.replace("_", " ")
     
-    # Create visualization
+
     fig = px.bar(
         plot_data, 
         x="model", 
@@ -214,7 +232,7 @@ def generate_structural_accuracy_chart(metrics_df: pd.DataFrame, output_dir: str
         barmode="group"
     )
     
-    # Update layout
+
     fig.update_layout(
         yaxis_title="Accuracy",
         xaxis_title="",
@@ -222,51 +240,56 @@ def generate_structural_accuracy_chart(metrics_df: pd.DataFrame, output_dir: str
         yaxis=dict(range=[0, 1])
     )
     
-    # Save visualization
+
     fig.write_image(os.path.join(output_dir, "structural_accuracy.png"))
 
 def generate_error_category_chart(analysis_df: pd.DataFrame, model_name: str, output_dir: str) -> None:
-    """Generate chart showing error categories for a model"""
-    # Count error categories
     if "gen_error_category" not in analysis_df.columns:
         return
         
     error_counts = analysis_df["gen_error_category"].value_counts().reset_index()
     error_counts.columns = ["Category", "Count"]
     
-    # Create visualization
+
+    colors = [ERROR_COLORS.get(cat, "#7f7f7f") for cat in error_counts["Category"]]
+    
+
     fig = px.pie(
         error_counts, 
         values="Count", 
         names="Category", 
-        hole=0.4
+        hole=0.4,
+        color="Category",
+        color_discrete_map={cat: ERROR_COLORS.get(cat, "#7f7f7f") for cat in error_counts["Category"]}
     )
     
-    # Update layout
+
     fig.update_layout(
         legend_title_text=""
     )
     
-    # Save visualization
+
     fig.write_image(os.path.join(output_dir, f"{model_name}_error_categories.png"))
 
 def generate_complexity_performance_chart(all_results: Dict[str, pd.DataFrame], output_dir: str) -> None:
-    """Generate chart showing performance by query complexity across models"""
-    # Prepare data for plotting
     plot_data = []
     
     for model_name, df in all_results.items():
         if "query_complexity" not in df.columns or "results_match" not in df.columns:
             continue
             
-        # Bin query complexity
+
+        if df["results_match"].dtype == bool:
+            df["results_match"] = df["results_match"].astype(int)
+            
+
         df['complexity_bin'] = pd.cut(
             df['query_complexity'], 
             bins=[0, 5, 10, 15, float('inf')], 
             labels=['Simple', 'Moderate', 'Complex', 'Very Complex']
         )
         
-        # Calculate success rate by complexity bin
+
         complexity_perf = df.groupby('complexity_bin')['results_match'].mean().reset_index()
         complexity_perf['model'] = model_name
         
@@ -276,10 +299,10 @@ def generate_complexity_performance_chart(all_results: Dict[str, pd.DataFrame], 
         print("No complexity performance data available")
         return
         
-    # Combine data from all models
+
     combined_data = pd.concat(plot_data)
     
-    # Create visualization
+
     fig = px.line(
         combined_data, 
         x="complexity_bin", 
@@ -289,7 +312,7 @@ def generate_complexity_performance_chart(all_results: Dict[str, pd.DataFrame], 
         category_orders={"complexity_bin": ['Simple', 'Moderate', 'Complex', 'Very Complex']}
     )
     
-    # Update layout
+
     fig.update_layout(
         xaxis_title="Query Complexity",
         yaxis_title="Result Match Rate",
@@ -297,26 +320,29 @@ def generate_complexity_performance_chart(all_results: Dict[str, pd.DataFrame], 
         yaxis=dict(range=[0, 1])
     )
     
-    # Save visualization
+
     fig.write_image(os.path.join(output_dir, "complexity_performance.png"))
 
 def generate_empty_results_chart(all_results: Dict[str, pd.DataFrame], output_dir: str) -> None:
-    """Generate chart comparing handling of empty results across models"""
-    # Prepare data for plotting
     empty_results_data = []
     
     for model_name, df in all_results.items():
         if not {"true_empty_result", "gen_empty_result", "both_empty", "results_match"}.issubset(df.columns):
             continue
             
-        # Calculate metrics
+
+        for col in ["true_empty_result", "gen_empty_result", "both_empty", "results_match"]:
+            if df[col].dtype == bool:
+                df[col] = df[col].astype(int)
+            
+
         total = len(df)
         both_empty = df["both_empty"].sum()
         true_empty_only = (df["true_empty_result"] & ~df["gen_empty_result"]).sum()
         gen_empty_only = (~df["true_empty_result"] & df["gen_empty_result"]).sum()
         correct_nonempty = ((~df["true_empty_result"]) & (~df["gen_empty_result"]) & df["results_match"]).sum()
         
-        # Add to data
+
         empty_results_data.append({
             "model": model_name,
             "Both Empty": both_empty / total,
@@ -329,10 +355,10 @@ def generate_empty_results_chart(all_results: Dict[str, pd.DataFrame], output_di
         print("No empty results data available")
         return
         
-    # Create dataframe
+
     empty_df = pd.DataFrame(empty_results_data)
     
-    # Reshape for plotting
+
     plot_data = empty_df.melt(
         id_vars=["model"], 
         value_vars=["Both Empty", "True Empty Only", "Generated Empty Only", "Correct Non-empty"],
@@ -340,7 +366,7 @@ def generate_empty_results_chart(all_results: Dict[str, pd.DataFrame], output_di
         value_name="Proportion"
     )
     
-    # Create visualization
+
     fig = px.bar(
         plot_data, 
         x="model", 
@@ -349,19 +375,17 @@ def generate_empty_results_chart(all_results: Dict[str, pd.DataFrame], output_di
         barmode="stack"
     )
     
-    # Update layout
+
     fig.update_layout(
         yaxis_title="Proportion of Queries",
         xaxis_title="",
         legend_title_text=""
     )
     
-    # Save visualization
+
     fig.write_image(os.path.join(output_dir, "empty_results_handling.png"))
 
 def generate_combined_error_categories(all_results: Dict[str, pd.DataFrame], output_dir: str) -> None:
-    """Generate a combined chart showing error categories for all models in a single figure"""
-    # Check if we have error categories
     models_with_errors = []
     for model_name, df in all_results.items():
         if "gen_error_category" in df.columns:
@@ -371,12 +395,20 @@ def generate_combined_error_categories(all_results: Dict[str, pd.DataFrame], out
         print("No error category data available")
         return
     
-    # Create subplot grid - determine rows and columns based on number of models
+
     n_models = len(models_with_errors)
     n_cols = min(3, n_models)  # Maximum 3 columns
     n_rows = (n_models + n_cols - 1) // n_cols  # Ceiling division
     
-    # Create subplots - Each model gets its own pie chart
+
+    all_categories = set()
+    for model_name in models_with_errors:
+        all_categories.update(all_results[model_name]["gen_error_category"].unique())
+    
+
+    color_map = {cat: ERROR_COLORS.get(cat, "#7f7f7f") for cat in all_categories}
+    
+
     fig = make_subplots(
         rows=n_rows, 
         cols=n_cols,
@@ -384,7 +416,7 @@ def generate_combined_error_categories(all_results: Dict[str, pd.DataFrame], out
         subplot_titles=models_with_errors
     )
     
-    # Add pie charts for each model
+
     for i, model_name in enumerate(models_with_errors):
         df = all_results[model_name]
         error_counts = df["gen_error_category"].value_counts()
@@ -392,26 +424,28 @@ def generate_combined_error_categories(all_results: Dict[str, pd.DataFrame], out
         row = i // n_cols + 1
         col = i % n_cols + 1
         
+
+        colors = [color_map[cat] for cat in error_counts.index]
+        
         fig.add_trace(
             go.Pie(
                 labels=error_counts.index,
                 values=error_counts.values,
                 hole=0.4,
                 name=model_name,
+                marker=dict(colors=colors),
                 showlegend=(i == 0)  # Only show legend for first pie to avoid duplication
             ),
             row=row, 
             col=col
         )
     
-    # Update layout
+
     fig.update_layout(
         height=300 * n_rows,
         width=300 * n_cols,
         margin=dict(t=50, b=50, l=50, r=50)
     )
     
-    # Save visualization
-    fig.write_image(os.path.join(output_dir, "combined_error_categories.png"))
 
-# Example usage
+    fig.write_image(os.path.join(output_dir, "combined_error_categories.png"))
