@@ -40,26 +40,6 @@ print("\n\n", models, "\n\n")
 test = "schema_aware"
 model_type = "m1"
 
-few_shot_examples = [
-    {
-        "question": "Has patient 10014078 undergone a central venous catheter placement with guidance procedure?",
-        "sql": "SELECT COUNT(*)>0 FROM procedures_icd WHERE procedures_icd.icd_code = ( SELECT d_icd_procedures.icd_code FROM d_icd_procedures WHERE d_icd_procedures.long_title = 'central venous catheter placement with guidance' ) AND procedures_icd.hadm_id IN ( SELECT admissions.hadm_id FROM admissions WHERE admissions.subject_id = 10014078 )",
-    },
-    {
-        "question": "What precautions should i take after a closed uterine biopsy procedure?",
-        "sql": "No SQL query can answer this. This requires medical advice, not database querying.",
-    },
-    {
-        "question": "When did last patient 10005348 have the minimum value of calculated total co2?",
-        "sql": "SELECT labevents.charttime FROM labevents WHERE labevents.hadm_id IN ( SELECT admissions.hadm_id FROM admissions WHERE admissions.subject_id = 10005348 ) AND labevents.itemid IN ( SELECT d_labitems.itemid FROM d_labitems WHERE d_labitems.label = 'calculated total co2' ) ORDER BY labevents.valuenum ASC, labevents.charttime DESC LIMIT 1",
-    },
-    {
-        "question": "How much did patient 10026354 weigh when measured for the last time since 14 months ago?",
-        "sql": "SELECT chartevents.valuenum FROM chartevents WHERE chartevents.stay_id IN ( SELECT icustays.stay_id FROM icustays WHERE icustays.hadm_id IN ( SELECT admissions.hadm_id FROM admissions WHERE admissions.subject_id = 10026354 ) ) AND chartevents.itemid IN ( SELECT d_items.itemid FROM d_items WHERE d_items.label = 'daily weight' AND d_items.linksto = 'chartevents' ) AND datetime(chartevents.charttime) >= datetime(current_time,'-14 month') ORDER BY chartevents.charttime DESC LIMIT 1",
-    },
-]
-
-
 def generate_sql_batch(llm, prompts):
     sql_queries = []
     responses = []
@@ -76,17 +56,79 @@ def generate_sql_batch(llm, prompts):
             responses.append(None)
     return sql_queries, responses
 
+with open(MIMIC_SCHEMA_PATH, "r") as f:
+    schema = json.load(f)
+
+def create_schema_string():
+    """Create a concise schema description for the system prompt"""
+    schema_str = "Database Schema:\n"
+    
+    # Add table descriptions
+    for table_file, table_info in schema.items():
+        table_name = table_info["name"]
+        schema_str += f"- {table_name} table: Contains "
+        
+        # Add brief description based on column descriptions
+        if "patients" in table_name:
+            schema_str += "patient demographic information"
+        elif "admissions" in table_name:
+            schema_str += "hospital admission records"
+        elif "icustays" in table_name:
+            schema_str += "ICU stay information"
+        elif "chart" in table_name:
+            schema_str += "patient vital signs and measurements"
+        elif "lab" in table_name:
+            schema_str += "laboratory test results"
+        elif "procedures" in table_name:
+            schema_str += "procedure records with ICD codes"
+        elif "diagnoses" in table_name:
+            schema_str += "diagnosis records with ICD codes"
+        elif "d_icd" in table_name:
+            schema_str += "ICD code definitions"
+        elif "d_item" in table_name:
+            schema_str += "definitions for chart items"
+        elif "prescription" in table_name:
+            schema_str += "medication prescription records"
+        elif "micro" in table_name:
+            schema_str += "microbiology test results"
+        elif "cost" in table_name:
+            schema_str += "cost information for healthcare events"
+        else:
+            schema_str += "related healthcare data"
+        
+        # Add key columns
+        cols = list(table_info["columns"].keys())
+        key_cols = [c for c in cols if c in ["subject_id", "hadm_id", "stay_id", "itemid", "icd_code"]]
+        if key_cols:
+            schema_str += f" (key columns: {', '.join(key_cols)})"
+        
+        schema_str += "\n"
+    
+    # Add common joins
+    schema_str += "\nCommon table joins:\n"
+    schema_str += "- Join patients to admissions using subject_id\n"
+    schema_str += "- Join admissions to icustays using hadm_id and subject_id\n"
+    schema_str += "- Join icustays to chartevents using stay_id\n"
+    schema_str += "- Join chartevents to d_items using itemid\n"
+    schema_str += "- Join labevents to d_labitems using itemid\n"
+    schema_str += "- Join diagnoses_icd to d_icd_diagnoses using icd_code\n"
+    schema_str += "- Join procedures_icd to d_icd_procedures using icd_code\n"
+    
+    schema_str += "\nIMPORTANT: Not all questions can be answered with SQL queries. If a question asks for medical advice, interpretation of results, or contains information not present in the database, respond with 'No SQL query can answer this question' and briefly explain why."
+    
+    return schema_str
+
+SCHEMA_STR = create_schema_string()
 
 def create_schema_aware_prompt(question):
     prompt = """Convert these questions to SQL queries in [brackets]. If the question cannot be answered with a SQL query, respond with [No SQL query can answer this].
 
-    Note these MIMIC-IV schema modifications for queries: (1) Added `charttime` to tables like `diagnoses_icd` (using admittime) and `procedures_icd` (using chartdate); (2) Synthetic `cost` table links to events via `event_type`/`event_id`; (3) Added computed `age` column in admissions; (4) Only selected clinical items retained. All timestamps are standardized and may be temporally shifted. Verify joins and filters accordingly.
+    Verify joins and filters accordingly.
 
-    Examples:
+    Schema:
     """
 
-    for example in few_shot_examples:
-        prompt += f"Question: {example['question']}\nSQL: [{example['sql']}]\n\n"
+    prompt += f"{SCHEMA_STR}\n\n"
 
     prompt += f"Question: {question}\nSQL:"
 
