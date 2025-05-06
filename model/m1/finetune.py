@@ -184,7 +184,7 @@ trainer = SFTTrainer(
 )
 
 trainer.train()
-trainer.save_model(f"{OUTPUT_DIR}/v1")
+trainer.save_model(f"{OUTPUT_DIR}/duckdb_nsql")
 
 
 def generate_sql(question, model, tokenizer):
