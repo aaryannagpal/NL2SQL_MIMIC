@@ -25,6 +25,7 @@ RAW_RESULT_DIR = STORE_RESULT_DIR / "raw"
 PROCESSED_RESULT_DIR = STORE_RESULT_DIR / "processed"
 
 STORE_ANALYSIS_DIR = PROJECT_ROOT / "analysis"
+STORE_DATASET_ANALYSIS = STORE_ANALYSIS_DIR / "dataset"
 
 SAMPLE_M1_MODEL_DIR = PROJECT_ROOT / "model" / "m1" / "finetune" / "output"
 SAMPLE_M2_MODEL_DIR = PROJECT_ROOT / "model" / "m2" / "finetune" / "output"
