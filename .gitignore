@@ -4,3 +4,4 @@ model_files/untuned/*
 mimic4.db
 *.log
 unsloth_compiled_cache
+output
