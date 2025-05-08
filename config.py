@@ -6,7 +6,7 @@ PROJECT_ROOT = Path(__file__).parent
 
 DATA_DIR: Final[Path] = PROJECT_ROOT / "data" / "mimic_data"
 
-MYSQL_DB_PATH: Final[Path] = DATA_DIR / "mimic4.db"
+MYSQL_DB_PATH: Final[Path] = '/media/chs.gpu/DATA/nagpal/modified_mimic/data/mimic_iv/mimic_iv.sqlite'
 MIMIC_SCHEMA_PATH: Final[Path] = DATA_DIR / "modified_mimic.json"
 DICTIONARY_MAP_PATH: Final[Path] = DATA_DIR / "dictionary.json"
 
@@ -27,12 +27,12 @@ PROCESSED_RESULT_DIR = STORE_RESULT_DIR / "processed"
 STORE_ANALYSIS_DIR = PROJECT_ROOT / "analysis"
 
 SAMPLE_M1_MODEL_DIR = PROJECT_ROOT / "model" / "m1" / "finetune" / "output"
+SAMPLE_M2_MODEL_DIR = PROJECT_ROOT / "model" / "m2" / "finetune" / "output"
 
 def _validate_paths() -> None:
     """Check if critical files/dirs exist at startup."""
     required_paths = [
         DATA_DIR,
-        MYSQL_DB_PATH,
         MIMIC_SCHEMA_PATH,
         DICTIONARY_MAP_PATH,
         TRAINING_DATA,
@@ -45,3 +45,5 @@ def _validate_paths() -> None:
 
 
 _validate_paths()
+
+DEFAULT_PATTERN_FOR_LIKE_OPERATION = "itis"
