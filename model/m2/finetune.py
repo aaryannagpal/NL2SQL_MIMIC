@@ -23,7 +23,8 @@ from config import (
 )
 
 # Configuration
-MODEL_NAME = "microsoft/phi-4"
+MODEL_NAME = "Qwen/Qwen2.5-14B-Instruct"
+modelname = "qwen_2.5"
 OUTPUT_DIR = str(PROJECT_ROOT / "model" / "m2" / "finetune" / "output")
 FIX_DATA_PATH = str(PROCESSED_RESULT_DIR / "m1" / "schema_aware")  # Directory containing results to fix
 
@@ -246,7 +247,7 @@ trainer = SFTTrainer(
 )
 
 trainer.train()
-trainer.save_model(f"{OUTPUT_DIR}/phi4")
+trainer.save_model(f"{OUTPUT_DIR}/{modelname}")
 
 def test_fixing(original_query, error_message, question, model, tokenizer):
     prompt = f"""You are an expert at fixing SQL queries specialized for MIMIC-IV Database. Fix the SQL query based on the error message and database schema information.
