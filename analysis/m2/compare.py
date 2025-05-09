@@ -208,10 +208,10 @@ def process_stages_comparison(
 
 
 if __name__ == "__main__":
-    zeroshot_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m1/zeroshot/zeroshot.csv")
-    fewshot_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m1/fewshot/fewshot.csv")
-    schema_aware_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m1/schema_aware/schema_aware.csv")
-    finetune_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m1/finetune/finetune.csv")
+    zeroshot_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m2/zeroshot/zeroshot.csv")
+    fewshot_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m2/fewshot/fewshot.csv")
+    schema_aware_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m2/schema_aware/schema_aware.csv")
+    finetune_results = pd.read_csv("/home/aaryan/Documents/Ashoka/Sem_8/Capstone_Thesis/NL2SQL_MIMIC/analysis/m2/finetune/finetune.csv")
     
     stage_results = {
         "zeroshot": zeroshot_results,
