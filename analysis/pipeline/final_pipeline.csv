@@ -1,0 +1,3 @@
+model,total_queries,execution_success_rate,result_match_rate,avg_table_access_accuracy,avg_column_access_accuracy,avg_query_similarity,avg_select_similarity,avg_from_similarity,avg_where_similarity,avg_composite_score,empty_results_both,experiment
+qwen 2.5-phi4,100,0.35,0.35,0.6024880952380953,0.5658202290217871,0.6360627552870095,0.6969293493030116,0.6324842065055145,0.7180119382845203,0.4022679403806773,94,final_pipeline
+qwen 2.5-qwen 2.5,100,0.34,0.34,0.5701706349206349,0.5494760835633847,0.6369459750196974,0.683101537598351,0.5867970451042757,0.6481611760072604,0.3896239411987736,94,final_pipeline
