@@ -2,6 +2,7 @@ import argparse
 import os
 import sys
 from pathlib import Path
+import pandas as pd
 
 PROJECT_ROOT = Path().resolve().parent
 sys.path.append(str(PROJECT_ROOT))
